@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('APP/db')
-    , {User, Thing, Favorite, Promise, Review} = db
+    , {User, memes, Favorite, Promise, Review} = db
     , {mapValues} = require('lodash')
 
 function seedEverything() {
@@ -15,31 +15,28 @@ function seedEverything() {
   return Promise.props(seeded)
 }
 
-const tags = seed(tags,{
-  theoffice: { name: 'The Office'},
-  funny: { name: 'funny'},
-  michalscott: {michaelscott: 'Michael Scott'}
-})
-
 const users = seed(User, {
   donald: {
     name: 'Mr.Presidnet',
     email: 'donald@trump.com',
-    password: '1234',
-    salt: 'hackers',
     address: '1600 Penn Ave',
     admin: true,
+    password: '1234',
+    salt: 'hackers',
 
   },
   obama: {
     name: 'Barack Obama',
     email: 'barack@example.gov',
+    address: 'somewhere far away',
+    admin: false,
     password: '1234',
     salt: 'americanpie',
-    address: 'somewhere far away',
-    admin: false
   },
 })
+
+
+
 
 
 
@@ -86,13 +83,13 @@ const memes = seed(meme, {
     },
 })
 
-const things = seed(Thing, { //memes
-  surfing: {name: 'surfing'},
-  smiting: {name: 'smiting'},
-  puppies: {name: 'puppies'},
-})
+// const things = seed(Thing, { //memes
+//   surfing: {name: 'surfing'},
+//   smiting: {name: 'smiting'},
+//   puppies: {name: 'puppies'},
+// })
 
-
+// review blongsTo Meme, review blongsto User
 const reviews = seed(Review, ({memes, users}) => ({
   content: 'this here is a smashing meme',
   title: 'superb',
@@ -101,6 +98,14 @@ const reviews = seed(Review, ({memes, users}) => ({
   user_id: users.donald.id,
 
 }))
+
+
+//tags belong to many mems through 'meme_tag'
+const tags = seed(tags,{
+  theoffice: { tag: 'The Office'},
+  funny: {tag: 'funny'},
+  michalscott: {tag: 'Michael Scott'}
+})
 
 
 
