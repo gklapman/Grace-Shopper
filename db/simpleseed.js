@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('APP/db')
-    , {User, Memes, Favorite, Tag, Promise, Review} = db
+    , {User, Meme, Favorite, Tag, Promise, Review, Cart} = db
     , {mapValues} = require('lodash')
 
 
@@ -16,7 +16,7 @@ const db = require('APP/db')
 const generateUsers = () => {
   let usersArray = []
 
-  usersArray.push(User.bulid({
+  usersArray.push(User.build({
     name: 'Barack Obama',
     email: 'barack@example.gov',
     address: 'somewhere far away',
@@ -25,7 +25,7 @@ const generateUsers = () => {
     salt: 'americanpie',
   }))
 
-  usersArray.push(User.bulid({
+  usersArray.push(User.build({
     name: 'Mr.Presidnet',
     email: 'donald@trump.com',
     address: '1600 Penn Ave',
@@ -41,7 +41,7 @@ const generateUsers = () => {
 const generateMemes = () => {
   let memesArray = [];
 
-  memesArray.push(Memes.build({
+  memesArray.push(Meme.build({
     name: 'michael',
     price: 9.99,
     rating: 4,
@@ -50,23 +50,23 @@ const generateMemes = () => {
     stock: 2
   }))
 
-  memesArray.push(Memes.build({
+  memesArray.push(Meme.build({
     name: 'dwight',
     price: 7.99,
     rating: 2,
-    photo:'http://4.bp.blogspot.com/-pFRXzhUqYb0/VZNw_h4OTCI/AAAAAAAAEVQ/S94m3_LRK0A/s320/FEARED%2BOR%2BLOVED.jpg',
-    product_info:'Dwight here is talking about stuff from his Farm... ',
+    photo: 'http://4.bp.blogspot.com/-pFRXzhUqYb0/VZNw_h4OTCI/AAAAAAAAEVQ/S94m3_LRK0A/s320/FEARED%2BOR%2BLOVED.jpg',
+    product_info: 'Dwight here is talking about stuff from his Farm... ',
     stock: 4
-}))
+  }))
 
-  memesArray.push(Memes.build({
+  memesArray.push(Meme.build({
     name: 'jim',
     price: 7.99,
     rating: 2,
-    photo:'http://s2.quickmeme.com/img/ae/ae150e79fb32592c6671db823eec58a4a7f6cd7a14847e600154ddf92e19c078.jpg',
-    product_info:'Jim product information here blah blha blah  ',
+    photo: 'http://s2.quickmeme.com/img/ae/ae150e79fb32592c6671db823eec58a4a7f6cd7a14847e600154ddf92e19c078.jpg',
+    product_info: 'Jim product information here blah blha blah  ',
     stock: 2
-}))
+  }))
 
   return memesArray;
 }
@@ -75,58 +75,58 @@ const generateMemes = () => {
 //tags belong to many mems through 'meme_tag'
 
 const generateTags = () => {
-    let tagsArray = [];
+  let tagsArray = []
 
-    tagsArray.push(Tag.bulid({
-        tag: 'The Offcie'
-    }))
+  tagsArray.push(Tag.build({
+    tag: 'The Offcie'
+  }))
 
-     tagsArray.push(Tag.bulid({
-        tag: 'Michale Scott'
-    }))
+  tagsArray.push(Tag.build({
+    tag: 'Michale Scott'
+  }))
 
-     tagsArray.push(Tag.bulid({
-        tag: 'Comedy'
-    }))
+  tagsArray.push(Tag.bulbuildid({
+    tag: 'Comedy'
+  }))
 
-    return tagsArray
+  return tagsArray
 }
 
 
 const generateCarts = () => {
-    const cartArray = [];
+  const cartArray = []
 
-    cartArray.push(Cart.build({
-        status: false,
-        date: new Date(2017,5,18),
-        quantity: 0
-    }))
+  cartArray.push(Cart.build({
+    status: false,
+    date: new Date(2017,5,18),
+    quantity: 0
+  }))
 
-     cartArray.push(Cart.build({
-        status: true,
-        date: new Date(2017,5,10),
-        quantity: 2
-    }))
+  cartArray.push(Cart.build({
+    status: true,
+    date: new Date(2017,5,10),
+    quantity: 2
+  }))
 
-    return cartArray;
+  return cartArray;
 }
 
 const generateReviews = () => {
-    let reviewArray = [];
+  let reviewArray = []
 
-    reviewArray.push(Cart.build({
-        content: 'this here is a smashing meme',
-        title: 'superb',
-        stars: 5,
-    }))
+reviewArray.push(Cart.build({
+  content: 'this here is a smashing meme',
+  title: 'superb',
+  stars: 5,
+}))
 
-    reviewArray.push(Cart.builid({
-        content: 'This meme is not a good one',
-        title: 'bad meme hombre',
-        stars: 1,
-    }))
+reviewArray.push(Cart.build({
+  content: 'This meme is not a good one',
+  title: 'bad meme hombre',
+  stars: 1,
+}))
 
-    return reviewArray;
+  return reviewArray;
 }
 
 
@@ -145,32 +145,29 @@ const generateReviews = () => {
 
 
 const createUsers = () => {    //need to resovle the promisese
-    let userPromises =  generateUsers().map(user=> { return user.save() })
-
-    return Promise.all(userPromises)
-
+  let userPromises =  generateUsers().map(user=> { return user.save() })
+  return Promise.all(userPromises)
 }
 
 const createMemes = () => {
-    let memePromises =  generateMemes().map(meme => { return meme.save() })
-    return Promise.all(memePromises)
+  let memePromises =  generateMemes().map(meme => { return meme.save() })
+  return Promise.all(memePromises)
 }
 
 
 const createCart = () => {    // this need to be belonged to meme and user
-    let cartPromises = generateCarts().map(cart => { return cart.save()})
-    return Promise.all(cartPromises);   // .thenable
+  let cartPromises = generateCarts().map(cart => { return cart.save()})
+  return Promise.all(cartPromises);   // .thenable
 }
 
 const createReviews  = () =>{
-    let reviewPromises = generateReviews().map(review =>{ return review.save() })
-    return Promise.all(reviewPromises)
+  let reviewPromises = generateReviews().map(review =>{ return review.save() })
+  return Promise.all(reviewPromises)
 }
 
 const createTags = (tags) => {
-    let tagPromises = generateTags().map(tag => { return tag.save() })
-
-    return Promise.all(tagPromises)
+  let tagPromises = generateTags().map(tag => { return tag.save() })
+  return Promise.all(tagPromises)
 }
 
 
@@ -184,20 +181,20 @@ let usersdata, memesdata, cartdata
 
 
 db.sync({force: true})
-    .then(function(){
-       return createUsers()
+    .then(function() {
+      return createUsers()
     })
-    .then(function(users){
-       usersdata = users;
-       return createMemes()
+    .then(function(data) {
+      usersdata = data
+      return createMemes()
     })
-    .then(function(memes){
-        memesdata = memes
-        return createCart()
+    .then(function(data) {
+      memesdata = data
+      return createCart()
     })
-    .then(function(cart){
-        cartdata = cart;
-        return createTags()
+    .then(function(data) {
+      cartdata = data
+      return createTags()
     })
     .catch(error => {
       console.error('an error occurred', error)
