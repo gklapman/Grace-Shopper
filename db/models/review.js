@@ -5,11 +5,10 @@ const {STRING, TEXT, INTEGER} = require('sequelize')
 module.exports = db => db.define('reviews', {
 	content: {
 		type: TEXT,
-		notEmpty: true,
+		defaultValue: ''
 	},
 	title: {
-		type: STRING, 
-
+		type: STRING,
 	}, 
 	stars: {
 		type: INTEGER,
@@ -20,17 +19,16 @@ module.exports = db => db.define('reviews', {
 	}
 },{
 	hooks: {
-		beforeValidate: {
-			setTitle: () => {
-				if (!this.title){
-					const dots = this.content.length > 15 ? "..." : "";
-					this.setDataValue('title', this.content.slice(0, 15) + dots)
+		beforeValidate: (review) => {
+				if (!review.title){
+					const dots = review.content.length > 15 ? "..." : "";
+					review.setDataValue('title', review.content.slice(0, 15) + dots)
 				}
 			}
 		}
 	} 
 
-})
+)
 
 
 module.exports.associations = (Review, {Meme, User}) => {
