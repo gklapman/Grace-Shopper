@@ -30,7 +30,7 @@ const generateUsers = () => {
     email: 'donald@trump.com',
     address: '1600 Penn Ave',
     admin: true,
-    password: '1234',
+    password: '134',
     salt: 'hackers',
   }))
 
@@ -85,7 +85,7 @@ const generateTags = () => {
     tag: 'Michale Scott'
   }))
 
-  tagsArray.push(Tag.bulbuildid({
+  tagsArray.push(Tag.build({
     tag: 'Comedy'
   }))
 
@@ -99,34 +99,42 @@ const generateCarts = () => {
   cartArray.push(Cart.build({
     status: false,
     date: new Date(2017,5,18),
-    quantity: 0
+    quantity: 0,
+    meme_id: 2,
+    user_id: 1
   }))
 
   cartArray.push(Cart.build({
     status: true,
     date: new Date(2017,5,10),
-    quantity: 2
+    quantity: 2,
+    meme_id: 1,
+    user_id: 2
   }))
 
-  return cartArray;
+  return cartArray
 }
 
 const generateReviews = () => {
   let reviewArray = []
 
-reviewArray.push(Cart.build({
-  content: 'this here is a smashing meme',
-  title: 'superb',
-  stars: 5,
-}))
+  reviewArray.push(Review.build({
+    content: 'this here is a smashing meme',
+    title: 'superb',
+    stars: 5,
+    meme_id: 1,
+    user_id: 1
+  }))
 
-reviewArray.push(Cart.build({
-  content: 'This meme is not a good one',
-  title: 'bad meme hombre',
-  stars: 1,
-}))
+  reviewArray.push(Review.build({
+    content: 'This meme is not a good one',
+    title: 'bad meme hombre',
+    stars: 1,
+    meme_id: 2,
+    user_id: 1
+  }))
 
-  return reviewArray;
+  return reviewArray
 }
 
 
@@ -180,7 +188,8 @@ let usersdata, memesdata, cartdata
 
 
 
-db.sync({force: true})
+db.didSync
+  //.sync({force: true})
     .then(function() {
       return createUsers()
     })
@@ -196,26 +205,12 @@ db.sync({force: true})
       cartdata = data
       return createTags()
     })
+    .then(function(){
+      createReviews()
+      console.log('end of seed')
+    })
     .catch(error => {
       console.error('an error occurred', error)
     })
 
 
-
-    //MAP USERS to associate to MEME
-
-
-//module.exports = Object.assign(seed, {users, things, favorites})
-
-
-// db.sync({force: true})
-// let users, memes
-//     .then(function(){
-//         users = createUsers()
-//         return users
-//     })
-//     .then(function(allofUsers){
-//         memes = createMemes()
-//         return memes //does this wait for the promise to fulfill?
-//     })
-//     .then()
