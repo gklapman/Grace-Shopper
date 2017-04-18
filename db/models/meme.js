@@ -11,9 +11,9 @@ module.exports = db => db.define('memes', {
   	type: DECIMAL(10,2),
   	defaultValue: 100.00
   },
-  rating: {
-  	type: DECIMAL(10,2),
-  }, 
+//   rating: {
+//   	type: DECIMAL(10,2),
+//   }, 
   photo: {
   	type: STRING,
   	defaultValue: '',
@@ -33,18 +33,14 @@ module.exports = db => db.define('memes', {
 
 }, {
   getterMethods: {
-	failedHook: function() {
-			console.log('this', this)
+	rating: function() {
 			const allReviews = this.getReviews()
 			return allReviews 
 			.then(reviews => {
-				console.log("reviews", reviews)
 				if(reviews.length === 0){
-					console.log('if works')
 					// this.setDataValue('rating', '0.00')
 					return('0.00')
 				} else {
-					console.log('there are some reviews', reviews)
 					let total = 0;
 					reviews.forEach(review => {
 						total += Number(review.dataValues.stars)
