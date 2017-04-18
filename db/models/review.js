@@ -5,7 +5,7 @@ const {STRING, TEXT, INTEGER} = require('sequelize')
 module.exports = db => db.define('reviews', {
 	content: {
 		type: TEXT,
-		defaultValue: '',
+		notEmpty: true,
 	},
 	title: {
 		type: STRING, 
@@ -23,7 +23,8 @@ module.exports = db => db.define('reviews', {
 		beforeValidate: {
 			setTitle: () => {
 				if (!this.title){
-					this.setDataValue('title', this.content.slice(0, 15) + "...")
+					const dots = this.content.length > 15 ? "..." : "";
+					this.setDataValue('title', this.content.slice(0, 15) + dots)
 				}
 			}
 		}
