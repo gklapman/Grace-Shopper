@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('APP/db')
-    , {User} = db
+    , {User, Meme, Review, Tag, Cart} = db
     , {expect} = require('chai')
 
 /* global describe it before afterEach */
