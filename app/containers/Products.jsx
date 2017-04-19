@@ -1,10 +1,18 @@
+import React from 'react'
 import {connect} from 'react-redux'
 import Products from '../components/Products'
+import {getMemes} from '../reducers/meme'
 
-const ProductsContainer = (props) => {
-  return (
-    <Products products={props.memes} />
-  )
+class ProductsContainer extends React.Component {
+  componentDidMount() {
+    this.props.getAllMemes()
+  }
+
+  render() {
+    return (
+      <Products products={this.props.memes} />
+    )
+  }
 }
 
 const mapStateToProps = (state) => {
@@ -14,7 +22,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    getAllMemes: () => dispatch(getMemes())
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer)

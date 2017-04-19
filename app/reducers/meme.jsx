@@ -2,16 +2,28 @@ import axios from 'axios'
 
 // initial state
 const initialState = {
-  memes: {},
-  meme: {}
+  memes: [],
+  selectedMeme: {},
+  reviews: [],
+  selectedReview: {}
 }
 
 // reducer
 const reducer = (prevState = initialState, action) => {
   let newState = Object.assign({}, prevState)
+  console.log('received action', action.type)
   switch (action.type) {
     case ALL_MEMES:
       newState.memes = action.memes
+      return newState
+    case ONE_MEME:
+      newState.selectedMeme = action.meme
+      return newState
+    case ALL_REVIEWS:
+      newState.reviews = action.reviews
+      return newState
+    case ONE_REVIEW:
+      newState.selectedReview = action.review
       return newState
     default:
       return newState
@@ -29,12 +41,23 @@ export const oneMeme = (meme) => {
     return {type: ONE_MEME, meme}
 }
 
+const ALL_REVIEWS = 'ALL_REVIEWS'
+export const allReviews = (reviews) => {
+    return {type: ALL_REVIEWS, reviews}
+}
+
+const ONE_REVIEW = 'ONE_REVIEW'
+export const oneReview = (review) => {
+    return {type: ONE_REVIEW, review}
+}
+
 // thunks
 export const getMemes = () => {
-    dispatch => {
-        axios.get('/api/memes')
+    return dispatch => {
+        return axios.get('/api/memes')
         .then(memes => {
-            dispatch(allMemes(memes))
+            // console.log('memes in thunk', memes.data)
+            dispatch(allMemes(memes.data))
         })
         .catch(err => {
             console.log('error!', err)
@@ -43,8 +66,8 @@ export const getMemes = () => {
 }
 
 export const getMeme = (memeId) => {
-    dispatch => {
-        axios.get(`/api/memes/${memeId}`)
+    return dispatch => {
+        return axios.get(`/api/memes/${memeId}`)
         .then(meme => {
             dispatch(oneMeme(meme))
         })
@@ -53,3 +76,5 @@ export const getMeme = (memeId) => {
         })
     }
 }
+
+export default reducer
