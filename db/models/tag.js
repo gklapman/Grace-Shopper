@@ -10,5 +10,5 @@ module.exports = db => db.define('tags', {
 })
 
 module.exports.associations = (Tag, {Meme}) => {
-	Tag.belongsToMany(Meme, {as: 'meme', through: 'meme_tag'})
+	Tag.belongsToMany(Meme, {as: 'memes', through: 'meme_tag'})
 }
