@@ -84,7 +84,7 @@ passport.deserializeUser(
       .then(user => {
         if (!user) debug('deserialize retrieved null user for id=%d', id)
         else debug('deserialize did ok user.id=%d', id)
-        done(null, user)
+        done(null, user) //set req.User = user
       })
       .catch(err => {
         debug('deserialize did fail err=%s', err)
@@ -94,7 +94,8 @@ passport.deserializeUser(
 )
 
 // require.('passport-local').Strategy => a function we can use as a constructor, that takes in a callback
-passport.use(new (require('passport-local').Strategy)(
+passport.use(
+  new (require('passport-local').Strategy)(
   (email, password, done) => {
     debug('will authenticate user(email: "%s")', email)
     User.findOne({where: {email}})
@@ -110,12 +111,13 @@ passport.use(new (require('passport-local').Strategy)(
               return done(null, false, { message: 'Login incorrect' })
             }
             debug('authenticate user(email: "%s") did ok: user.id=%d', email, user.id)
-            done(null, user)
+            done(null, user) //req.user = user && sets a cookie with the userid
           })
       })
       .catch(done)
   }
-))
+)
+  )
 
 auth.get('/whoami', (req, res) => res.send(req.user))
 
@@ -137,6 +139,20 @@ auth.get('/login/:strategy', (req, res, next) =>
 auth.post('/logout', (req, res) => {
   req.logout()
   res.redirect('/api/auth/whoami')
+})
+
+auth.post('/signup', (req, res, next) => {
+  //Can add something that checks if the user exists
+  User.create({
+    email: req.body.email, 
+    password: req.body.password,
+    name: req.body.name, 
+    
+  })
+  .then(()=> {
+    res.send();
+  })
+  .catch(err => console.error(err))
 })
 
 module.exports = auth

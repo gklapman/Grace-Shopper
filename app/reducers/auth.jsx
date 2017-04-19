@@ -1,4 +1,4 @@
-import axios from 'axios'
+ import axios from 'axios'
 
 const reducer = (state=null, action) => {
   switch (action.type) {
@@ -13,10 +13,10 @@ export const authenticated = user => ({
   type: AUTHENTICATED, user
 })
 
-export const login = (username, password) =>
+export const login = (email, password) =>
   dispatch =>
     axios.post('/api/auth/login/local',
-      {username, password})
+      {email, password})
       .then(() => dispatch(whoami()))
       .catch(() => dispatch(whoami()))
 
@@ -34,5 +34,28 @@ export const whoami = () =>
         dispatch(authenticated(user))
       })
       .catch(failed => dispatch(authenticated(null)))
+
+export const oauth = (strategy) => 
+  dispatch => 
+    axios.get(`/api/auth/login/${strategy}`)
+    // .then(response => {
+    //   const user = response.data
+    //   dispatch(authenticated(user))
+    // })
+    // .catch(failed => dispatch(authenticated(null)))
+     .then(() => dispatch(whoami()))
+      .catch(() => dispatch(whoami()))
+
+export const signup = (email, password, address, name) => 
+  dispatch => 
+    axios.post('/api/auth/signup')
+    .then(()=> dispatch(login(email, password)))
+     .then(() => dispatch(whoami()))
+      .catch(() => dispatch(whoami()))
+   
+
+
+
+//clicks for oauth
 
 export default reducer

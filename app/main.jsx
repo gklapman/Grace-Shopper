@@ -10,13 +10,18 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 
+import LoginLogoutContainer from './components/LoginLogoutContainer'
+
+
+
 const ExampleApp = connect(
-  ({ auth }) => ({ user: auth })
-)(
+  ({ auth }) => ({ user: auth }))
+
+(
   ({ user, children }) =>
     <div>
       <nav>
-        {user ? <WhoAmI/> : <Login/>}
+        <LoginLogoutContainer />
       </nav>
       {children}
     </div>
@@ -27,10 +32,16 @@ render(
     <Router history={browserHistory}>
       <Route path="/" component={ExampleApp}>
         <IndexRedirect to="/jokes" />
-        <Route path="/jokes" component={Jokes} />
+        <Route path="/jokes" component={Jokes}/>
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
   </Provider>,
   document.getElementById('main')
 )
+
+
+
+// <Route path="/products" component={AllProductsContainer} />
+        // <Route path="products/:productId" component={SingleProductContainer}/>
+        // <Route path="mycart" component={Cart} />
