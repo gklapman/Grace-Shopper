@@ -1,7 +1,7 @@
 import Reat from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { SingleProduct } from './SingleProduce.jsx'
+import SingleProduct from './SingleProduct'
 
 const mapDispatchToProps = null;
 
