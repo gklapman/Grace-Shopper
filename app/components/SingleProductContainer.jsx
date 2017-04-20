@@ -6,9 +6,8 @@ import SingleProduct from './SingleProduct'
 const mapDispatchToProps = null;
 
 const mapStateToProps = function(state) {
-  console.log('this is state', state )
   return {
-    reviews: state.reviews,
+    reviews: state.meme.reviews,
     selectedmeme: state.meme.selectedMeme
   }
 }

@@ -92,7 +92,7 @@ export const getReviews = (memeId) => {
   return dispatch => {
     return axios.get(`/api/memes/${memeId}/reviews`)
     .then(reviews => {
-      dispatch(allReviews(reviews))
+      dispatch(allReviews(reviews.data))
     })
     .catch(err => {
       console.log('error!', err)
