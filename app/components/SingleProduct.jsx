@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import Reviews from './Reviews.jsx'
+import CreateReview from './CreateReview';
 
 const SingleProduct = (props) => {
   const reviews = props.reviews
@@ -15,6 +16,9 @@ const SingleProduct = (props) => {
         <div>
             <Reviews review={props.reviews} />
         </div>
+        <hr/>
+        <CreateReview/>
+
     </div>
   )
 }

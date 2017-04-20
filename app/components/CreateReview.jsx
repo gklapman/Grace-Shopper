@@ -1,53 +1,60 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import { connect } from 'react-redux';
-
+import { connect } from 'react-redux'
 
 class CreateReview extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       title: '',
       content: '',
-      stars: ''
-
-    };
-
-    this.submit = this.submit.bind(this);
-    this.change = this.change.bind(this);
-
-    submit(){
-      conosle.log(submit)
-    }
-
-
-    change(event){
-      event.preventDefault()
-       this.setState( {[event.currentTarget.name]:event.currentTarget.value} )
+      stars: 0
 
     }
 
-    render(){
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleSubmit(event){
+    event.preventDefault();
+    console.log('this.state is', this.state)
+
+  }
+
+  handleChange(event){
+    console.log(event.currentTarget.value)
+    event.preventDefault()
+    this.setState({[event.currentTarget.name]:event.currentTarget.value} )
+
+  }
+
+    render(state){
+
       return (
-        <div class="form-group">
-          <input type="text" class="form-control" id="title" placeholder="title">
-          <small  value={this.state.title} onChange={this.handleChange}id="title" class="form-text text-muted">We'll never share your email with anyone else.</small>
-          <label for="content">Write review here for meme.</label>
-          <textarea value={this.state.content} onChange={this.handleChange} class="form-control" id="content" rows="3"></textarea>
-          <label for="ratingControl">Star Rating Quantity</label>
-          <select class="ratingControl" id="exampleSelect1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
+        <div style={{border: '2px solid black', margin: '0 0 100px 0'}}>
 
+          <form onSubmit = {this.handleSubmit}>
+            <label className="labelform" style={{display: 'block', margin:'20px'}} type="text" htmlFor="title">Write tile here for meme review.</label>
+            <input name='title' style={{width: '300px', display:'block', margin:'20px'}} type="text" value={this.state.title} onChange={this.handleChange} id="title" placeholder="title"></input>
+            <label htmlFor="content" style={{display: 'block', margin:'20px'}}  >Write review here for meme.</label>
+
+            <textarea name='content' value={this.state.content} onChange={this.handleChange} style={{display: 'block',  margin:'20px', width: '400px'}} id="content"  rows="7"></textarea>
+
+              <select value={this.state.value} onChange={this.handleChange} className="ratingControl" name='stars' id="exampleSelect1" style={{ margin:'20px'}}>
+                <option selected disabled hidden style={{display: 'none'}} value=''></option>
+                <option value ='1' >★</option>
+                <option value ='2' >★★</option>
+                <option value ='3' >★★★</option>
+                <option  value ='4' >★★★★</option>
+                <option value ='5' >★★★★★</option>
+              </select>
+                <input type="submit" value="Submit"/>
+          </form>
         </div>
       )
     }
-
-
-    export default connect(mapStateToProps)(CreateReview)
 }
+
+export default CreateReview
 
