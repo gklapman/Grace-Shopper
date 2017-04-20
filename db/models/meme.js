@@ -56,9 +56,9 @@ module.exports = db => db.define('memes', {
 
 module.exports.associations = (Meme, {User, Favorite, Tag, Review, Cart}) => {
   Meme.belongsToMany(User, {as: 'lovers', through: Favorite})
-  Meme.belongsToMany(Tag, {as: 'tag', through: 'meme_tag'})
+  Meme.belongsToMany(Tag, {as: 'tags', through: 'meme_tag'})
   Meme.belongsToMany(User, {as: 'reviewers', through: Review})
-  Meme.belongsToMany(User, {as: 'purchaser', through: Cart})
+  Meme.belongsToMany(User, {as: 'purchasers', through: Cart})
   Meme.hasMany(Review)
   Meme.hasMany(Cart)
   Meme.hasMany(Favorite)

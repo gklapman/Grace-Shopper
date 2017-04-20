@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('APP/db')
-    , {Meme, Review, User} = db
+    , {Meme, Review, User, Tag} = db
     , {expect} = require('chai')
 
 describe('Meme', () => {
@@ -12,6 +12,7 @@ describe('Meme', () => {
       let meme;
       let user;
       let user2;
+      let tag;
       beforeEach(() => {
           return Meme.create({name: 'charlesOnSubway', price: 60.40, stock: 40})
           .then((memez) => {
@@ -26,6 +27,10 @@ describe('Meme', () => {
           .then((arnodl) => {
               user2 = arnodl
             //   console.log('user2', user2.id)
+              return Tag.create({tag: 'klassic komedy'})
+          })
+          .then((tagz) => {
+              tag = tagz
           })
       })
       afterEach('Clear the tables', () => db.truncate({ cascade: true }))
@@ -45,6 +50,18 @@ describe('Meme', () => {
         })
         .then((hooked) => {
             expect(hooked).to.equal('3.00')
+        })
+    })
+    it('tag', () => {
+        return meme.createTag({tag: 'mango'})
+        .then(talg => {
+            return meme.addTag(tag)
+        })
+        .then(res => {
+            return meme.getTags()
+        })
+        .then(tags => {
+            expect(tags.length).to.equal(2)
         })
     })
 })

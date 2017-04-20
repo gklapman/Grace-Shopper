@@ -15,6 +15,8 @@ import LoginLogoutContainer from './components/LoginLogoutContainer'
 
 
 
+import ProductsContainer from './containers/Products'
+
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth }))
 
@@ -33,8 +35,9 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={ExampleApp}>
-        <IndexRedirect to="/jokes" />
-        <Route path="/jokes" component={Jokes}/>
+        <IndexRedirect to="/products" />
+        {/*<Route path="/jokes" component={Jokes} />*/}
+        <Route path="/products" component={ProductsContainer} />
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
