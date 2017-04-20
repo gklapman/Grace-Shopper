@@ -124,4 +124,11 @@ export const getTags = (memeId) => {
   }
 }
 
+export const addReview = (reviewData) => {
+  return dispatch => {
+    return axios.post('/api/memes/reviews', reviewData)
+    .then() // not done
+  }
+}
+
 export default reducer
