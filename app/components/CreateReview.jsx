@@ -23,19 +23,17 @@ class CreateReview extends Component {
 
     change(event){
       event.preventDefault()
+       this.setState( {[event.currentTarget.name]:event.currentTarget.value} )
 
     }
-
-
-
 
     render(){
       return (
         <div class="form-group">
           <input type="text" class="form-control" id="title" placeholder="title">
-          <small id="title" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          <small  value={this.state.title} onChange={this.handleChange}id="title" class="form-text text-muted">We'll never share your email with anyone else.</small>
           <label for="content">Write review here for meme.</label>
-          <textarea class="form-control" id="content" rows="3"></textarea>
+          <textarea value={this.state.content} onChange={this.handleChange} class="form-control" id="content" rows="3"></textarea>
           <label for="ratingControl">Star Rating Quantity</label>
           <select class="ratingControl" id="exampleSelect1">
             <option>1</option>
