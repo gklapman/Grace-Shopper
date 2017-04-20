@@ -1,0 +1,61 @@
+/*ul {
+  list-style-type: none
+}
+
+li {
+  border: solid 2px black;
+}*/
+/*.produce {
+  list-style-type: none;
+}
+.produce li {
+  border: solid 2px black;
+  margin: 0 0 1em 0
+}
+
+img {
+  border: solid 1px red
+}
+
+.in-block {
+  display: inline-block;
+  border: solid 1px green;
+  position: absolute;
+}
+
+.in-block div {
+  margin: 5px 10px 5px 10px;
+  border: solid 1px black;
+}
+
+.name {
+  font-size: 48px
+}
+
+.price {
+  font-size: 24px
+}
+
+.rating {
+  font-size: 24px
+}
+
+.info {
+  font-size: 16px
+}*/
+
+.on-display {
+  border: solid 1px black
+}
+
+.sidebar {
+  background-color: blue;
+  border: solid 1px black;
+  padding: 50% 0 0 0
+}
+
+.adbar {
+  background-color: red;
+  border: solid 1px black;
+  padding: 50% 0 0 0
+}

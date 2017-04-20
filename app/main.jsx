@@ -18,6 +18,7 @@ import SingleProductContainer from './components/SingleProductContainer'
 
 
 import ProductsContainer from './containers/Products'
+import {getMemes} from './reducers/meme'
 
 import { getMeme } from './reducers/meme'
 import { getReviews } from './reducers/meme'
@@ -39,19 +40,20 @@ const ExampleApp = connect(
     </div>
 )
 
+const onProductContainerEnter = () => {
+  return store.dispatch(getMemes())
+}
 const loadSingleProduct = () => {
   store.dispatch(getMeme(1))
   store.dispatch(getReviews(1, 1))
 }
-
-
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={ExampleApp}>
         <IndexRedirect to="/products" />
-        <Route path="/products" component={ProductsContainer} />
-        <Route path="products/:productId" component={SingleProductContainer}/>
+        <Route path="/products" onEnter={onProductContainerEnter} component={ProductsContainer} />
+        <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
       </Route>
       <Route path='*' component={NotFound} />
     </Router>

@@ -1,16 +1,21 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Products from '../components/Products'
+import Sidebar from '../components/Sidebar'
+import Adbar from '../components/Adbar'
 import {getMemes} from '../reducers/meme'
 
 class ProductsContainer extends React.Component {
-  componentDidMount() {
-    this.props.getAllMemes()
-  }
-
+//eventually it'd be great to refactor this wrapped view to whole site as a mega container
   render() {
     return (
-      <Products products={this.props.memes} />
+      <div className="container-fluid">
+        <Sidebar />
+        <div className="col-md-8">
+          <Products products={this.props.memes} />
+        </div>
+        <Adbar />
+      </div>
     )
   }
 }
@@ -22,9 +27,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    getAllMemes: () => dispatch(getMemes())
-  }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer)
