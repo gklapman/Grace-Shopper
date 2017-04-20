@@ -46,9 +46,10 @@ module.exports = app
 
   // Authentication middleware
   .use(passport.initialize())
-  .use(passport.session())
+  .use(passport.session()) //invokes deserialize user
 
   // Serve static files from ../public
+
   .use(express.static(resolve(__dirname, '..', 'public')))
   .use(express.static(resolve(__dirname, '..', 'node_modules')))
 

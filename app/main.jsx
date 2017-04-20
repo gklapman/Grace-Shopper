@@ -9,21 +9,32 @@ import Jokes from './components/Jokes'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
+import CartIcon from './components/CartIcon'
+
+import LoginLogoutContainer from './components/LoginLogoutContainer'
+import SearchContainer from './components/SearchContainer'
+import SingleProductContainer from './components/SingleProductContainer'
+
+
+
 import ProductsContainer from './containers/Products'
 import {getMemes} from './reducers/meme'
 
 import { getMeme } from './reducers/meme'
 import { getReviews } from './reducers/meme'
 
-import SingleProductContainer from './components/SingleProductContainer'
+
 
 const ExampleApp = connect(
-  ({ auth }) => ({ user: auth })
-)(
+  ({ auth }) => ({ user: auth }))
+
+(
   ({ user, children }) =>
     <div>
-      <nav>
-        {user ? <WhoAmI/> : <Login/>}
+      <nav className="navbar navbar-default">
+        <LoginLogoutContainer className="navbar-nav"/>
+        <CartIcon className="navbar-nav" />
+        <SearchContainer />
       </nav>
       {children}
     </div>
@@ -49,3 +60,9 @@ render(
   </Provider>,
   document.getElementById('main')
 )
+
+
+
+// <Route path="/products" component={AllProductsContainer} />
+        // <Route path="products/:productId" component={SingleProductContainer}/>
+        // <Route path="mycart" component={Cart} />

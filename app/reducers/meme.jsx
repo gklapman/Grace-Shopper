@@ -41,6 +41,7 @@ export const allMemes = (memes) => {
 
 const ONE_MEME = 'ONE_MEME'
 export const oneMeme = (meme) => {
+
   return {type: ONE_MEME, meme}
 }
 
@@ -120,13 +121,6 @@ export const getTags = (memeId) => {
     .catch(err => {
       console.log('error!', err)
     })
-  }
-}
-
-export const addReview = (reviewData) => {
-  return dispatch => {
-    return axios.post('/api/memes/reviews', reviewData)
-    .then() // not done
   }
 }
 

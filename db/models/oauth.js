@@ -1,4 +1,4 @@
-'use strict'
+ 'use strict'
 
 const app = require('APP')
     , debug = require('debug')(`${app.name}:oauth`)
