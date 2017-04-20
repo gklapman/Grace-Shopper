@@ -12,6 +12,11 @@ import NotFound from './components/NotFound'
 import ProductsContainer from './containers/Products'
 import {getMemes} from './reducers/meme'
 
+import { getMeme } from './reducers/meme'
+import { getReviews } from './reducers/meme'
+
+import SingleProductContainer from './components/SingleProductContainer'
+
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
 )(
@@ -27,13 +32,17 @@ const ExampleApp = connect(
 const onProductContainerEnter = () => {
   return store.dispatch(getMemes())
 }
-
+const loadSingleProduct = () => {
+  store.dispatch(getMeme(1))
+  store.dispatch(getReviews(1, 1))
+}
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={ExampleApp}>
         <IndexRedirect to="/products" />
         <Route path="/products" onEnter={onProductContainerEnter} component={ProductsContainer} />
+        <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
