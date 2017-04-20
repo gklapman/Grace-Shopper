@@ -12,7 +12,6 @@ const initialState = {
 // reducer
 const reducer = (prevState = initialState, action) => {
   let newState = Object.assign({}, prevState)
-  console.log('received action', action.type)
   switch (action.type) {
     case ALL_MEMES:
       newState.memes = action.memes
@@ -42,6 +41,7 @@ export const allMemes = (memes) => {
 
 const ONE_MEME = 'ONE_MEME'
 export const oneMeme = (meme) => {
+
   return {type: ONE_MEME, meme}
 }
 
@@ -121,13 +121,6 @@ export const getTags = (memeId) => {
     .catch(err => {
       console.log('error!', err)
     })
-  }
-}
-
-export const addReview = (reviewData) => {
-  return dispatch => {
-    return axios.post('/api/memes/reviews', reviewData)
-    .then() // not done
   }
 }
 

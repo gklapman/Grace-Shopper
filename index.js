@@ -1,4 +1,4 @@
-'use strict'
+ 'use strict'
 
 const {resolve} = require('path')
     , chalk = require('chalk')
@@ -32,8 +32,11 @@ if (!reasonableName.test(pkg.name)) {
 //
 // and add it to the environment.
 // Note that this needs to be in your home directory, not the project's root directory
-const env = Object.create(process.env)
-    , secretsFile = resolve(env.HOME, `.${pkg.name}.env`)
+const env = Object.assign({}, process.env)
+    , secretsFile = resolve(process.env.HOME, `.${pkg.name}.env.json`)
+
+console.log('secret file*************', secretsFile)
+
 
 try {
   const additionalEnv = require(secretsFile)
@@ -65,4 +68,5 @@ module.exports = {
   },
   package: pkg,
   env,
+  secretsFile: require(secretsFile),
 }
