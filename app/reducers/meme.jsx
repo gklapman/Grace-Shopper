@@ -78,7 +78,7 @@ export const getMeme = (memeId) => {
   return dispatch => {
     return axios.get(`/api/memes/${memeId}`)
     .then(meme => {
-      dispatch(oneMeme(meme))
+      dispatch(oneMeme(meme.data))
       dispatch(getReviews(memeId))
       dispatch(getTags(memeId))
     })
@@ -104,7 +104,7 @@ export const getReview = (memeId, userId) => {
   return dispatch => {
     return axios.get(`/api/memes/${memeId}/reviews/${userId}`)
     .then(review => {
-      dispatch(oneReview(review))
+      dispatch(oneReview(review.data))
     })
     .catch(err => {
       console.log('error!', err)
@@ -116,7 +116,7 @@ export const getTags = (memeId) => {
   return dispatch => {
     return axios.get(`/api/memes/${memeId}/tags`)
     .then(tags => {
-      dispatch(loadTags(tags))
+      dispatch(loadTags(tags.data))
     })
     .catch(err => {
       console.log('error!', err)
