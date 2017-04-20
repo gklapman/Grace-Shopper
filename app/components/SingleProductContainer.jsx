@@ -3,7 +3,15 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import SingleProduct from './SingleProduct'
 
-const mapDispatchToProps = null;
+import {addReviewThunk} from '../reducers/meme'
+
+const mapDispatchToProps = function(dispatch){
+  return {
+    onSubmit: function(obj) {
+      dispatch(addReviewThunk(obj))
+    }
+  }
+}
 
 const mapStateToProps = function(state) {
   return {
