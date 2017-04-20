@@ -41,6 +41,7 @@ export const allMemes = (memes) => {
 
 const ONE_MEME = 'ONE_MEME'
 export const oneMeme = (meme) => {
+
   return {type: ONE_MEME, meme}
 }
 
