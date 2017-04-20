@@ -44,7 +44,13 @@ class LoginContainer extends React.Component {
 		const { currentUser } = this.props
 		return (
 			<div className="login-container navbar"> 
-			{currentUser ? <WhoAmI /> : <div> <Login className="nav-item navbar-left" handleChange={this.handleChange} handleSubmit={this.handleSubmit} /> <Oauth className="nav-item navbar-right"/> <SignUpContainer className="nav-item navbar-right"/></div> }
+			{currentUser ? <WhoAmI /> : 
+				<div className='navbar'> 
+				
+				<Login className="nav-item navbar-left" handleChange={this.handleChange} handleSubmit={this.handleSubmit} /> 
+				<Oauth className="nav-item navbar-right"/>
+				<SignUpContainer className="nav-item navbar-right"/></div> }
+
 			
 			</div>
 		)

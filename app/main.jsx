@@ -22,7 +22,7 @@ import ProductsContainer from './containers/Products'
 import { getMeme } from './reducers/meme'
 import { getReviews } from './reducers/meme'
 
-import SingleProductContainer from './components/SingleProductContainer'
+
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth }))
