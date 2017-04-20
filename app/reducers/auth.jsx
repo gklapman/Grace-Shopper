@@ -13,12 +13,21 @@ export const authenticated = user => ({
   type: AUTHENTICATED, user
 })
 
-export const login = (email, password) =>
-  dispatch =>
-    axios.post('/api/auth/login/local',
-      {email, password})
-      .then(() => dispatch(whoami()))
+// export const login = (email, password) =>
+//   dispatch =>
+//     axios.post('/api/auth/login/local',
+//       {email, password})
+//       .then(() => dispatch(whoami()))
+//       .catch(() => dispatch(whoami()))
+
+
+export const login = function(email, password) {
+  return (dispatch, getState) => {
+    return axios.post('/api/auth/login/local', {email, password})
+     .then(() => dispatch(whoami()))
       .catch(() => dispatch(whoami()))
+    }
+   }
 
 export const logout = () =>
   dispatch =>
@@ -35,24 +44,18 @@ export const whoami = () =>
       })
       .catch(failed => dispatch(authenticated(null)))
 
-export const oauth = (strategy) => 
-  dispatch => 
-    axios.get(`/api/auth/login/${strategy}`)
-    // .then(response => {
-    //   const user = response.data
-    //   dispatch(authenticated(user))
-    // })
-    // .catch(failed => dispatch(authenticated(null)))
-     .then(() => dispatch(whoami()))
-      .catch(() => dispatch(whoami()))
 
-export const signup = (email, password, address, name) => 
-  dispatch => 
-    axios.post('/api/auth/signup')
+
+export const signup = function(email, password, address, name) {
+  return (dispatch, getState) => {
+    console.log('inside of signup')
+    return axios.post('/api/auth/signup', {email, password, address, name})
     .then(()=> dispatch(login(email, password)))
      .then(() => dispatch(whoami()))
       .catch(() => dispatch(whoami()))
-   
+    }
+   }
+
 
 
 

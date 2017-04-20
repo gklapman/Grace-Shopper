@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 
 const Login = ({handleSubmit, handleChange}) => (
 
-  <div className="login">
+  <div className="login form-inline">
     <form onSubmit={handleSubmit}>
       <div className="form-group">
         <label>Email</label>
@@ -21,12 +21,12 @@ const Login = ({handleSubmit, handleChange}) => (
         <label>Password</label>
         <input 
           onChange ={handleChange}
-          name="passowrd"
+          name="password"
           type="password"
           className="form-control"
         />
       </div>
-      <button type="submit" className="btn btn-block btn-primary">Login!</button>
+      <button type="submit" className="btn btn-primary">Login!</button>
     </form>
   </div>
 )

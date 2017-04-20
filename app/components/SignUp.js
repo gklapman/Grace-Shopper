@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SignUp = (props) => (
-	<div className="create-account">
+	<div className="create-account navbar-right">
 		<form onSubmit={props.handleSubmit}>
 			<div className="form-group">
 				<label>Email</label>

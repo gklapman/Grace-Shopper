@@ -26,10 +26,9 @@ class SignUpContainer extends React.Component {
 		const password = this.state.password;
 		const address = this.state.address;
 		const name = this.state.name;
-		console.log('inside of handle submit with ', email, password, address)
 		if (!email || !password){
 			alert('Please fill out email and password')
-		} else {	
+		} else {
 		this.props.signup(email, password, address, name)
 		}
 
@@ -52,8 +51,8 @@ class SignUpContainer extends React.Component {
 	render(){
 	
 		return (
-			<div className="create-account-container"> 
-			<button onClick={this.switchSignUp}>SignUp</button>
+			<div className="create-account-container container"> 
+			<button className="btn btn-default" onClick={this.switchSignUp}>SignUp</button>
 			{this.state.showSignUp ? <SignUp handleChange={this.handleChange} handleSubmit={this.handleSubmit}/> : null}
 			
 			
@@ -65,10 +64,13 @@ class SignUpContainer extends React.Component {
 const mapStateToProps = null;
 
 const mapDispatchToProps = (dispatch) => {
-	return {signup}	
+	return {
+		signup(email, password, address, name){
+			return dispatch(signup(email, password, address, name))
+		}
+		
 	}
-
-
+}
 
 
 

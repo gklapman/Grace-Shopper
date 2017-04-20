@@ -14,7 +14,7 @@ class LoginContainer extends React.Component {
     constructor(props) {
 		super(props);
 		this.state =  
-			{name: '', password: ''}
+			{email: '', password: ''}
 		
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,17 +32,19 @@ class LoginContainer extends React.Component {
 
 	handleSubmit(event){
 		event.preventDefault();
-		const email = this.state.formEmail;
-		const password = this.state.formPassword;
+		const email = this.state.email;
+		const password = this.state.password;
+	
 		this.props.login(email, password)
 	}
 
 
 	render(){
+		console.log("the currentUser is ", this.props.currentUser)
 		const { currentUser } = this.props
 		return (
-			<div className="login-container"> 
-			{currentUser ? <WhoAmI /> : <div> <Login handleChange={this.handleChange} handleSubmit={this.handleSubmit} /> <Oauth /> <SignUpContainer /></div> }
+			<div className="login-container navbar"> 
+			{currentUser ? <WhoAmI /> : <div> <Login className="nav-item navbar-left" handleChange={this.handleChange} handleSubmit={this.handleSubmit} /> <Oauth className="nav-item navbar-right"/> <SignUpContainer className="nav-item navbar-right"/></div> }
 			
 			</div>
 		)

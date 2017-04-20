@@ -9,7 +9,9 @@ export const Oauth = ({ oauth }) => {
 
 return (
   <div className="oauth">
-    <a href='api/auth/login/facebook'>Login with Facebook</a>
+ 
+    <a className="btn btn-default" href='api/auth/login/google'>Login with Google</a>
+    
   </div>
 )
 }

@@ -9,6 +9,7 @@ import Jokes from './components/Jokes'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
+import CartIcon from './components/CartIcon'
 
 import LoginLogoutContainer from './components/LoginLogoutContainer'
 
@@ -20,8 +21,9 @@ const ExampleApp = connect(
 (
   ({ user, children }) =>
     <div>
-      <nav>
+      <nav className="navbar navbar-default">
         <LoginLogoutContainer />
+        <CartIcon />
       </nav>
       {children}
     </div>
