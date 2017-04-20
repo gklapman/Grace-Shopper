@@ -12,7 +12,6 @@ const initialState = {
 // reducer
 const reducer = (prevState = initialState, action) => {
   let newState = Object.assign({}, prevState)
-  console.log('received action', action.type)
   switch (action.type) {
     case ALL_MEMES:
       newState.memes = action.memes

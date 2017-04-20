@@ -9,7 +9,7 @@ import {connect, Link} from 'react-redux'
 const CartIcon = () => (
 
   <div className="cart-icon">
-    <span>Number</span>
+    <span></span>
   </div>
 )
 

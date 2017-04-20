@@ -2,8 +2,7 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import React from 'react';
 import Search from './Search'
-
-
+import {oneMeme} from '../reducers/meme'
 
 
 
@@ -20,9 +19,8 @@ class SearchContainer extends React.Component {
 
 
 	handleChange(event){
-		let name = event.target.name
 		this.setState({
-			[name]: event.target.value
+			search: event.target.value
 		})
 	}
 
@@ -30,16 +28,36 @@ class SearchContainer extends React.Component {
 
 	handleSubmit(event){
 		event.preventDefault();
-		const search = this.state.search;
-		console.log(search)
+		const searcheditem = this.state.search;
+		let correctMeme;
+		this.props.memes.forEach(meme => {
+			if (meme.name === searcheditem){
+				correctMeme = meme
+			}
+		})
+		if (!correctMeme){
+			alert(`Sorry, we don't have that meme in stock`)
+			browserHistory.push(`/products`)
+			this.setState({
+				search: '',
+			})
+		}
+		else {
+			this.props.oneMeme(correctMeme)
+			let productId = correctMeme.id
+			browserHistory.push(`/products/${productId}`)
+		}
+
 	}
 
 
+
 	render(){
-		const { currentUser } = this.props
+		const { memes } = this.props
+	
 		return (
 			<div className="search-container"> 
-			<Search handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+			<Search handleChange={this.handleChange} handleSubmit={this.handleSubmit} search={this.state.search}/>
 			</div>
 		)
 	}
@@ -50,12 +68,21 @@ class SearchContainer extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
 	return {
-		memes: state.memes.products
+		memes: state.meme.memes
 	}
 	
 }
 
-const MapDispatchToProps = null
+const mapDispatchToProps = (dispatch) => {
+	return {
+		oneMeme(meme){
+			return dispatch(oneMeme(meme))
+		}
+		
+	}
+}
 
 
-export default connect(mapStateToProps, MapDispatchToProps)(SearchContainer);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);

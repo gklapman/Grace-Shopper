@@ -12,6 +12,8 @@ import NotFound from './components/NotFound'
 import CartIcon from './components/CartIcon'
 
 import LoginLogoutContainer from './components/LoginLogoutContainer'
+import SearchContainer from './components/SearchContainer'
+import SingleProductContainer from './components/SingleProductContainer'
 
 
 
@@ -24,8 +26,9 @@ const ExampleApp = connect(
   ({ user, children }) =>
     <div>
       <nav className="navbar navbar-default">
-        <LoginLogoutContainer />
-        <CartIcon />
+        <LoginLogoutContainer className="navbar-nav"/>
+        <CartIcon className="navbar-nav" />
+        <SearchContainer />
       </nav>
       {children}
     </div>
@@ -36,8 +39,8 @@ render(
     <Router history={browserHistory}>
       <Route path="/" component={ExampleApp}>
         <IndexRedirect to="/products" />
-        {/*<Route path="/jokes" component={Jokes} />*/}
         <Route path="/products" component={ProductsContainer} />
+        <Route path="products/:productId" component={SingleProductContainer}/>
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
