@@ -1,4 +1,11 @@
-.produce {
+/*ul {
+  list-style-type: none
+}
+
+li {
+  border: solid 2px black;
+}*/
+/*.produce {
   list-style-type: none;
 }
 .produce li {
@@ -35,4 +42,20 @@ img {
 
 .info {
   font-size: 16px
+}*/
+
+.on-display {
+  border: solid 1px black
+}
+
+.sidebar {
+  background-color: blue;
+  border: solid 1px black;
+  padding: 50% 0 0 0
+}
+
+.adbar {
+  background-color: red;
+  border: solid 1px black;
+  padding: 50% 0 0 0
 }

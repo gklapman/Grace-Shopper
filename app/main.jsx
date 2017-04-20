@@ -10,6 +10,7 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import ProductsContainer from './containers/Products'
+import {getMemes} from './reducers/meme'
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -23,13 +24,16 @@ const ExampleApp = connect(
     </div>
 )
 
+const onProductContainerEnter = () => {
+  return store.dispatch(getMemes())
+}
+
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={ExampleApp}>
         <IndexRedirect to="/products" />
-        {/*<Route path="/jokes" component={Jokes} />*/}
-        <Route path="/products" component={ProductsContainer} />
+        <Route path="/products" onEnter={onProductContainerEnter} component={ProductsContainer} />
       </Route>
       <Route path='*' component={NotFound} />
     </Router>

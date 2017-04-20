@@ -13,23 +13,41 @@ export default (props) => {
   }
     // todo: create function for displaying ratings as stars
     // todo: refactor styling to css
+  let endRow = ''
+
+  // clump function groups list itmes into rows
+  const clump = produce => {
+    let rows = []
+    for (let i = 0; i < produce.length; i += 2) {
+      let row = produce.length - i > 1 ? produce.slice(i, i + 2) : produce.slice(i)
+      rows.push(row)
+    }
+    return rows.map((row, index) => {
+      return(
+        <div key={index} className="row">
+          {row.map(product => {
+            return (
+              <div key={product.name} className="col-md-6 on-display">
+                <img src={product.photo} alt={product.name}></img>
+                <span className="in-block">
+                  <div className="name">{product.name}</div>
+                  <div className="price">$$$ {product.price} $$$</div>
+                  <div className="rating">{product.rating}/5.00 starz based on user reviews</div>
+                  <div className="info">{shorten(product.product_info)}</div>
+                </span>
+              </div>
+            )
+          })}
+        </div>
+      )
+    })
+  }
+
   return (
     <div>
-      <ul className="produce">
-        {props.products.map(product => {
-          return (
-            <li key={product.name}>
-              <img src={product.photo} alt={product.name}></img>
-              <span className="in-block">
-                <div className="name">{product.name}</div>
-                <div className="price">$$$ {product.price} $$$</div>
-                <div className="rating">{product.rating}/5.00 starz based on user reviews</div>
-                <div className="info">{shorten(product.product_info)}</div>
-              </span>
-            </li>
-          )
-        })}
-      </ul>
+      <div className="produce">
+        {clump(props.products)}
+      </div>
     </div>
   )
 }
