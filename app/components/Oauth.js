@@ -8,7 +8,7 @@ export const Oauth = ({ oauth }) => {
 
 
 return (
-  <div className="oauth">
+  <div className="oauth col-md-8">
  
     <a className="btn btn-default" href='api/auth/login/google'>Login with Google</a>
     

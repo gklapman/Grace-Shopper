@@ -51,7 +51,7 @@ class SignUpContainer extends React.Component {
 	render(){
 	
 		return (
-			<div className="create-account-container container"> 
+			<div className="create-account-container"> 
 			<button className="btn btn-default" onClick={this.switchSignUp}>SignUp</button>
 			{this.state.showSignUp ? <SignUp handleChange={this.handleChange} handleSubmit={this.handleSubmit}/> : null}
 			

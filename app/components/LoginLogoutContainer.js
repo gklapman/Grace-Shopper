@@ -45,11 +45,13 @@ class LoginContainer extends React.Component {
 		return (
 			<div className="login-container navbar"> 
 			{currentUser ? <WhoAmI /> : 
-				<div className='navbar'> 
-				
-				<Login className="nav-item navbar-left" handleChange={this.handleChange} handleSubmit={this.handleSubmit} /> 
-				<Oauth className="nav-item navbar-right"/>
-				<SignUpContainer className="nav-item navbar-right"/></div> }
+				<div className="container-fluid"> 
+					<Login handleChange={this.handleChange} handleSubmit={this.handleSubmit} /> 
+					<div className="col-md-5">
+					<Oauth />
+					<SignUpContainer />
+					</div>
+				</div> }
 
 			
 			</div>
