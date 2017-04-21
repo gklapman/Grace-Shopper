@@ -6,7 +6,7 @@ const Meme = db.model('memes')
 
 module.exports = require('express').Router()
   .get('/', (req, res, next) => {
-    Tag.findAll()
+    Tag.findAll({order: [['tag', 'ASC']]})
     .then(tags => {
       res.send(tags)
     })
