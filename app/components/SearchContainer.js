@@ -36,7 +36,7 @@ class SearchContainer extends React.Component {
 			}
 		})
 		if (!correctMeme){
-			alert(`Sorry, we don't have that meme in stock`)
+			alert(`Sorry, we don't carry that meme`)
 			browserHistory.push(`/products`)
 			this.setState({
 				search: '',
@@ -56,8 +56,8 @@ class SearchContainer extends React.Component {
 		const { memes } = this.props
 	
 		return (
-			<div className="search-container"> 
-			<Search handleChange={this.handleChange} handleSubmit={this.handleSubmit} search={this.state.search}/>
+			<div className="search-container container-fluid"> 
+				<Search handleChange={this.handleChange} handleSubmit={this.handleSubmit} search={this.state.search}/>
 			</div>
 		)
 	}

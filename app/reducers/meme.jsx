@@ -124,4 +124,16 @@ export const getTags = (memeId) => {
   }
 }
 
+export const getMemesForOneTag = (tagId) => {
+  return dispatch => {
+    return axios.get(`/api/tags/${tagId}`)
+    .then(memes => {
+      dispatch(allMemes(memes.data))
+    })
+    .catch(err => {
+      console.log('error!', err)
+    })
+  }
+}
+
 export default reducer

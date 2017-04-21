@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 
 const Login = ({handleSubmit, handleChange}) => (
 
-  <div className="login form-inline">
+  <div className="login form-inline col-md-7">
     <form onSubmit={handleSubmit}>
       <div className="form-group">
         <label>Email</label>

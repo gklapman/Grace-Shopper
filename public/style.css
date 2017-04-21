@@ -49,13 +49,31 @@ img {
 }
 
 .sidebar {
-  background-color: blue;
-  border: solid 1px black;
-  padding: 50% 0 0 0
+  border: solid 1px blue;
 }
 
 .adbar {
-  background-color: red;
-  border: solid 1px black;
+  border: solid 1px red;
   padding: 50% 0 0 0
 }
+
+ul {
+  list-style-type: none
+}
+
+.categories {
+  float: left
+}
+
+.centered-text {
+  padding-top: .5em
+}
+
+.on-display img {
+  height: 100%;
+  width: 100%;
+}
+
+/*.row {
+  clear: both
+}*/

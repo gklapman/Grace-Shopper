@@ -11,35 +11,52 @@ import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import CartIcon from './components/CartIcon'
 
+import Sidebar from './components/Sidebar'
+import Adbar from './components/Adbar'
 import LoginLogoutContainer from './components/LoginLogoutContainer'
 import SearchContainer from './components/SearchContainer'
 import SingleProductContainer from './components/SingleProductContainer'
 
-
-
 import ProductsContainer from './containers/Products'
-import {getMemes} from './reducers/meme'
-
-import { getMeme } from './reducers/meme'
-import { getReviews } from './reducers/meme'
+import {getMemes, getMeme, getReviews, getMemesForOneTag} from './reducers/meme'
+import { getCats } from './reducers/bars'
 
 
 
-const ExampleApp = connect(
+const MemeApp = connect(
   ({ auth }) => ({ user: auth }))
 
 (
   ({ user, children }) =>
     <div>
-      <nav className="navbar navbar-default">
-        <LoginLogoutContainer className="navbar-nav"/>
-        <CartIcon className="navbar-nav" />
-        <SearchContainer />
+      <nav className="navbar navbar-default container-fluid">
+        <div className="col-md-6">
+          <LoginLogoutContainer />
+        </div>
+        <div className="col-md-4">
+          <SearchContainer />
+        </div>
+        <div className="col-md-2">
+          <CartIcon />
+        </div>
       </nav>
-      {children}
+      <div className="container-fluid">
+        <Sidebar />
+        <div className="col-md-8">
+          {children}
+        </div>
+        <Adbar />
+      </div>
     </div>
 )
 
+const onEnterLoadCategories = () => {
+  return store.dispatch(getCats())
+}
+const onProductCategoryEnter = (req) => {
+  console.log(req)
+  return store.dispatch(getMemesForOneTag(Number(req.params.tagId)))
+}
 const onProductContainerEnter = () => {
   return store.dispatch(getMemes())
 }
@@ -50,9 +67,10 @@ const loadSingleProduct = () => {
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={ExampleApp}>
+      <Route path="/" component={MemeApp} onEnter={onEnterLoadCategories} >
         <IndexRedirect to="/products" />
-        <Route path="/products" onEnter={onProductContainerEnter} component={ProductsContainer} />
+        <Route path="/products" component={ProductsContainer} onEnter={onProductContainerEnter} />
+        <Route path="/products/categories/:tagId" component={ProductsContainer} onEnter={onProductCategoryEnter} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
       </Route>
       <Route path='*' component={NotFound} />
