@@ -12,6 +12,7 @@ module.exports = db => db.define('reviews', {
 	}, 
 	stars: {
 		type: INTEGER,
+		allowNull: false,
 		validate: {
 			min: 1, 
 			max: 5,

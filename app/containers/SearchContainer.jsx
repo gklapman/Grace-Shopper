@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import React from 'react';
-import Search from './Search'
+import Search from '../components/Search.jsx'
 import {oneMeme} from '../reducers/meme'
 
 

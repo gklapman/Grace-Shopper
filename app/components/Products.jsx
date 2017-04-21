@@ -4,18 +4,13 @@ import {Link} from 'react-router'
 
 export default (props) => {
 
-console.log("props", props)
 
-  // const addToCart = function(event){
-  //   console.log('current user', props.currentUser)
-  //   console.log('product', event.target)
-  //   let userId = props.currentUser.id
-  //   let productId = 
-  //   console.log("info", userId, productId)
-  //   props.addItem(productId, userId)
-  // }
+  const addToCart = function(event){
+    let userId = props.currentUser.id
+    let productId = event.target.value
+    props.addItemThunk(productId, userId)
+  }
 
-  console.log('props', props)
   // expect to receive: array of products (which have a name, image, description, price, average rating)
   const shorten = (text) => {
     if (text.length < 64) {
@@ -41,6 +36,7 @@ console.log("props", props)
           {row.map(product => {
             return (
               <div key={product.id} className="col-md-6 on-display">
+              <button value={product.id} className="btn btn-default" onClick={addToCart}>Add to Cart </button>
                   <img src={product.photo} alt={product.name}></img>
                   <span className="in-block">
                     <div className="name">{product.name}</div>
@@ -68,4 +64,4 @@ console.log("props", props)
 }
 
 
- // <button value={product} className="btn btn-default" onClick={addToCart}>Add to Cart </button>
+ // 

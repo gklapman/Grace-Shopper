@@ -65,7 +65,6 @@ export const getMemes = () => {
   return dispatch => {
     return axios.get('/api/memes')
     .then(memes => {
-      // console.log('memes in thunk', memes.data)
       dispatch(allMemes(memes.data))
     })
     .catch(err => {

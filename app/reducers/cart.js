@@ -9,11 +9,8 @@ const initialState = {
 const reducer = (prevState = initialState, action) => {
   let newState = Object.assign({}, prevState)
   switch (action.type) {
-    case ALL_ITEMS:
+    case LOAD_ITEMS:
       newState.cart = action.items
-      return newState
-    case ADD_ITEM:
-      newState.cart = newState.cart.concat(item)
       return newState
     default:
       return newState
@@ -21,23 +18,20 @@ const reducer = (prevState = initialState, action) => {
 }
 
 // constants and action creators
-const ALL_ITEMS = 'ALL_ITEMS'
-export const allItems = (items) => {
-  return {type: ALL_ITEMS, items}
+const LOAD_ITEMS = 'LOAD_ITEMS'
+export const loadItems = (items) => {
+  return {type: LOAD_ITEMS, items}
 }
 
-const ADD_ITEM = 'ADD_ITEM'
-export const addMeme = (item) => {
-  return {type: ADD_ITEM, item}
-}
 
 
 // thunks
-export const getItems = (userId) => {
+export const loadItemsThunk = (userId) => {
   return dispatch => {
     return axios.get(`/api/carts/${userId}`)
     .then(items => {
-      dispatch(allItems(items.data))
+      dispatch(loadItems(items.data))
+      console.log('the items are ', items.data)
     })
     .catch(err => {
       console.log('error!', err)
@@ -45,17 +39,19 @@ export const getItems = (userId) => {
   }
 }
 
-export const addItem = (memeId, userId) => {
-  return dispatch => {
-    return axios.get(`/api/carts`, {meme_Id: memeId, user_Id: userId})
-    .then(item => {
-      dispatch(addItem(item.data))
+
+
+export const addItemThunk = function(memeId, userId) {
+  return (dispatch, getState) => {
+    return axios.post('/api/carts', {memeId, userId})
+    .then(res => {
+      return res.data
     })
-    .catch(err => {
-      console.log('error!', err)
+    .then(() => {
+      dispatch(loadItemsThunk(userId))
     })
+    .catch((error) => console.error(error))
   }
 }
-
 
 export default reducer

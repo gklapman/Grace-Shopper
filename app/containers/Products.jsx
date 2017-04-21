@@ -4,7 +4,7 @@ import Products from '../components/Products'
 import Sidebar from '../components/Sidebar'
 import Adbar from '../components/Adbar'
 import {getMemes} from '../reducers/meme'
-import {addItem} from '../reducers/cart'
+import {addItemThunk} from '../reducers/cart'
 
 class ProductsContainer extends React.Component {
 
@@ -14,7 +14,7 @@ class ProductsContainer extends React.Component {
       <div className="container-fluid">
         <Sidebar />
         <div className="col-md-8">
-          <Products products={this.props.memes} addItem={this.props.addItem} currentUser={this.props.currentUser} />
+          <Products products={this.props.memes} addItemThunk={this.props.addItemThunk} currentUser={this.props.currentUser} />
         </div>
         <Adbar />
       </div>
@@ -29,8 +29,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {addItem}
-}
+const mapDispatchToProps = {addItemThunk}
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer)

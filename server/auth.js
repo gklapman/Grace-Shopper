@@ -132,18 +132,20 @@ auth.get('/whoami', (req, res) => res.send(req.user))
 
 // POST requests for local login:
 auth.post('/login/local', function(req, res, next){
-  console.log('inside of local ', req.body)
   return passport.authenticate('local', function(err, user){
-    if (user){
+    if (err) {
+      console.log('err', err)
+
+    } else if (!user){
+      res.send('Please ensure your email and password are correct')
+    }
+    else if (user){
       req.logIn(user, function(err){
       console.log('user', user)
       console.log('req.user', req.user)
         return res.json(req.user)
       })
-
-    } else if (err || !user) {
-      console.log('err', err)
-    }
+      }
   })
   (req, res, next)
 }
