@@ -48,7 +48,6 @@ export const whoami = () =>
 
 export const signup = function(email, password, address, name) {
   return (dispatch, getState) => {
-    console.log('inside of signup')
     return axios.post('/api/auth/signup', {email, password, address, name})
     .then(()=> dispatch(login(email, password)))
      .then(() => dispatch(whoami()))
