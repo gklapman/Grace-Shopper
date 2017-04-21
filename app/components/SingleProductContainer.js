@@ -16,7 +16,8 @@ const mapDispatchToProps = function(dispatch){
 const mapStateToProps = function(state) {
   return {
     reviews: state.meme.reviews,
-    selectedmeme: state.meme.selectedMeme
+    selectedmeme: state.meme.selectedMeme,
+    currenetUser: state.auth
   }
 }
 
