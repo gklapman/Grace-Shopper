@@ -1,11 +1,8 @@
-import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
-import React from 'react';
+import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
+import React from 'react'
 import Search from './Search'
 import {oneMeme} from '../reducers/meme'
-
-
-
 
 class SearchContainer extends React.Component {
     constructor(props) {
@@ -36,7 +33,7 @@ class SearchContainer extends React.Component {
 			}
 		})
 		if (!correctMeme){
-			alert(`Sorry, we don't carry that meme`)
+			window.alert(`Sorry, we don't carry that meme`)
 			browserHistory.push(`/products`)
 			this.setState({
 				search: '',
@@ -63,26 +60,18 @@ class SearchContainer extends React.Component {
 	}
 }
 
-
-
-
 const mapStateToProps = (state, ownProps) => {
-	return {
-		memes: state.meme.memes
-	}
-	
+  return {
+    memes: state.meme.memes
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
-	return {
-		oneMeme(meme){
-			return dispatch(oneMeme(meme))
-		}
-		
-	}
+  return {
+    oneMeme(meme) {
+      return dispatch(oneMeme(meme))
+    }
+  }
 }
-
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);

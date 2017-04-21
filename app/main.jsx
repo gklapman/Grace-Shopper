@@ -61,8 +61,9 @@ const onProductContainerEnter = () => {
   return store.dispatch(getMemes())
 }
 const loadSingleProduct = () => {
-  store.dispatch(getMeme(1))
-  store.dispatch(getReviews(1, 1))
+  let productNum = browserHistory.getCurrentLocation().pathname.split('/')[2]
+  store.dispatch(getMeme(productNum))
+  store.dispatch(getReviews(productNum))
 }
 render(
   <Provider store={store}>
@@ -79,8 +80,3 @@ render(
   document.getElementById('main')
 )
 
-
-
-// <Route path="/products" component={AllProductsContainer} />
-        // <Route path="products/:productId" component={SingleProductContainer}/>
-        // <Route path="mycart" component={Cart} />

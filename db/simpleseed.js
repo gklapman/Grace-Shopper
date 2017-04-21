@@ -52,7 +52,7 @@ const generateMemes = () => {
     name: 'dwight',
     price: 7.99,
     rating: 2,
-    photo: 'http://4.bp.blogspot.com/-pFRXzhUqYb0/VZNw_h4OTCI/AAAAAAAAEVQ/S94m3_LRK0A/s320/FEARED%2BOR%2BLOVED.jpg',
+    photo: 'https://i.imgflip.com/1lvxzd.jpg',
     product_info: 'Dwight here is talking about stuff from his Farm... ',
     stock: 4
   }))
