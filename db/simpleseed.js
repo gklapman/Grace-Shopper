@@ -97,7 +97,7 @@ const generateCarts = () => {
   const cartArray = []
 
   cartArray.push(Cart.build({
-    status: false,
+    status: 'not-purchased',
     date: new Date(2017,5,18),
     quantity: 0,
     meme_id: 2,
@@ -105,7 +105,7 @@ const generateCarts = () => {
   }))
 
   cartArray.push(Cart.build({
-    status: true,
+    status: 'purchased',
     date: new Date(2017,5,10),
     quantity: 2,
     meme_id: 1,

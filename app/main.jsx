@@ -9,11 +9,11 @@ import Jokes from './components/Jokes'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
-import CartIcon from './components/CartIcon'
+import CartIcon from './components/CartIcon.jsx'
 
-import LoginLogoutContainer from './components/LoginLogoutContainer'
-import SearchContainer from './components/SearchContainer'
-import SingleProductContainer from './components/SingleProductContainer'
+import LoginLogoutContainer from './containers/LoginLogoutContainer.jsx'
+import SearchContainer from './containers/SearchContainer.jsx'
+import SingleProductContainer from './components/SingleProductContainer.jsx'
 
 
 
