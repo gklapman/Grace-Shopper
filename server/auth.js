@@ -152,8 +152,7 @@ auth.post('/login/local', function(req, res, next){
 
 // GET requests for OAuth login:
 // Register this route as a callback URL with OAuth provider
-auth.get('/login/:strategy', (req, res, next) =>
-  {console.log('we are inside the correct route')
+auth.get('/login/:strategy', (req, res, next) => {
   return passport.authenticate(req.params.strategy, {
     scope: 'email', // You may want to ask for additional OAuth scopes. These are
                     // provider specific, and let you access additional data (like
@@ -170,7 +169,6 @@ auth.post('/logout', (req, res) => {
 })
 
 auth.post('/signup', (req, res, next) => {
-  console.log('req.body', req.body)
   //Can add something that checks if the user exists
   return User.create({
     email: req.body.email, 

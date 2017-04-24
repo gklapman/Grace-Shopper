@@ -4,10 +4,10 @@ const db = require('APP/db')
 const Cart = db.model('carts')
 const User = db.model('users')
 const Meme = db.model('memes')
+const {selfOnly} = require('./auth.filters')
 
 module.exports = require('express').Router()
-// Gonna need to implement some forbidden stuff here
-.get('/:userId', (req, res, next) => {
+.get('/:userId', selfOnly('view cart'), (req, res, next) => {
   return Cart.findAll({where: {user_id: req.params.userId, status: 'not-purchased'}, include: [Meme]})
   .then(items => {
     res.send(items)

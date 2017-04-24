@@ -29,9 +29,10 @@ export const loadItems = (items) => {
 export const loadCartItems = (userId) => {
   return dispatch => {
     return axios.get(`/api/carts/${userId}`)
-    .then(items => {
-      console.log('these are the items', items)
-      dispatch(loadItems(items.data))
+    .then(res => {
+      if (typeof res.data !== 'string'){
+      dispatch(loadItems(res.data))
+      }
     })
     .catch(err => {
       console.log('error!', err)

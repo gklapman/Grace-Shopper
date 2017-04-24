@@ -81,6 +81,15 @@ ul {
   background-image: url('/images/he-man_crop.jpg')
 }
 
+#cart-item {
+  padding: 5;
+  text-align: center;
+}
+
+#center {
+   text-align: center
+}
+
 /*.whoami-user-name {
 }*/
 
