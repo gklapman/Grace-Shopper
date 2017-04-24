@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 
 
 const Search = ({handleChange, handleSubmit, search}) => {
-	console.log('search', search)
 
 return (
   <div className="search">

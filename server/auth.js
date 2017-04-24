@@ -2,7 +2,7 @@ const app = require('APP'), {env, secretsFile} = app
 const debug = require('debug')(`${app.name}:auth`)
 const passport = require('passport')
 
-const {User, OAuth} = require('APP/db')
+const {User, OAuth, Cart} = require('APP/db')
 const auth = require('express').Router()
 
 /*************************
@@ -105,7 +105,7 @@ passport.use(
   },
   
   (email, password, done) => {
-    console.log('inside of path')
+    // console.log('inside of path')
     debug('will authenticate user(email: "%s")', email)
     User.findOne({where: {email}})
       .then(user => {
@@ -132,18 +132,23 @@ auth.get('/whoami', (req, res) => res.send(req.user))
 
 // POST requests for local login:
 auth.post('/login/local', function(req, res, next){
-  console.log('inside of local ', req.body)
   return passport.authenticate('local', function(err, user){
-    if (user){
+    if (err) {
+      console.log('err', err)
+
+    } else if (!user){
+      res.send('Please ensure your email and password are correct')
+    }
+    else if (user){
+      let cart = req.session.cart || []
+      carteBlanche(user, cart)
+      .then(() => {
+        delete req.session.cart
+      })
       req.logIn(user, function(err){
-      console.log('user', user)
-      console.log('req.user', req.user)
         return res.json(req.user)
       })
-
-    } else if (err || !user) {
-      console.log('err', err)
-    }
+      }
   })
   (req, res, next)
 }
@@ -152,8 +157,7 @@ auth.post('/login/local', function(req, res, next){
 
 // GET requests for OAuth login:
 // Register this route as a callback URL with OAuth provider
-auth.get('/login/:strategy', (req, res, next) =>
-  {console.log('we are inside the correct route')
+auth.get('/login/:strategy', (req, res, next) => {
   return passport.authenticate(req.params.strategy, {
     scope: 'email', // You may want to ask for additional OAuth scopes. These are
                     // provider specific, and let you access additional data (like
@@ -170,7 +174,6 @@ auth.post('/logout', (req, res) => {
 })
 
 auth.post('/signup', (req, res, next) => {
-  console.log('req.body', req.body)
   //Can add something that checks if the user exists
   return User.create({
     email: req.body.email, 
@@ -178,10 +181,24 @@ auth.post('/signup', (req, res, next) => {
     name: req.body.name, 
     address: req.body.address,
   })
+  .then((newUser) => {
+    let cart = req.session.cart || []
+    return carteBlanche(newUser, cart)
+  })
   .then(()=> {
+    delete req.session.cart
     res.send();
   })
   .catch(err => console.error(err))
 })
+
+//util function for assigning items to cart off req.session
+const carteBlanche = (user, seshCart) => {
+  cart = seshCart.map(item => {
+    item.user_id = user.id
+    return Cart.create(item)
+  })
+  return Promise.all(cart)
+}
 
 module.exports = auth
