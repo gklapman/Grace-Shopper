@@ -10,17 +10,13 @@ import {Link} from 'react-router'
 
 const CartIcon = ({cartItems, currentUser}) => {
 
-let userId;
-if (currentUser){
-  userId = currentUser.id
-}
 
 return (
-  (currentUser ? <div className="cart-icon">
-   <Link to={`/cart/${userId}`}>
+  <div className="cart-icon">
+   <Link to={`/cart`}>
      <span>My Cart </span>
     </Link>
-  </div> : null)
+  </div> 
   
 )
 }

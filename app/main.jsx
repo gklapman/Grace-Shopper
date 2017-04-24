@@ -59,7 +59,8 @@ const MemeApp = connect(
 )
 
 const onEnterLoadCategories = () => {
-  return store.dispatch(getCats())
+  store.dispatch(getCats())
+  store.dispatch(loadCartItems())
 }
 const onProductCategoryEnter = (req) => {
   console.log(req)
@@ -74,10 +75,7 @@ const loadSingleProduct = () => {
   store.dispatch(getReviews(productNum))
 }
 
-const loadCart = (nextRouterState) => {
-  let userId = nextRouterState.params.userId
-  store.dispatch(loadCartItems(userId))
-}
+
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -86,7 +84,7 @@ render(
         <Route path="/products" component={ProductsContainer} onEnter={onProductContainerEnter} />
         <Route path="/products/categories/:tagId" component={ProductsContainer} onEnter={onProductCategoryEnter} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
-        <Route path='/cart/:userId' component={Cart} onEnter={loadCart}/>
+        <Route path='/cart' component={Cart}/>
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
