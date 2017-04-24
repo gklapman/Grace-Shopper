@@ -16,8 +16,8 @@ import SingleProductContainer from './components/SingleProductContainer.js'
 import Cart from './components/Cart'
 import Sidebar from './components/Sidebar'
 import Adbar from './components/Adbar'
-import PastOrders from './components/PastOrders'
 
+import PastOrders from './components/PastOrders'
 
 import ProductsContainer from './containers/Products'
 import {getMemes, getMeme, getReviews, getMemesForOneTag} from './reducers/meme'
