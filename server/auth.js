@@ -143,7 +143,7 @@ auth.post('/login/local', function(req, res, next){
       let cart = req.session.cart || []
       carteBlanche(user, cart)
       .then(() => {
-        delete req.session.cart
+        req.session.cart = null
       })
       req.logIn(user, function(err){
         return res.json(req.user)
@@ -186,7 +186,8 @@ auth.post('/signup', (req, res, next) => {
     return carteBlanche(newUser, cart)
   })
   .then(()=> {
-    delete req.session.cart
+    console.log('kill it')
+    req.session.cart = null
     res.send();
   })
   .catch(err => console.error(err))
