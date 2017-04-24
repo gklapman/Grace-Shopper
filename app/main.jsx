@@ -14,7 +14,7 @@ import CartIcon from './components/CartIcon.jsx'
 
 import LoginLogoutContainer from './containers/LoginLogoutContainer.jsx'
 import SearchContainer from './containers/SearchContainer.jsx'
-import SingleProductContainer from './components/SingleProductContainer.jsx'
+import SingleProductContainer from './components/SingleProductContainer.js'
 import Cart from './components/Cart'
 
 
