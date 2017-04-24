@@ -13,9 +13,9 @@ import {login} from 'APP/app/reducers/auth'
 class LoginContainer extends React.Component {
     constructor(props) {
 		super(props);
-		this.state =  
+		this.state =
 			{email: '', password: ''}
-		
+
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -34,26 +34,26 @@ class LoginContainer extends React.Component {
 		event.preventDefault();
 		const email = this.state.email;
 		const password = this.state.password;
-	
+
 		this.props.login(email, password)
 	}
 
 
 	render(){
-		console.log("the currentUser is ", this.props.currentUser)
+		//console.log("the currentUser is ", this.props.currentUser)
 		const { currentUser } = this.props
 		return (
-			<div className="login-container navbar"> 
-			{currentUser ? <WhoAmI /> : 
-				<div className="container-fluid"> 
-					<Login handleChange={this.handleChange} handleSubmit={this.handleSubmit} /> 
+			<div className="login-container navbar">
+			{currentUser ? <WhoAmI /> :
+				<div className="container-fluid">
+					<Login handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
 					<div className="col-md-5">
 					<Oauth />
 					<SignUpContainer />
 					</div>
 				</div> }
 
-			
+
 			</div>
 		)
 	}
@@ -63,7 +63,7 @@ const mapStateToProps = (state, ownProps) => {
 	return {
 		currentUser: state.auth
 	}
-	
+
 }
 
 const MapDispatchToProps = (dispatch) => {

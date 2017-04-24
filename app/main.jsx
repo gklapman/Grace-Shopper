@@ -15,7 +15,7 @@ import Sidebar from './components/Sidebar'
 import Adbar from './components/Adbar'
 import LoginLogoutContainer from './components/LoginLogoutContainer'
 import SearchContainer from './components/SearchContainer'
-import SingleProductContainer from './components/SingleProductContainer'
+import SingleProductContainer from './containers/SingleProductContainer'
 
 import ProductsContainer from './containers/Products'
 import {getMemes, getMeme, getReviews, getMemesForOneTag} from './reducers/meme'

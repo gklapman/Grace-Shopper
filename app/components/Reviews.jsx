@@ -4,14 +4,13 @@ import { Link } from 'react-router'
 
 
 const Reviews = ({review}) => {
-  console.log('this is review', review)
 
   return (
     <div>
      { review.map((review, index) => { return (
-          <div style={{border: '1px solid black', padding: '5px'}} key={index}>
+          <div style={{border: '1px solid black', padding: '5px', backgroundColor: 'white'}} key={index}>
             <h3>{review.title} </h3>
-            <h4>{Number(review.stars)} Star Review</h4>
+            <h4>{Number(review.stars)} Star Review!</h4>
             <p> {review.content} <br/> User # {review.user_id} made this review. </p>
           </div>
        )
