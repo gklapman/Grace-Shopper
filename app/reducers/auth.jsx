@@ -23,6 +23,11 @@ export const authenticated = user => ({
 export const login = function(email, password) {
   return (dispatch, getState) => {
     return axios.post('/api/auth/login/local', {email, password})
+      .then((res) => {
+        if (typeof res.data === 'string'){
+          alert(res.data)
+        }
+      })
       .then(() => dispatch(whoami()))
       .catch(() => dispatch(whoami()))
   }

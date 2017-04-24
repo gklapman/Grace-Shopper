@@ -9,18 +9,26 @@ import Jokes from './components/Jokes'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
-import CartIcon from './components/CartIcon'
+
+import CartIcon from './components/CartIcon.jsx'
+
+import LoginLogoutContainer from './containers/LoginLogoutContainer.jsx'
+import SearchContainer from './containers/SearchContainer.jsx'
+import SingleProductContainer from './components/SingleProductContainer.js'
+import Cart from './components/Cart'
+
 
 import Sidebar from './components/Sidebar'
 import Adbar from './components/Adbar'
-import LoginLogoutContainer from './components/LoginLogoutContainer'
-import SearchContainer from './components/SearchContainer'
-import SingleProductContainer from './components/SingleProductContainer'
+
+
 
 import ProductsContainer from './containers/Products'
 import {getMemes, getMeme, getReviews, getMemesForOneTag} from './reducers/meme'
 import { getCats } from './reducers/bars'
 
+
+import {loadCartItems} from './reducers/cart.jsx'
 
 
 const MemeApp = connect(
@@ -56,7 +64,8 @@ const MemeApp = connect(
 )
 
 const onEnterLoadCategories = () => {
-  return store.dispatch(getCats())
+  store.dispatch(getCats())
+  store.dispatch(loadCartItems())
 }
 const onProductCategoryEnter = (req) => {
   console.log(req)
@@ -70,6 +79,8 @@ const loadSingleProduct = () => {
   store.dispatch(getMeme(productNum))
   store.dispatch(getReviews(productNum))
 }
+
+
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -78,10 +89,12 @@ render(
         <Route path="/products" component={ProductsContainer} onEnter={onProductContainerEnter} />
         <Route path="/products/categories/:tagId" component={ProductsContainer} onEnter={onProductCategoryEnter} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
+        <Route path='/cart' component={Cart}/>
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
   </Provider>,
   document.getElementById('main')
 )
+
 

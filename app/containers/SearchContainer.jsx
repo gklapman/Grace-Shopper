@@ -1,7 +1,9 @@
-import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
-import React from 'react'
-import Search from './Search'
+
+import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
+import React from 'react';
+import Search from '../components/Search.jsx'
+
 import {oneMeme} from '../reducers/meme'
 
 class SearchContainer extends React.Component {

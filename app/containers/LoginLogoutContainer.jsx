@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import React from 'react';
-import Login from './Login'
-import WhoAmI from './WhoAmI'
-import Oauth from './Oauth'
-import SignUpContainer from './SignUpContainer'
+import Login from '../components/Login.jsx'
+import WhoAmI from '../components/WhoAmI.jsx'
+import Oauth from '../components/Oauth.jsx'
+import SignUpContainer from './SignUpContainer.jsx'
 
 import {login} from 'APP/app/reducers/auth'
 
@@ -34,13 +34,11 @@ class LoginContainer extends React.Component {
 		event.preventDefault();
 		const email = this.state.email;
 		const password = this.state.password;
-	
 		this.props.login(email, password)
 	}
 
 
 	render(){
-		console.log("the currentUser is ", this.props.currentUser)
 		const { currentUser } = this.props
 		return (
 			<div className="login-container navbar"> 

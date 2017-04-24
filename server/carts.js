@@ -4,45 +4,76 @@ const db = require('APP/db')
 const Cart = db.model('carts')
 const User = db.model('users')
 const Meme = db.model('memes')
+const {selfOnly} = require('./auth.filters')
 
 module.exports = require('express').Router()
 // Gonna need to implement some forbidden stuff here
 
 .get('/', (req, res, next) => {
-	// console.log(req.user)
-	if (req.session.passport.user) {
-		Cart.findAll({where: {user_id: req.session.passport.user, status: false}})
-		.then(items => {
-			res.send(items)
-		})
-		.catch(next)
-	} else if (req.session.cart) {
-	res.send(req.session.cart)
-	} else {
-		res.send([])
-	}
+	let cart = req.session.cart || []
+	res.send(cart)
 })
 
 .get('/:userId', (req, res, next) => {
-  Cart.findAll({where: {user_id: req.params.userId, status: false}})
+  return Cart.findAll({where: {user_id: req.user.id, status: 'not-purchased'}, include: [Meme]})
   .then(items => {
     res.send(items)
   })
   .catch(next)
 })
 
+
+//SORRY THIS IS SO LONG... IF ANYONE HAS ANY WAY TO SHORTEN, LMK
 .post('/', (req, res, next)=> {
-	if (req.session.passport.user) {
+<<<<<<< HEAD
+	let user;
+	let meme;
+	if (req.user) {
 		// logic for authed users
-		console.log('inside of cart post with this body ', req.body)
-		let user;
 		return User.findOne({
 			where: {
-				user_id: req.body.userId
+				id: req.body.userId
 			}
 		})
+		.then(user1 => {
+			user = user1;
+			return Meme.findOne({
+				where: {
+					id: req.body.memeId
+				}
+			})
+		})
+		.then(meme1 => {
+			meme = meme1
+			return Cart.findOrCreate({
+				where :{
+					user_id: user.id,
+					meme_id: meme.id,
+				}
+			})
+		})
+		.spread((cart, created) => {
+			let quant =  cart.quantity + 1
+			return cart.update({
+				quantity: quant,	
+			})
+		})	
+		.then(cart => {
+			res.json(cart)
+		})
+		.catch(err => console.error(err))
 	} else {
 		req.session.cart = req.session.cart || []
-		req.session.cart.push(req.body)
+		let added = false
+		req.session.cart.forEach(item => {
+			if (item.meme_id == req.body.memeId) {
+				item.quantity++
+				added = true
+			}
+		})
+		if (!added) {
+			req.session.cart.push({quantity: 1, meme_id: memeId})
+		}
+		res.json(req.session.cart)
 	}
 })

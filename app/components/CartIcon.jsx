@@ -1,21 +1,30 @@
 import React from 'react'
 
 
-import {connect, Link} from 'react-redux'
+import {connect} from 'react-redux'
+
+import {Link} from 'react-router'
 
 
 
 
-const CartIcon = () => (
+const CartIcon = ({cartItems, currentUser}) => {
 
+
+return (
   <div className="cart-icon">
-    <span></span>
-  </div>
+   <Link to={`/cart`}>
+     <span>My Cart </span>
+    </Link>
+  </div> 
+  
 )
+}
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    // products: state.memes.products //what is the correct redux store and key for this
+    cartItems: state.cart.cart,
+    currentUser: state.auth
   }
   
 }
