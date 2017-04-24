@@ -10,8 +10,16 @@ module.exports = require('express').Router()
 // Gonna need to implement some forbidden stuff here
 
 .get('/', (req, res, next) => {
-	let cart = req.session.cart || []
-	res.send(cart)
+	if (!req.user) {
+		let cart = req.session.cart || []
+		res.send(cart)
+	} else {
+		return Cart.findAll({where: {user_id: req.user.id, status: 'not-purchased'}, include: [Meme]})
+		.then(items => {
+			res.send(items)
+		})
+		.catch(next)
+	}
 })
 
 .get('/user', (req, res, next) => {
