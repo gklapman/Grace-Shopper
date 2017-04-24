@@ -48,8 +48,12 @@ export const addCartItem = function(memeId, userId) {
     .then(res => {
       return res.data
     })
-    .then(() => {
-      dispatch(loadCartItems(userId))
+    .then((cart) => {
+      if (userId) {
+        dispatch(loadCartItems(userId))
+      } else {
+        dispatch(loadItems(cart))
+      }
     })
     .catch((error) => console.error(error))
   }

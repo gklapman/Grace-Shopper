@@ -7,6 +7,7 @@ import Oauth from '../components/Oauth.jsx'
 import SignUpContainer from './SignUpContainer.jsx'
 
 import {login} from 'APP/app/reducers/auth'
+import {loadItems} from '../reducers/cart'
 
 
 
@@ -68,7 +69,8 @@ const MapDispatchToProps = (dispatch) => {
 	return {
 		login(email, password){
 			return dispatch(login(email, password))
-		}
+		},
+		load: dispatch(loadItems())
 	}
 }
 

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {loadCartItems} from '../reducers/cart.jsx'
 
 const reducer = (state=null, action) => {
   switch (action.type) {
@@ -28,7 +29,10 @@ export const login = function(email, password) {
           alert(res.data)
         }
       })
-      .then(() => dispatch(whoami()))
+      .then(() => {
+        dispatch(whoami())
+        dispatch(loadCartItems(res.data.id))
+      })
       .catch(() => dispatch(whoami()))
   }
 }

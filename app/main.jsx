@@ -79,6 +79,9 @@ const loadSingleProduct = () => {
   store.dispatch(getMeme(productNum))
   store.dispatch(getReviews(productNum))
 }
+const loadCart = () => {
+  store.dispatch(loadCartItems())
+}
 
 
 render(
@@ -89,7 +92,7 @@ render(
         <Route path="/products" component={ProductsContainer} onEnter={onProductContainerEnter} />
         <Route path="/products/categories/:tagId" component={ProductsContainer} onEnter={onProductCategoryEnter} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
-        <Route path='/cart' component={Cart}/>
+        <Route path='/cart' component={Cart} onEnter={loadCart}/>
       </Route>
       <Route path='*' component={NotFound} />
     </Router>

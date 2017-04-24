@@ -140,13 +140,13 @@ auth.post('/login/local', function(req, res, next){
       res.send('Please ensure your email and password are correct')
     }
     else if (user){
+      let cart = req.session.cart || []
+      carteBlanche(user, cart)
+      .then(() => {
+        delete req.session.cart
+      })
       req.logIn(user, function(err){
-        let cart = req.session.cart || []
-        return carteBlanche(user, cart)
-        .then(() => {
-          delete req.session.cart
-          return res.json(req.user)
-        })
+        return res.json(req.user)
       })
       }
   })

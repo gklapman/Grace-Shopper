@@ -25,7 +25,6 @@ module.exports = require('express').Router()
 
 //SORRY THIS IS SO LONG... IF ANYONE HAS ANY WAY TO SHORTEN, LMK
 .post('/', (req, res, next)=> {
-<<<<<<< HEAD
 	let user;
 	let meme;
 	if (req.user) {
@@ -72,7 +71,7 @@ module.exports = require('express').Router()
 			}
 		})
 		if (!added) {
-			req.session.cart.push({quantity: 1, meme_id: memeId})
+			req.session.cart.push({quantity: 1, meme_id: req.body.memeId})
 		}
 		res.json(req.session.cart)
 	}
