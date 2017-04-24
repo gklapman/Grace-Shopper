@@ -26,9 +26,10 @@ export const loadItems = (items) => {
 
 
 // thunks
-export const loadCartItems = (userId) => {
+export const loadCartItems = () => {
+  console.log('LOADING CART ITEMS WITH THIS USER ')
   return dispatch => {
-    return axios.get(`/api/carts/${userId}`)
+    return axios.get(`/api/carts/user`)
     .then(res => {
       if (typeof res.data !== 'string'){
       dispatch(loadItems(res.data))
@@ -49,10 +50,14 @@ export const addCartItem = function(memeId, userId) {
       return res.data
     })
     .then(() => {
-      dispatch(loadCartItems(userId))
+      dispatch(loadCartItems())
     })
     .catch((error) => console.error(error))
   }
 }
+
+// export const removeCartItem = function(memeId, userId){
+
+// }
 
 export default reducer

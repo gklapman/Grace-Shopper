@@ -12,9 +12,12 @@ const CartIcon = ({cartItems, currentUser}) => {
 
 
 return (
-  <div className="cart-icon">
+  <div className="cart-items">
    <Link to={`/cart`}>
      <span>My Cart </span>
+    </Link>
+    <Link to={`/pastorders`}>
+    <span>My Past Orders</span>
     </Link>
   </div> 
   
@@ -34,9 +37,3 @@ const MapDispatchToProps = null
 
 export default connect(mapStateToProps, MapDispatchToProps)(CartIcon);
 
-  // <div className="cart-icon">
-  //   <Link to="/cart">
-  //     <span className="cart-items">{props.products.length}</span> 
-  //     <span class="glyphicon glyphicon-shopping-cart"></span>
-  //   </Link>
-  // </div>
