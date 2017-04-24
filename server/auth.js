@@ -2,7 +2,7 @@ const app = require('APP'), {env, secretsFile} = app
 const debug = require('debug')(`${app.name}:auth`)
 const passport = require('passport')
 
-const {User, OAuth} = require('APP/db')
+const {User, OAuth, Cart} = require('APP/db')
 const auth = require('express').Router()
 
 /*************************
@@ -105,7 +105,7 @@ passport.use(
   },
   
   (email, password, done) => {
-    console.log('inside of path')
+    // console.log('inside of path')
     debug('will authenticate user(email: "%s")', email)
     User.findOne({where: {email}})
       .then(user => {
@@ -140,6 +140,11 @@ auth.post('/login/local', function(req, res, next){
       res.send('Please ensure your email and password are correct')
     }
     else if (user){
+      let cart = req.session.cart || []
+      carteBlanche(user, cart)
+      .then(() => {
+        delete req.session.cart
+      })
       req.logIn(user, function(err){
         return res.json(req.user)
       })
@@ -176,10 +181,24 @@ auth.post('/signup', (req, res, next) => {
     name: req.body.name, 
     address: req.body.address,
   })
+  .then((newUser) => {
+    let cart = req.session.cart || []
+    return carteBlanche(newUser, cart)
+  })
   .then(()=> {
+    delete req.session.cart
     res.send();
   })
   .catch(err => console.error(err))
 })
+
+//util function for assigning items to cart off req.session
+const carteBlanche = (user, seshCart) => {
+  cart = seshCart.map(item => {
+    item.user_id = user.id
+    return Cart.create(item)
+  })
+  return Promise.all(cart)
+}
 
 module.exports = auth

@@ -13,7 +13,7 @@ const CartIcon = ({cartItems, currentUser}) => {
 
 return (
   <div className="cart-items">
-   <Link to={`/cart`}>
+   <Link to="/cart">
      <span>My Cart </span>
     </Link>
     <Link to={`/pastorders`}>

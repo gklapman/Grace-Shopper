@@ -13,5 +13,5 @@ export const WhoAmI = ({ user, logout }) => (
 
 export default connect(
   ({ auth }) => ({ user: auth }),
-  {logout},
+  {logout}
 )(WhoAmI)

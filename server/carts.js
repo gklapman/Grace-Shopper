@@ -7,6 +7,21 @@ const Meme = db.model('memes')
 const {selfOnly} = require('./auth.filters')
 
 module.exports = require('express').Router()
+// Gonna need to implement some forbidden stuff here
+
+.get('/', (req, res, next) => {
+	if (!req.user) {
+		let cart = req.session.cart || []
+		res.send(cart)
+	} else {
+		return Cart.findAll({where: {user_id: req.user.id, status: 'not-purchased'}, include: [Meme]})
+		.then(items => {
+			res.send(items)
+		})
+		.catch(next)
+	}
+})
+
 .get('/user', (req, res, next) => {
   return Cart.findAll({where: {user_id: req.user.id, status: 'not-purchased'}, include: [Meme]})
   .then(items => {
@@ -20,19 +35,21 @@ module.exports = require('express').Router()
 .post('/', (req, res, next)=> {
 	let user;
 	let meme;
-	return User.findOne({
-		where: {
-			id: req.body.userId
-		}
-	})
-	.then(user1 => {
-		user = user1;
-		return Meme.findOne({
+	if (req.user) {
+		// logic for authed users
+		return User.findOne({
 			where: {
-				id: req.body.memeId
+				id: req.body.userId
 			}
 		})
-	})
+		.then(user1 => {
+			user = user1;
+			return Meme.findOne({
+				where: {
+					id: req.body.memeId
+				}
+			})
+		})
 		.then(meme1 => {
 			meme = meme1
 			return Cart.findOrCreate({
@@ -46,11 +63,24 @@ module.exports = require('express').Router()
 			let quant =  cart.quantity + 1
 			return cart.update({
 				quantity: quant,	
-		})
+			})
 		})	
 		.then(cart => {
 			res.json(cart)
 		})
 		.catch(err => console.error(err))
+	} else {
+		req.session.cart = req.session.cart || []
+		let added = false
+		req.session.cart.forEach(item => {
+			if (item.meme_id == req.body.memeId) {
+				item.quantity++
+				added = true
+			}
+		})
+		if (!added) {
+			req.session.cart.push({quantity: 1, meme_id: req.body.memeId})
+		}
+		res.json(req.session.cart)
+	}
 })
-

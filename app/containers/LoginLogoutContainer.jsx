@@ -46,8 +46,8 @@ class LoginContainer extends React.Component {
 				<div className="container-fluid"> 
 					<Login handleChange={this.handleChange} handleSubmit={this.handleSubmit} /> 
 					<div className="col-md-5">
-					<Oauth />
-					<SignUpContainer />
+						<Oauth />
+						<SignUpContainer />
 					</div>
 				</div> }
 

@@ -28,13 +28,14 @@ class Cart extends React.Component {
       <div className="container-fluid center" style={{backgroundColor: 'white'}}>
         {cart.length > 0 ? <h2>My Cart</h2>: <h3> Your Cart is Empty. Click <Link to="/products">HERE</Link> to add items to your cart</h3>}
           {cart && cart.map(item=> {
-            return <div key={item.meme_id} className="row cart-item">
-              <h5 className='center'>Meme Item: {item.meme.name}</h5>
-              <img className='center' src={item.meme.photo} style={{height: 50, width: 50}}/>
-              <span className='center'> Quantity: {item.quantity}</span>
-              <button className='center' value={item.meme_id} onClick={this.addToCart}>+</button>
-              
-            </div>
+            return (
+              <div key={item.meme_id} className="row cart-item">
+                <h5 className='center'>Meme Item: {item.meme.name}</h5>
+                <img className='center' src={item.meme.photo} style={{height: 50, width: 50}}/>
+                <span className='center'> Quantity: {item.quantity}</span>
+                <button className='center' value={item.meme_id} onClick={this.addToCart}>+</button>
+              </div>
+            )
           })}
          
       </div>
