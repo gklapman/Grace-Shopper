@@ -41,7 +41,7 @@ class PastOrders extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.pastorders.pastorders,
+    pastorders: state.pastorders.pastitems,
     currentUser: state.auth
   }
 }

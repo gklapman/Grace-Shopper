@@ -29,6 +29,7 @@ export const loadItems = (items) => {
 export const loadCartItems = () => {
   console.log('LOADING CART ITEMS WITH THIS USER ')
   return dispatch => {
+
     return axios.get(`/api/carts/user`)
     .then(res => {
       if (typeof res.data !== 'string'){
