@@ -10,10 +10,24 @@ module.exports = require('express').Router()
 // Gonna need to implement some forbidden stuff here
 
 .get('/', (req, res, next) => {
-	console.log('sesh', req.session.cart)
 	if (!req.user) {
 		let cart = req.session.cart || []
-		res.send(cart)
+		let bob = []
+		cart.forEach(item => {
+			bob.push(Meme.findById(Number(item.meme_id)))
+		})
+		return Promise.all(bob)
+		.then(bobItems => {
+			let cartItems = bobItems.map((meme, index) => {
+				return {
+					meme: meme,
+					quantity: cart[index].quantity,
+					meme_id: cart[index].meme_id
+				}
+			})
+			return res.json(cartItems)
+		})
+
 	} else {
 		return Cart.findAll({where: {user_id: req.user.id, status: 'not-purchased'}, include: [Meme]})
 		.then(items => {
@@ -23,12 +37,37 @@ module.exports = require('express').Router()
 	}
 })
 
-.get('/user', (req, res, next) => {
-  return Cart.findAll({where: {user_id: req.user.id, status: 'not-purchased'}, include: [Meme]})
-  .then(items => {
-    res.send(items)
-  })
-  .catch(next)
+.post('/remove', (req, res, next)=> {
+	if (req.user){
+		let userId = req.user.id 
+		return Cart.findOne({
+			where: {
+				user_id: userId,
+				meme_id: req.body.memeId
+			}
+		})
+		.then(item => {
+			let quant = item.quantity -1 
+			return item.update({
+				quantity: quant
+			})
+		})
+		.then(item => {
+			res.json(item)
+		})
+	} else {
+		req.session.cart = req.session.cart || []
+		req.session.cart.forEach(item => {
+			if (item.meme_id == req.body.memeId) {
+				if (item.quantity > 0){
+				item.quantity--
+				}
+			}
+		})
+
+		res.json(req.session.cart)
+	}
+
 })
 
 
@@ -57,6 +96,7 @@ module.exports = require('express').Router()
 				where :{
 					user_id: user.id,
 					meme_id: meme.id,
+					status: 'not-purchased'
 				}
 			})
 		})

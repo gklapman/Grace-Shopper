@@ -17,7 +17,7 @@ class PastOrders extends React.Component {
   render() {
     const pastorders = this.props.pastorders
 
-    console.log('past orders are ', this.props.pastorders)
+    
 
   
     return (
@@ -41,7 +41,7 @@ class PastOrders extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.pastorders.pastorders,
+    pastorders: state.pastorders.pastitems,
     currentUser: state.auth
   }
 }
