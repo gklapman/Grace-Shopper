@@ -27,14 +27,13 @@ export const loadItems = (items) => {
 
 // thunks
 export const loadCartItems = () => {
-  console.log('inside load cart items')
   return dispatch => {
-    console.log('inside of dispatch of load items')
-    return axios.get(`/api/carts`)
+    return axios.get('/api/carts')
     .then(res => {
       console.log('the response is ', res.data)
       if (typeof res.data !== 'string'){
-      dispatch(loadItems(res.data))
+        console.log('loading in loacCartItems', res.data)
+        dispatch(loadItems(res.data))
       }
     })
     .catch(err => {
@@ -55,6 +54,7 @@ export const addCartItem = function(memeId, userId) {
       if (userId) {
         dispatch(loadCartItems())
       } else {
+        console.log('loading in addCartItem', cart)
         dispatch(loadItems(cart))
       }
     })
@@ -63,7 +63,6 @@ export const addCartItem = function(memeId, userId) {
 }
 
 export const removeCartItem = function(memeId) {
-  console.log('the memeId is ', memeId)
   return (dispatch, getState) => {
     return axios.post('/api/carts/remove', {memeId})
     .then(res => {

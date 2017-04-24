@@ -135,14 +135,4 @@ export const getMemesForOneTag = (tagId) => {
   }
 }
 
-export const postReview = (data) => {
-  console.log('his post', data)
-  return dispatch => {
-    return axios.post('/api/reviews', data)
-      .then(function(data) {
-        console.log('hahahahahahahahahahahaahahahahah', data)
-      })
-  }
-}
-
 export default reducer
