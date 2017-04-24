@@ -1,4 +1,4 @@
-import Reat from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import SingleProduct from './SingleProduct'
@@ -16,7 +16,8 @@ const mapDispatchToProps = function(dispatch){
 const mapStateToProps = function(state) {
   return {
     reviews: state.meme.reviews,
-    selectedmeme: state.meme.selectedMeme
+    selectedmeme: state.meme.selectedMeme,
+    currenetUser: state.auth
   }
 }
 

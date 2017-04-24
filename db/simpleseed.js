@@ -4,8 +4,6 @@ const db = require('APP/db')
     , {User, Meme, Favorite, Tag, Promise, Review, Cart} = db
     , {mapValues} = require('lodash')
 
-
-
 // function seedEverything() {
 //   const seeded = {
 //     users: users(),
@@ -54,7 +52,7 @@ const generateMemes = () => {
     name: 'dwight',
     price: 7.99,
     rating: 2,
-    photo: 'http://4.bp.blogspot.com/-pFRXzhUqYb0/VZNw_h4OTCI/AAAAAAAAEVQ/S94m3_LRK0A/s320/FEARED%2BOR%2BLOVED.jpg',
+    photo: 'https://i.imgflip.com/1lvxzd.jpg',
     product_info: 'Dwight here is talking about stuff from his Farm... ',
     stock: 4
   }))
@@ -66,6 +64,22 @@ const generateMemes = () => {
     photo: 'http://s2.quickmeme.com/img/ae/ae150e79fb32592c6671db823eec58a4a7f6cd7a14847e600154ddf92e19c078.jpg',
     product_info: 'Jim product information here blah blha blah  ',
     stock: 2
+  }))
+
+  memesArray.push(Meme.build({
+    name: 'charles',
+    price: 10.99,
+    photo: '/images/charles_on_subway.png',
+    product_info: 'Need to convey that perfect sense of despair at the futility of even existing?',
+    stock: 3
+  }))
+
+  memesArray.push(Meme.build({
+    name: 'arthur',
+    price: 6.99,
+    photo: '/images/arthur.jpg',
+    product_info: 'Who\'s a good boy?  Is it you?  Yes it is!  Yes you are a good boy.  Have some treats.  I need to test the space limit of descriptions so laaaaaaaaaaa',
+    stock: 8
   }))
 
   return memesArray;
@@ -189,7 +203,7 @@ let usersdata, memesdata, cartdata
 
 
 db.didSync
-  //.sync({force: true})
+  // .sync({force: true})
     .then(function() {
       return createUsers()
     })

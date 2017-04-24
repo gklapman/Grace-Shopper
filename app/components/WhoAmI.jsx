@@ -5,8 +5,8 @@ import {connect} from 'react-redux'
 
 export const WhoAmI = ({ user, logout }) => (
   <div className="whoami">
-    <span className="whoami-user-name">{user && user.name}</span>
-    <button className="logout" onClick={logout}>Logout</button>
+    <span className="whoami-user-name"><strong>{user && user.name} </strong></span>
+    <button className="logout btn btn-default" onClick={logout}>Logout</button>
   </div>
 )
 

@@ -9,19 +9,21 @@ const Search = ({handleChange, handleSubmit, search}) => {
 return (
   <div className="search">
     <form onSubmit={handleSubmit}>
-    <div className="form-group row">
-          <div className="col-md-6 col-xs-12">
-            <label className="col-xs-2 control-label">Search Memes</label>
-            <input
-              className="form-control"
-              type="text"
-              placeholder="search..."
-              onChange={handleChange}
-            />
-          </div>
-          </div>
-          <button className="btn btn-default">Go!</button>
-      </form>
+      <div className="col-md-2">
+        <label className="centered-text">Search</label>
+      </div>
+      <div className="col-md-8">
+        <input
+          className="form-control"
+          type="text"
+          placeholder="search..."
+          onChange={handleChange}
+        />
+      </div>
+      <div className="col-md-2">
+        <button className="btn btn-default">Go!</button>
+      </div>
+    </form>
   </div>
 )
 }

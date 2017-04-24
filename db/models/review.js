@@ -3,6 +3,7 @@
 const {STRING, TEXT, INTEGER} = require('sequelize')
 
 module.exports = db => db.define('reviews', {
+
 	content: {
 		type: TEXT,
 		defaultValue: ''
@@ -30,6 +31,7 @@ module.exports = db => db.define('reviews', {
 	} 
 
 )
+
 
 
 module.exports.associations = (Review, {Meme, User}) => {

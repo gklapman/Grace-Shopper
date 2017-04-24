@@ -11,6 +11,7 @@ class ProductsContainer extends React.Component {
 //eventually it'd be great to refactor this wrapped view to whole site as a mega container
   render() {
     return (
+<<<<<<< HEAD
       <div className="container-fluid">
         <Sidebar />
         <div className="col-md-8">
@@ -18,6 +19,9 @@ class ProductsContainer extends React.Component {
         </div>
         <Adbar />
       </div>
+=======
+      <Products products={this.props.memes} addItem={this.props.addItem} currentUser={this.props.currentUser} />
+>>>>>>> 750d3ecb544129a8ab9d02c3adb761bf5f03fa20
     )
   }
 }

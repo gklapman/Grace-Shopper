@@ -9,6 +9,7 @@ import Jokes from './components/Jokes'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
+
 import CartIcon from './components/CartIcon.jsx'
 
 import LoginLogoutContainer from './containers/LoginLogoutContainer.jsx'
@@ -17,37 +18,60 @@ import SingleProductContainer from './components/SingleProductContainer.jsx'
 import Cart from './components/Cart'
 
 
-import ProductsContainer from './containers/Products'
-import {getMemes} from './reducers/meme'
+import Sidebar from './components/Sidebar'
+import Adbar from './components/Adbar'
 
-import { getMeme } from './reducers/meme'
-import { getReviews } from './reducers/meme'
+
+
+import ProductsContainer from './containers/Products'
+import {getMemes, getMeme, getReviews, getMemesForOneTag} from './reducers/meme'
+import { getCats } from './reducers/bars'
+
 
 import {loadCartItems} from './reducers/cart.jsx'
 
 
-
-const ExampleApp = connect(
+const MemeApp = connect(
   ({ auth }) => ({ user: auth }))
 
 (
   ({ user, children }) =>
     <div>
-      <nav className="navbar navbar-default">
-        <LoginLogoutContainer className="navbar-nav"/>
-        <CartIcon className="navbar-nav" />
-        <SearchContainer />
+      <nav className="navbar navbar-default container-fluid">
+        <div className="col-md-6">
+          <LoginLogoutContainer />
+        </div>
+        <div className="col-md-4">
+          <SearchContainer />
+        </div>
+        <div className="col-md-2">
+          <CartIcon />
+        </div>
       </nav>
-      {children}
+      <div className="container-fluid">
+        <Sidebar />
+        <div className="col-md-8">
+          {children}
+        </div>
+        <Adbar />
+      </div>
     </div>
 )
 
+const onEnterLoadCategories = () => {
+  return store.dispatch(getCats())
+}
+const onProductCategoryEnter = (req) => {
+  console.log(req)
+  return store.dispatch(getMemesForOneTag(Number(req.params.tagId)))
+}
 const onProductContainerEnter = () => {
   return store.dispatch(getMemes())
 }
 const loadSingleProduct = () => {
-  store.dispatch(getMeme(1))
-  store.dispatch(getReviews(1, 1))
+  let productNum = browserHistory.getCurrentLocation().pathname.split('/')[2]
+  store.dispatch(getMeme(productNum))
+  store.dispatch(getReviews(productNum))
 }
 
 const loadCart = (nextRouterState) => {
@@ -57,9 +81,10 @@ const loadCart = (nextRouterState) => {
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={ExampleApp}>
+      <Route path="/" component={MemeApp} onEnter={onEnterLoadCategories} >
         <IndexRedirect to="/products" />
-        <Route path="/products" onEnter={onProductContainerEnter} component={ProductsContainer} />
+        <Route path="/products" component={ProductsContainer} onEnter={onProductContainerEnter} />
+        <Route path="/products/categories/:tagId" component={ProductsContainer} onEnter={onProductCategoryEnter} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
         <Route path='/cart/:userId' component={Cart} onEnter={loadCart}/>
       </Route>
@@ -68,6 +93,5 @@ render(
   </Provider>,
   document.getElementById('main')
 )
-
 
 
