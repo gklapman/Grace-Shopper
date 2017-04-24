@@ -28,7 +28,7 @@ export default (props) => {
     let stars = ''
     const n = Number(rating)
     for (let i = 0; i < n; i++) {
-      stars += '*'
+      stars += '★'
     }
     return stars
   }
