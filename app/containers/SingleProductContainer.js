@@ -8,7 +8,7 @@ import ReviewsContainer from './ReviewsContainer'
 class SingleProductContainer extends React.Component {
   render(props) {
     return (
-      <div>
+      <div className="on-display">
         <SingleProduct props = {this.props}/>
         <ReviewsContainer/>
       </div>

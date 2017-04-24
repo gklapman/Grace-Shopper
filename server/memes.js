@@ -36,8 +36,24 @@ module.exports = require('express').Router()
       .catch(next)
   })
   .get('/:memeId', (req, res, next) => {
+    let meme;
     Meme.findById(req.params.memeId)
-      .then(meme => res.send(meme))
+      .then(meme1 => {
+        meme = meme1
+        return meme.rating
+      })
+      .then(rating => {
+        let obj = {
+          id: meme.id,
+          name: meme.name,
+          photo: meme.photo,
+          price: meme.price,
+          product_info: meme.product_info,
+          stock: meme.stock,
+          rating
+        }
+        res.send(obj)
+      })
       .catch(next)
   })
   .get('/:memeId/reviews', (req, res, next) => {

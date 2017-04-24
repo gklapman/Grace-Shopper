@@ -1,9 +1,9 @@
-
+import axios from 'axios'
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
-import { postReview } from '../reducers/meme'
-import Reviewcreator from '../components/reviewcreator'
+import { getReviews } from '../reducers/meme'
+import ReviewCreator from '../components/reviewcreator'
 
 import Reviews from '../components/Reviews.jsx'
 
@@ -23,13 +23,25 @@ class ReviewsContainer extends Component {
   handleSubmit(event) {
     event.preventDefault()
 
-    postReview({
+    let rev = {
       title: this.state.title,
       content: this.state.content,
       stars: this.state.stars,
       meme_id: this.props.selectedMeme.id,
       user_id: this.props.currentUser.id
+    }
+
+    axios.post('/api/reviews', rev)
+    .then(res => {
+      return this.props.reloadReviews(this.props.selectedMeme.id)
     })
+
+    this.setState({
+      title: '',
+      content: '',
+      stars: 0
+    })
+
   }
   handleChange(event) {
     console.log(event.currentTarget.value)
@@ -54,25 +66,7 @@ class ReviewsContainer extends Component {
         <div>
           <Reviews review={this.props.reviews} />
         </div>
-           <div style={{border: '2px solid black', margin: '0 0 100px 0'}}>
-      <form onSubmit = {this.handleSubmit}>
-        <label className="labelform" style={{display: 'block', margin:'20px'}} type="text" htmlFor="title">Write tile here for meme review.</label>
-        <input name='title' style={{width: '300px', display:'block', margin:'20px'}} type="text" value={this.state.title} onChange={this.handleChange} id="title" placeholder="title"></input>
-        <label htmlFor="content" style={{display: 'block', margin:'20px'}}  >Write review here for meme.</label>
-
-        <textarea name='content' value={this.state.content} onChange={this.handleChange} style={{display: 'block',  margin:'20px', width: '400px'}} id="content"  rows="7" ></textarea>
-
-          <select value={this.state.value} onChange={this.handleChange} className="ratingControl" name='stars' id="exampleSelect1" style={{ margin:'20px'}}>
-            <option selected disabled hidden style={{display: 'none'}} value=''></option>
-            <option value ='1' >★</option>
-            <option value ='2' >★★</option>
-            <option value ='3' >★★★</option>
-            <option value ='4' >★★★★</option>
-            <option value ='5' >★★★★★</option>
-          </select>
-            <input type="submit" value="Submit" disabled={!userSet}/>
-      </form>
-    </div>
+        {userSet ? <ReviewCreator handleChange={this.handleChange} handleSubmit={this.handleSubmit} title={this.state.title} content={this.state.content} stars={this.state.stars}/> : <div>Log in to leave a review!</div>}
       </div>
     )
   }
@@ -92,6 +86,7 @@ const mapDispatchToProps = function(dispatch) {
     onSubmit: function(obj) {
       dispatch(postReview(obj))
     },
+    reloadReviews: (meme) => {dispatch(getReviews(meme))}
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewsContainer)
