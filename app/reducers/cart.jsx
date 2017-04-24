@@ -26,12 +26,12 @@ export const loadItems = (items) => {
 
 
 // thunks
-export const loadItemsThunk = (userId) => {
+export const loadCartItems = (userId) => {
   return dispatch => {
     return axios.get(`/api/carts/${userId}`)
     .then(items => {
+      console.log('these are the items', items)
       dispatch(loadItems(items.data))
-      console.log('the items are ', items.data)
     })
     .catch(err => {
       console.log('error!', err)
@@ -41,14 +41,14 @@ export const loadItemsThunk = (userId) => {
 
 
 
-export const addItemThunk = function(memeId, userId) {
+export const addCartItem = function(memeId, userId) {
   return (dispatch, getState) => {
     return axios.post('/api/carts', {memeId, userId})
     .then(res => {
       return res.data
     })
     .then(() => {
-      dispatch(loadItemsThunk(userId))
+      dispatch(loadCartItems(userId))
     })
     .catch((error) => console.error(error))
   }

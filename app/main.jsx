@@ -14,7 +14,7 @@ import CartIcon from './components/CartIcon.jsx'
 import LoginLogoutContainer from './containers/LoginLogoutContainer.jsx'
 import SearchContainer from './containers/SearchContainer.jsx'
 import SingleProductContainer from './components/SingleProductContainer.jsx'
-
+import Cart from './components/Cart'
 
 
 import ProductsContainer from './containers/Products'
@@ -22,6 +22,8 @@ import {getMemes} from './reducers/meme'
 
 import { getMeme } from './reducers/meme'
 import { getReviews } from './reducers/meme'
+
+import {loadCartItems} from './reducers/cart.jsx'
 
 
 
@@ -47,6 +49,11 @@ const loadSingleProduct = () => {
   store.dispatch(getMeme(1))
   store.dispatch(getReviews(1, 1))
 }
+
+const loadCart = (nextRouterState) => {
+  let userId = nextRouterState.params.userId
+  store.dispatch(loadCartItems(userId))
+}
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -54,6 +61,7 @@ render(
         <IndexRedirect to="/products" />
         <Route path="/products" onEnter={onProductContainerEnter} component={ProductsContainer} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
+        <Route path='/cart/:userId' component={Cart} onEnter={loadCart}/>
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
@@ -63,6 +71,3 @@ render(
 
 
 
-// <Route path="/products" component={AllProductsContainer} />
-        // <Route path="products/:productId" component={SingleProductContainer}/>
-        // <Route path="mycart" component={Cart} />

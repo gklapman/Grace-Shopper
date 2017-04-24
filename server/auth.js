@@ -141,8 +141,6 @@ auth.post('/login/local', function(req, res, next){
     }
     else if (user){
       req.logIn(user, function(err){
-      console.log('user', user)
-      console.log('req.user', req.user)
         return res.json(req.user)
       })
       }

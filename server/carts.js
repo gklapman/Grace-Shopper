@@ -8,7 +8,7 @@ const Meme = db.model('memes')
 module.exports = require('express').Router()
 // Gonna need to implement some forbidden stuff here
 .get('/:userId', (req, res, next) => {
-  Cart.findAll({where: {user_id: req.params.userId, status: 'not-purchased'}})
+  return Cart.findAll({where: {user_id: req.params.userId, status: 'not-purchased'}, include: [Meme]})
   .then(items => {
     res.send(items)
   })
@@ -18,7 +18,6 @@ module.exports = require('express').Router()
 
 //SORRY THIS IS SO LONG... IF ANYONE HAS ANY WAY TO SHORTEN, LMK
 .post('/', (req, res, next)=> {
-	console.log('inside of cart post with this body ', req.body)
 	let user;
 	let meme;
 	return User.findOne({

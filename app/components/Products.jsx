@@ -8,7 +8,7 @@ export default (props) => {
   const addToCart = function(event){
     let userId = props.currentUser.id
     let productId = event.target.value
-    props.addItemThunk(productId, userId)
+    props.addCartItem(productId, userId)
   }
 
   // expect to receive: array of products (which have a name, image, description, price, average rating)
