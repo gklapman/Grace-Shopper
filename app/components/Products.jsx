@@ -7,7 +7,7 @@ export default (props) => {
 
 
   const addToCart = function(event){
-    let userId = props.currentUser.id
+    let userId = props.currentUser.id || null
     let productId = event.target.value
     props.addCartItem(productId, userId)
   }
@@ -25,7 +25,7 @@ export default (props) => {
     let stars = ''
     const n = Number(rating)
     for (let i = 0; i < n; i++) {
-      stars += '*'
+      stars += '★'
     }
     return stars
   }
@@ -43,16 +43,16 @@ export default (props) => {
           {row.map(product => {
             return (
               <div key={product.id} className="col-md-6 on-display">
-              <button value={product.id} className="btn btn-default" onClick={addToCart}>Add to Cart</button>
-              <Link to={`/products/${product.id}`}>
-                    <img src={product.photo} alt={product.name}></img>
-                    <div className="name col-md-4">{product.name}</div>
-                    <div className="name col-md-4">{starify(product.rating)}</div>
-                    <div className="price col-md-4">$$$ {product.price} $$$</div>
-                    <div className="info">Description: {shorten(product.product_info)}</div>
-                    <div className="rating">{product.rating}/5.00 starz based on user reviews</div>
-             </Link>
-             </div>
+                <button value={product.id} className="btn btn-default" onClick={addToCart}>Add to Cart</button>
+                <Link to={`/products/${product.id}`}>
+                  <img src={product.photo} alt={product.name}></img>
+                  <div className="name col-md-4">{product.name}</div>
+                  <div className="name col-md-4">{starify(product.rating)}</div>
+                  <div className="price col-md-4">$$$ {product.price} $$$</div>
+                  <div className="info">Description: {shorten(product.product_info)}</div>
+                  <div className="rating">{product.rating}/5.00 starz based on user reviews</div>
+                </Link>
+              </div>
             )
           })}
         </div>
