@@ -30,7 +30,6 @@ export const loadPastItems = () => {
   return dispatch => {
     return axios.get(`/api/pastorders/`)
     .then(res => {
-      console.log('the past orders include ', res.data)
       dispatch(loadPastOrderItems(res.data))
     })
     .catch(err => {

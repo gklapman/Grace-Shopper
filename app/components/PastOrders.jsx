@@ -17,7 +17,7 @@ class PastOrders extends React.Component {
   render() {
     const pastorders = this.props.pastorders
 
-    console.log('past orders are ', this.props.pastorders)
+    
 
   
     return (
