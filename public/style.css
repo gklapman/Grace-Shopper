@@ -87,3 +87,25 @@ ul {
 /*.row {
   clear: both
 }*/
+
+.store {
+  font-size: 36px;
+  position: absolute;
+  left: 45%;
+  top: 40px;
+  background-color: orange;
+  border: solid 4px purple;
+  border-radius: 20%
+}
+
+.green {
+  color: green
+}
+
+.red {
+  color: red
+}
+
+.blue {
+  color: blue
+}

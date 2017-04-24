@@ -45,8 +45,8 @@ export default (props) => {
         <div key={index} className="row">
           {row.map(product => {
             return (
-              <Link to={`/products/${product.id}`}>
-                <div key={product.id} className="col-md-6 on-display">
+              <Link key={product.id} to={`/products/${product.id}`}>
+                <div className="col-md-6 on-display">
                     <img src={product.photo} alt={product.name}></img>
                     <div className="name col-md-4">{product.name}</div>
                     <div className="name col-md-4">{starify(product.rating)}</div>

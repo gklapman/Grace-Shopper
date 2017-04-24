@@ -35,7 +35,7 @@ export const addMeme = (item) => {
 // thunks
 export const getItems = (userId) => {
   return dispatch => {
-    return axios.get(`/api/carts/${userId}`)
+    return axios.get('/api/carts')
     .then(items => {
       dispatch(allItems(items.data))
     })

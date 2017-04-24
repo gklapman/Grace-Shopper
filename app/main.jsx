@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react'
-import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
+import {Link, Router, Route, IndexRedirect, browserHistory} from 'react-router'
 import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
 
@@ -39,6 +39,11 @@ const MemeApp = connect(
         <div className="col-md-2">
           <CartIcon />
         </div>
+        <Link to="/">
+          <div className="store">
+            <span className="green">memes</span><span className="red">R</span><span className="blue">us</span>
+          </div>
+        </Link>
       </nav>
       <div className="container-fluid">
         <Sidebar />

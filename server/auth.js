@@ -2,7 +2,7 @@ const app = require('APP'), {env, secretsFile} = app
 const debug = require('debug')(`${app.name}:auth`)
 const passport = require('passport')
 
-const {User, OAuth} = require('APP/db')
+const {User, OAuth, Cart} = require('APP/db')
 const auth = require('express').Router()
 
 /*************************
@@ -105,7 +105,7 @@ passport.use(
   },
   
   (email, password, done) => {
-    console.log('inside of path')
+    // console.log('inside of path')
     debug('will authenticate user(email: "%s")', email)
     User.findOne({where: {email}})
       .then(user => {
@@ -136,9 +136,14 @@ auth.post('/login/local', function(req, res, next){
   return passport.authenticate('local', function(err, user){
     if (user){
       req.logIn(user, function(err){
-      console.log('user', user)
-      console.log('req.user', req.user)
-        return res.json(req.user)
+      // console.log('user', user)
+      // console.log('req.user', req.user)
+        let cart = req.session.cart || []
+        return carteBlanche(user, cart)
+        .then(() => {
+          delete req.session.cart
+          return res.json(req.user)
+        })
       })
 
     } else if (err || !user) {
@@ -170,7 +175,7 @@ auth.post('/logout', (req, res) => {
 })
 
 auth.post('/signup', (req, res, next) => {
-  console.log('req.body', req.body)
+  // console.log('req.body', req.body)
   //Can add something that checks if the user exists
   return User.create({
     email: req.body.email, 
@@ -178,10 +183,24 @@ auth.post('/signup', (req, res, next) => {
     name: req.body.name, 
     address: req.body.address,
   })
+  .then((newUser) => {
+    let cart = req.session.cart || []
+    return carteBlanche(newUser, cart)
+  })
   .then(()=> {
+    delete req.session.cart
     res.send();
   })
   .catch(err => console.error(err))
 })
+
+//util function for assigning items to cart off req.session
+const carteBlanche = (user, seshCart) => {
+  cart = seshCart.map(item => {
+    item.user_id = user.id
+    return Cart.create(item)
+  })
+  return Promise.all(cart)
+}
 
 module.exports = auth
