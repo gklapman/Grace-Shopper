@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import React from 'react';
-import SignUp from '../components/Signup'
+import SignUp from '../components/Signup.jsx'
 import {signup} from 'APP/app/reducers/auth'
 
 class SignUpContainer extends React.Component {

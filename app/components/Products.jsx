@@ -4,18 +4,15 @@ import {Link} from 'react-router'
 
 export default (props) => {
 
-// console.log("props", props)
 
-  // const addToCart = function(event){
-  //   console.log('current user', props.currentUser)
-  //   console.log('product', event.target)
-  //   let userId = props.currentUser.id
-  //   let productId = 
-  //   console.log("info", userId, productId)
-  //   props.addItem(productId, userId)
-  // }
 
-  // console.log('props', props)
+  const addToCart = function(event){
+    let userId = props.currentUser.id
+    let productId = event.target.value
+    props.addCartItem(productId, userId)
+  }
+
+
   // expect to receive: array of products (which have a name, image, description, price, average rating)
   const shorten = (text) => {
     if (text.length < 108) {
@@ -45,6 +42,7 @@ export default (props) => {
         <div key={index} className="row">
           {row.map(product => {
             return (
+
               <Link to={`/products/${product.id}`}>
                 <div key={product.id} className="col-md-6 on-display">
                     <img src={product.photo} alt={product.name}></img>
@@ -72,4 +70,4 @@ export default (props) => {
 }
 
 
- // <button value={product} className="btn btn-default" onClick={addToCart}>Add to Cart </button>
+ // 

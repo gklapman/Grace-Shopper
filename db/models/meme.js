@@ -9,11 +9,9 @@ module.exports = db => db.define('memes', {
   },
   price: {
   	type: DECIMAL(10,2),
+    allowNull: false, 
   	defaultValue: 100.00
   },
-//   rating: {
-//   	type: DECIMAL(10,2),
-//   }, 
   photo: {
   	type: STRING,
   	defaultValue: '',
@@ -38,7 +36,6 @@ module.exports = db => db.define('memes', {
 			return allReviews 
 			.then(reviews => {
 				if(reviews.length === 0){
-					// this.setDataValue('rating', '0.00')
 					return('0.00')
 				} else {
 					let total = 0;
@@ -46,7 +43,6 @@ module.exports = db => db.define('memes', {
 						total += Number(review.dataValues.stars)
 					})
 					const finalRating = total/reviews.length
-					// this.setDataValue('rating', finalRating)
 					return(finalRating.toFixed(2))
 				}
 			})

@@ -1,11 +1,11 @@
 'use strict'
 
-const {INTEGER, BOOLEAN, DATE} = require('sequelize')
+const {INTEGER, BOOLEAN, DATE, ENUM} = require('sequelize')
 
 module.exports = db => db.define('carts', {
 	status: {
-		type: BOOLEAN,
-		defualtValue: false,
+		type: ENUM('purchased', 'not-purchased'),
+		defaultValue: 'not-purchased',
 	}, 
 	date: {
 		type: DATE,
