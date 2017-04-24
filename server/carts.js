@@ -14,7 +14,7 @@ module.exports = require('express').Router()
 	res.send(cart)
 })
 
-.get('/:userId', (req, res, next) => {
+.get('/user', (req, res, next) => {
   return Cart.findAll({where: {user_id: req.user.id, status: 'not-purchased'}, include: [Meme]})
   .then(items => {
     res.send(items)

@@ -26,9 +26,10 @@ export const loadItems = (items) => {
 
 
 // thunks
-export const loadCartItems = (userId) => {
+export const loadCartItems = () => {
+  console.log('LOADING CART ITEMS WITH THIS USER ')
   return dispatch => {
-    return axios.get(`/api/carts/${userId}`)
+    return axios.get(`/api/carts/user`)
     .then(res => {
       if (typeof res.data !== 'string'){
       dispatch(loadItems(res.data))

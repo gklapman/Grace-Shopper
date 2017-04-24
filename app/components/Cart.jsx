@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {addCartItem} from '../reducers/cart.jsx'
 
+import {Link} from 'react-router'
+
 
 class Cart extends React.Component {
   constructor(props) {
@@ -24,7 +26,7 @@ class Cart extends React.Component {
     return (
 
       <div className="container-fluid center" style={{backgroundColor: 'white'}}>
-        {cart.length > 0 ? <h2>My Cart</h2>: <h2>You can only view your own cart</h2> }
+        {cart.length > 0 ? <h2>My Cart</h2>: <h3> Your Cart is Empty. Click <Link to="/products">HERE</Link> to add items to your cart</h3>}
           {cart && cart.map(item=> {
             return (
               <div key={item.meme_id} className="row cart-item">
