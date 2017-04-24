@@ -7,7 +7,7 @@ const Meme = db.model('memes')
 const {selfOnly} = require('./auth.filters')
 
 module.exports = require('express').Router()
-.get('/:userId', (req, res, next) => {
+.get('/user', (req, res, next) => {
   return Cart.findAll({where: {user_id: req.user.id, status: 'not-purchased'}, include: [Meme]})
   .then(items => {
     res.send(items)
