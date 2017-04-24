@@ -29,10 +29,11 @@ export const loadItems = (items) => {
 export const loadCartItems = () => {
   console.log('LOADING CART ITEMS WITH THIS USER ')
   return dispatch => {
-    return axios.get(`/api/carts`)
+    return axios.get('/api/carts')
     .then(res => {
       if (typeof res.data !== 'string'){
-      dispatch(loadItems(res.data))
+        console.log('loading in loacCartItems', res.data)
+        dispatch(loadItems(res.data))
       }
     })
     .catch(err => {
@@ -53,6 +54,7 @@ export const addCartItem = function(memeId, userId) {
       if (userId) {
         dispatch(loadCartItems(userId))
       } else {
+        console.log('loading in addCartItem', cart)
         dispatch(loadItems(cart))
       }
     })

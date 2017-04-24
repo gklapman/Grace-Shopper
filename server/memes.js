@@ -14,7 +14,7 @@ module.exports = require('express').Router()
         memes.forEach(meme => {
           bob.push(meme.rating)
         })
-        Promise.all(bob)
+        return Promise.all(bob)
         .then(bobs => {
           let focus = 0
           let resolvedMemes = memes.map(meme => {
@@ -30,7 +30,7 @@ module.exports = require('express').Router()
             focus++
             return obj
           })
-          res.send(resolvedMemes)
+          return res.send(resolvedMemes)
         })
       })
       .catch(next)
