@@ -35,7 +35,6 @@ class Cart extends React.Component {
       total += item.quantity * Number(item.meme.price)
     })
 
-
     return (
       <div className="container-fluid center green myitems">
         {cart.length > 0 ? <h2 className="center">My Cart</h2>: <h3> Your Cart is Empty. Click <Link to="/products">HERE</Link> to add items to your cart</h3>}
