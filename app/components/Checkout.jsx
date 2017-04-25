@@ -29,9 +29,7 @@ class Checkout extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    // set orders to be fulfilled in db
-    // clear cart in redux
-    // redirect user + give message
+    
     this.props.checkout()
     window.alert('Your order has been received')
     browserHistory.push('/')
