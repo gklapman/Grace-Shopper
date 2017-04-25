@@ -35,6 +35,7 @@ class LoginContainer extends React.Component {
 		const email = this.state.email;
 		const password = this.state.password;
 		this.props.login(email, password)
+		browserHistory.push('/products')
 	}
 
 

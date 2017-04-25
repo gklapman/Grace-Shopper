@@ -44,7 +44,7 @@ module.exports.associations = (User, {OAuth, Meme, Favorite, Cart, Review}) => {
   User.hasOne(OAuth)
   User.belongsToMany(Meme, {as: 'favorites', through: Favorite})
   User.belongsToMany(Meme, {as: 'reviews', through: Review})
-  User.belongsToMany(Meme, {as: 'cartItem', through: Cart})
+  // User.belongsToMany(Meme, {as: 'cartItem', through: Cart})
   User.hasMany(Review)
   User.hasMany(Favorite)
   User.hasMany(Cart)

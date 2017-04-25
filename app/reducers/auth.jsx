@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {loadItems, loadCartItems} from './cart.jsx'
+import {loadPastItems, loadPastOrderItems} from './pastorders.jsx'
 
 const reducer = (state=null, action) => {
   switch (action.type) {
@@ -30,7 +31,9 @@ export const login = function(email, password) {
         }
       })
       .then(() => dispatch(loadCartItems()))
+      .then(() => dispatch(loadPastItems()))
       .then(() => dispatch(whoami()))
+      
       .catch(() => dispatch(whoami()))
   }
 }
@@ -40,6 +43,7 @@ export const logout = () =>
     axios.post('/api/auth/logout')
       .then(() => dispatch(whoami()))
       .then(() => dispatch(loadItems([])))
+      .then(() => dispatch(loadPastOrderItems([])))
       .catch(() => dispatch(whoami()))
 
 export const whoami = () =>
