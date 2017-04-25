@@ -8,7 +8,6 @@ import SignUpContainer from './SignUpContainer.jsx'
 import {login} from 'APP/app/reducers/auth'
 
 class LoginContainer extends React.Component {
-<<<<<<< HEAD
     constructor(props) {
 		super(props);
 		this.state =
@@ -61,47 +60,6 @@ class LoginContainer extends React.Component {
 			</div>
 		)
 	}
-=======
-  constructor(props) {
-    super(props)
-    this.state = {
-      email: '',
-      password: ''}
-
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  handleChange(event) {
-    let name = event.target.name
-    this.setState({
-      [name]: event.target.value
-    })
-  }
-
-  handleSubmit(event) {
-    event.preventDefault()
-    const email = this.state.email
-    const password = this.state.password
-    this.props.login(email, password)
-  }
-
-  render() {
-    const { currentUser } = this.props
-    return (
-      <div className="login-container navbar">
-      {currentUser ? <WhoAmI /> :
-        <div className="container-fluid">
-          <Login handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-          <div className="col-md-5">
-            <Oauth />
-            <SignUpContainer />
-          </div>
-        </div> }
-      </div>
-    )
-  }
->>>>>>> adminPanel
 }
 
 const mapStateToProps = (state, ownProps) => {
