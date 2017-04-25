@@ -11,6 +11,7 @@ module.exports = require('express').Router()
     Meme.findAll()
       .then(memes => {
         let bob = []
+        // QUESTION: why would this be a promise?
         memes.forEach(meme => {
           bob.push(meme.rating)
         })

@@ -8,7 +8,6 @@ import {Link} from 'react-router'
 class Cart extends React.Component {
   constructor(props) {
     super(props);
-    
     this.addToCart = this.addToCart.bind(this)
     this.removeFromCart = this.removeFromCart.bind(this)
   }
@@ -29,7 +28,7 @@ class Cart extends React.Component {
   render() {
     const cart = this.props.cart
 
-  
+ // TODO: write each cart item as own component
     return (
 
       <div className="container-fluid center" style={{backgroundColor: 'white'}}>

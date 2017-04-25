@@ -37,21 +37,25 @@ class LoginContainer extends React.Component {
 		this.props.login(email, password)
 	}
 
+  renderCurrentUser(currentUser){
+  }
 
 	render(){
 		const { currentUser } = this.props
 		return (
 			<div className="login-container navbar">
-			{currentUser ? <WhoAmI /> :
-				<div className="container-fluid">
-					<Login handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-					<div className="col-md-5">
-						<Oauth />
-						<SignUpContainer />
-					</div>
-				</div> }
-
-
+      {/* Style or method*/}
+			  {
+          currentUser
+          ? <WhoAmI />
+          : <div className="container-fluid">
+            <Login handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+            <div className="col-md-5">
+              <Oauth />
+              <SignUpContainer />
+            </div>
+          </div>
+        }
 			</div>
 		)
 	}

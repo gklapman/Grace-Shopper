@@ -36,7 +36,7 @@ module.exports = require('express').Router()
 		.catch(next)
 	}
 })
-
+// TODO: REST architecture
 .post('/remove', (req, res, next)=> {
 	if (req.user){
 		let userId = req.user.id 

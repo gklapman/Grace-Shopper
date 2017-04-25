@@ -28,6 +28,7 @@ import {loadCartItems} from './reducers/cart.jsx'
 
 import {loadPastItems} from './reducers/pastorders.jsx'
 
+// TODO: write as own container
 const MemeApp = connect(
   ({ auth }) => ({ user: auth }))
 
