@@ -3,6 +3,11 @@
 const {INTEGER, BOOLEAN, DATE, ENUM} = require('sequelize')
 
 module.exports = db => db.define('carts', {
+	id: {
+		type: INTEGER,
+		primaryKey: true,
+		autoIncrement: true, 
+	},
 	status: {
 		type: ENUM('purchased', 'not-purchased'),
 		defaultValue: 'not-purchased',

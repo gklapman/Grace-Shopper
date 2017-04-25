@@ -71,34 +71,17 @@ module.exports = require('express').Router()
 })
 
 
+
 .post('/', (req, res, next)=> {
-	let user;
-	let meme;
 	if (req.user) {
-		// logic for authed users
-		return User.findOne({
-			where: {
-				id: req.body.userId
-			}
-		})
-		.then(user1 => {
-			user = user1;
-			return Meme.findOne({
-				where: {
-					id: req.body.memeId
-				}
-			})
-		})
-		.then(meme1 => {
-			meme = meme1
 			return Cart.findOrCreate({
 				where :{
-					user_id: user.id,
-					meme_id: meme.id,
+					user_id: req.user.id,
+					meme_id: req.body.memeId,
 					status: 'not-purchased'
 				}
 			})
-		})
+		
 		.spread((cart, created) => {
 			let quant =  cart.quantity + 1
 			return cart.update({

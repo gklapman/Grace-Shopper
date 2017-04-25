@@ -36,9 +36,7 @@ export const loadCartItems = () => {
   return dispatch => {
     return axios.get('/api/carts')
     .then(res => {
-      console.log('the response is ', res.data)
       if (typeof res.data !== 'string'){
-        console.log('loading in loacCartItems', res.data)
         dispatch(loadItems(res.data))
       }
     })

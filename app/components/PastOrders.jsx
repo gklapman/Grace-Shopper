@@ -1,4 +1,4 @@
-import React from 'react'
+ import React from 'react'
 import {connect} from 'react-redux'
 import {addCartItem} from '../reducers/cart.jsx'
 
@@ -22,13 +22,13 @@ class PastOrders extends React.Component {
   
     return (
 
-      <div className="container-fluid center" style={{backgroundColor: 'white'}}>
+      <div className="container-fluid center green myitems">
         {pastorders && pastorders.length > 0 ? <h2>My Past Orders</h2>: <h3> You have no past orders. Click <Link to="/products">HERE</Link> to add items to your cart</h3>}
           {pastorders && pastorders.map(item=> {
             return <div key={item.meme_id} className="row cart-item">
-              <h5 className='center'>Meme Item: {item.meme.name}</h5>
-              <img className='center' src={item.meme.photo} style={{height: 50, width: 50}}/>
-              <span className='center'> Quantity: {item.quantity}</span>
+              <h4 className='meme-name'>Meme Item: {item.meme.name}</h4>
+              <img className='image' src={item.meme.photo}/>
+              <span className='quantity'> Quantity: {item.quantity}</span>
             
               
             </div>

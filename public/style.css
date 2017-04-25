@@ -82,14 +82,40 @@ ul {
   background-image: url('/images/he-man_crop.jpg')
 }
 
-#cart-item {
-  padding: 5;
-  text-align: center;
+.cart-item {
+  margin: 20px;
 }
 
-#center {
+.center {
    text-align: center
 }
+
+.myitems {
+  background-color: lightgreen;
+  border: solid 1px green; ;
+}
+
+.image {
+  height: 120px;
+  width: 120px;
+}
+
+.quantity {
+  display: block;
+  font-size: 20px;
+
+}
+
+.price {
+  font-size: 20px;
+}
+
+.total {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+
 
 /*.whoami-user-name {
 }*/
