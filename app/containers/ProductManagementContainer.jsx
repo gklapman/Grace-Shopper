@@ -2,11 +2,13 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import React from 'react'
 import ManageProducts from '../components/ManageProducts'
+import { editProduct } from '../reducers/meme'
 
 class ProductManagement extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      id: '',
       name: '',
       price: '',
       product: '',
@@ -22,6 +24,16 @@ class ProductManagement extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    let putObject = {
+      id: this.state.id,
+      name: this.state.name,
+      price: this.state.price,
+      photo: this.state.photo,
+      product_info: this.state.product,
+      stock: this.state.stock
+    }
+    editProduct(putObject)
+    //.then and reset the local state and/or display a sucess message?
   }
   handleChange(event) {
     this.setState( {[event.currentTarget.name]: event.currentTarget.value})
@@ -37,13 +49,13 @@ class ProductManagement extends React.Component {
     const meme = value[0]
 
     this.setState({
+      id: meme.id
       name: meme.name,
       price: meme.price,
       product: meme.product_info,
       stock: meme.stock,
       photo: meme.photo
     })
-
   }
 
   render() {

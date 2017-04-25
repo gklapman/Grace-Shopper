@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import React from 'react'
+import ManageOrders from '../components/ManageOrders'
+
 
 class OrderManagement extends React.Component {
   constructor(props) {

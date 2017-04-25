@@ -136,11 +136,20 @@ export const getMemesForOneTag = (tagId) => {
 }
 
 export const postReview = (data) => {
-  console.log('his post', data)
+  console.log('hts post', data)
   return dispatch => {
     return axios.post('/api/reviews', data)
       .then(function(data) {
-        console.log('hahahahahahahahahahahaahahahahah', data)
+        console.log( data)
+      })
+  }
+}
+
+export const editProduct = (data) => {
+  return dispatch => {
+    return axios.put('/api/edit/memeid', data)
+      .then(function(data){
+        console.log(data)
       })
   }
 }
