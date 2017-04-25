@@ -18,6 +18,7 @@ class LoginContainer extends React.Component {
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.checkUser = this.checkUser.bind(this);
 	}
 
 
@@ -38,21 +39,27 @@ class LoginContainer extends React.Component {
 		browserHistory.push('/products')
 	}
 
-
-	render(){
-		const { currentUser } = this.props
-		return (
-			<div className="login-container navbar">
-			{currentUser ? <WhoAmI /> :
-				<div className="container-fluid">
+	checkUser(currentUser){
+		if (currentUser) {
+			return (<WhoAmI />)
+		}
+		else {
+			return ( <div className="container-fluid">
 					<Login handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
 					<div className="col-md-5">
 						<Oauth />
 						<SignUpContainer />
 					</div>
-				</div> }
+				</div> )
+			}
 
+	}
 
+	render(){
+		const { currentUser } = this.props
+		return (
+			<div className="login-container navbar">
+			{ this.checkUser (currentUser)}
 			</div>
 		)
 	}
