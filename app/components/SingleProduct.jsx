@@ -14,9 +14,9 @@ const SingleProduct = (props) => {
   }
 
   return (
-    <div>{}
+    <div>
         <h3>{meme.name} <span>$ {meme.price} {starify(meme.rating)}</span></h3>
-        <img src={meme.photo}/>
+        <img className="single-display" src={meme.photo}/>
         <p>{meme.product_info}</p>
         <p>User reviews gave {meme.name} an average of {meme.rating}/5.00</p>
         <h4>We have this many in stock: {meme.stock}</h4>
