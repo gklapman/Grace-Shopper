@@ -29,6 +29,12 @@ import {loadCartItems} from './reducers/cart.jsx'
 
 import {loadPastItems} from './reducers/pastorders.jsx'
 
+import ProductManagement from './containers/productManagementContainer'
+import OrderManagement from './containers/orderManagementContainer'
+import UserManagement from './containers/userManagementContainer'
+import AdminPanel from './containers/adminPanel'
+
+
 const MemeApp = connect(
   ({ auth }) => ({ user: auth }))
 
@@ -96,6 +102,12 @@ render(
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
         <Route path='/cart' component={Cart} onEnter={loadCartItemsEnter}/>
         <Route path='/pastorders' component={PastOrders} onEnter={loadPastOrderEnter}/>
+        <Route path='/admin' component={AdminPanel}>
+          <Route path='productManagement' component={ProductManagement} onEnter={onProductContainerEnter}/>
+          <Route path='orderManagement' component={OrderManagement} />
+          <Route path='userManagement' component={UserManagement}/>
+        </Route>
+
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
