@@ -203,7 +203,9 @@ let usersdata, memesdata, cartdata
 
 
 db.didSync
-  // .sync({force: true})
+    .then(() => {
+      return db.sync({force: true})
+    })
     .then(function() {
       return createUsers()
     })

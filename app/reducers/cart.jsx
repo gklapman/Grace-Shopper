@@ -30,9 +30,7 @@ export const loadCartItems = () => {
   return dispatch => {
     return axios.get('/api/carts')
     .then(res => {
-      console.log('the response is ', res.data)
       if (typeof res.data !== 'string'){
-        console.log('loading in loacCartItems', res.data)
         dispatch(loadItems(res.data))
       }
     })
@@ -51,12 +49,7 @@ export const addCartItem = function(memeId, userId) {
       return res.data
     })
     .then((cart) => {
-      if (userId) {
         dispatch(loadCartItems())
-      } else {
-        console.log('loading in addCartItem', cart)
-        dispatch(loadItems(cart))
-      }
     })
     .catch((error) => console.error(error))
   }
@@ -69,11 +62,8 @@ export const removeCartItem = function(memeId) {
       return res.data
     })
     .then((item) => {
-      if (item.user_id) {
         dispatch(loadCartItems())
-      } else {
-        dispatch(loadItems(cart))
-      }
+  
     })
     .catch((error) => console.error(error))
   }

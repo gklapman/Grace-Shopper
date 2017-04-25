@@ -2,8 +2,11 @@ const app = require('APP'), {env, secretsFile} = app
 const debug = require('debug')(`${app.name}:auth`)
 const passport = require('passport')
 
-const {User, OAuth, Cart} = require('APP/db')
+const {User, OAuth, Cart, Meme} = require('APP/db')
 const auth = require('express').Router()
+// const Promise = require ('bluebird')
+
+
 
 /*************************
  * Auth strategies
@@ -132,6 +135,8 @@ auth.get('/whoami', (req, res) => res.send(req.user))
 
 // POST requests for local login:
 auth.post('/login/local', function(req, res, next){
+  console.log('this is inside of the post route ', req.body)
+  console.log(req.session.cart)
   return passport.authenticate('local', function(err, user){
     if (err) {
       console.log('err', err)
@@ -140,19 +145,74 @@ auth.post('/login/local', function(req, res, next){
       res.send('Please ensure your email and password are correct')
     }
     else if (user){
+      let cartSesh = []
       let cart = req.session.cart || []
-      carteBlanche(user, cart)
-      .then(() => {
+      cart.forEach(item => {
+        item.user_id = user.id
+        cartSesh.push(carteUser(item))
+      })
+      return Promise.all(cartSesh)
+      .then((cartrows) => {
         req.session.cart = null
-      })
-      req.logIn(user, function(err){
+        req.logIn(user, function(err){
         return res.json(req.user)
+         })
       })
-      }
+      .catch(next)
+    }
   })
   (req, res, next)
 }
 )
+
+
+const carteUser = function (item) {
+  let user;
+  let meme;
+      return Cart.findOrCreate({
+        where :{
+          user_id: item.user_id,
+          meme_id: Number(item.meme_id),
+          status: 'not-purchased'
+        }
+      })
+
+  
+    .spread((cart, created) => {
+      let quant =  item.quantity + cart.quantity
+      return cart.update({
+        quantity: quant,  
+      })
+    })  
+    .catch(err => console.error(err))
+
+ 
+}
+
+
+//THIS IS THE OLD POST STRATEGY
+// auth.post('/login/local', function(req, res, next){
+//   return passport.authenticate('local', function(err, user){
+//     if (err) {
+//       console.log('err', err)
+
+//     } else if (!user){
+//       res.send('Please ensure your email and password are correct')
+//     }
+//     else if (user){
+//       let cart = req.session.cart || []
+//       carteBlanche(user, cart)
+//       .then(() => {
+//         req.session.cart = null
+//       })
+//       req.logIn(user, function(err){
+//         return res.json(req.user)
+//       })
+//       }
+//   })
+//   (req, res, next)
+// }
+// )
 
 
 // GET requests for OAuth login:
@@ -169,6 +229,7 @@ auth.get('/login/:strategy', (req, res, next) => {
 )
 
 auth.post('/logout', (req, res) => {
+  req.session.cart = []
   req.logout()
   res.redirect('/api/auth/whoami')
 })
@@ -186,7 +247,6 @@ auth.post('/signup', (req, res, next) => {
     return carteBlanche(newUser, cart)
   })
   .then(()=> {
-    console.log('kill it')
     req.session.cart = null
     res.send();
   })
@@ -194,6 +254,7 @@ auth.post('/signup', (req, res, next) => {
 })
 
 //util function for assigning items to cart off req.session
+
 const carteBlanche = (user, seshCart) => {
   cart = seshCart.map(item => {
     item.user_id = user.id
@@ -201,5 +262,4 @@ const carteBlanche = (user, seshCart) => {
   })
   return Promise.all(cart)
 }
-
 module.exports = auth
