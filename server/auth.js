@@ -47,12 +47,7 @@ const auth = require('express').Router()
   passport
 })
 
-// Google needs the GOOGLE_CLIENT_SECRET AND GOOGLE_CLIENT_ID
-// environment variables.
-// console.log("ENV", env)
-// console.log('env google', secretsFile.GOOGLE_CLIENT_ID)
-// console.log('process home', process.env.HOME)
-// console.log('secretsfile', secretsFile)
+
 
 OAuth.setupStrategy({
   provider: 'google',
@@ -190,29 +185,7 @@ const carteUser = function (item) {
 }
 
 
-//THIS IS THE OLD POST STRATEGY
-// auth.post('/login/local', function(req, res, next){
-//   return passport.authenticate('local', function(err, user){
-//     if (err) {
-//       console.log('err', err)
 
-//     } else if (!user){
-//       res.send('Please ensure your email and password are correct')
-//     }
-//     else if (user){
-//       let cart = req.session.cart || []
-//       carteBlanche(user, cart)
-//       .then(() => {
-//         req.session.cart = null
-//       })
-//       req.logIn(user, function(err){
-//         return res.json(req.user)
-//       })
-//       }
-//   })
-//   (req, res, next)
-// }
-// )
 
 
 // GET requests for OAuth login:

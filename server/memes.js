@@ -3,6 +3,7 @@
 const db = require('APP/db')
 const Meme = db.model('memes')
 const Tag = db.model('tags')
+const {isAdmin} = require('./auth.filters')
 
 module.exports = require('express').Router()
 // The reason this code sucks is because the getter method
@@ -91,7 +92,7 @@ module.exports = require('express').Router()
       })
       .catch(next)
   })
-  .post('/:memeId/tags', (req, res, next) => {
+  .post('/:memeId/tags', isAdmin('only admins can add tags'), (req, res, next) => {
     Tag.findOrCreate({tag: req.body.tag})
       .then(tag => {
         return Meme.findById(req.params.memeId)
@@ -104,3 +105,36 @@ module.exports = require('express').Router()
       })
       .catch(next)
   })
+
+  .put('/edit/:memeId', isAdmin('only admins can edit products'), (req, res, next) => {
+    //need to send the product info correctly based on the table name
+    return Meme.findById(req.params.memeId)
+    .then(meme => {
+      return meme.update(req.body)
+    })
+    .then(updatedmeme => {
+      res.json(updatedmeme)
+    })
+    .catch(next)
+  })
+
+  .post('/add', isAdmin('only admin can add products'), (req, res, next) => {
+    console.log(req.body)
+    // let {name, photo, product_info, stock} = req.body
+    return Meme.create({
+      name: req.body.name, 
+      price: req.body.price, 
+      photo: req.body.photo, 
+      product_info: req.body.product_info,
+      stock: req.body.stock
+    })
+    .then(meme => {
+      res.json(meme)
+    })
+  })
+
+
+
+
+
+
