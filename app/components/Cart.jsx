@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {addCartItem, removeCartItem} from '../reducers/cart.jsx'
 
 import {Link} from 'react-router'
+import Checkout from './Checkout'
 
 
 class Cart extends React.Component {
@@ -32,8 +33,9 @@ class Cart extends React.Component {
   
     return (
 
-      <div className="container-fluid center" style={{backgroundColor: 'white'}}>
+      <div className="container-fluid center cart" style={{backgroundColor: 'white'}}>
         {cart.length > 0 ? <h2>My Cart</h2>: <h3> Your Cart is Empty. Click <Link to="/products">HERE</Link> to add items to your cart</h3>}
+        {cart.length > 0 ? <Checkout /> : null}
           {cart && cart.map(item=> {
             return (
             item.meme && item.quantity > 0 ? 
@@ -46,7 +48,6 @@ class Cart extends React.Component {
               </div> : null
             ) 
           })}
-         
       </div>
     )
   }

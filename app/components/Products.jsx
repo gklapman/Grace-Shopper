@@ -24,7 +24,7 @@ export default (props) => {
   const starify = (rating) => {
     let stars = ''
     const n = Number(rating)
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < Math.round(n); i++) {
       stars += '★'
     }
     return stars
@@ -52,6 +52,7 @@ export default (props) => {
                   <div className="info">Description: {shorten(product.product_info)}</div>
                   <div className="rating">{product.rating}/5.00 starz based on user reviews</div>
                 </Link>
+                <button value={product.id} className="btn btn-default" onClick={addToCart}>Add to Cart</button>
               </div>
             )
           })}

@@ -12,6 +12,9 @@ const reducer = (prevState = initialState, action) => {
     case LOAD_ITEMS:
       newState.cart = action.items
       return newState
+    // case CHECKOUT:
+    //   newState.cart = []
+    //   return newState
     default:
       return newState
   }
@@ -23,7 +26,10 @@ export const loadItems = (items) => {
   return {type: LOAD_ITEMS, items}
 }
 
-
+// const CHECKOUT = 'CHECKOUT'
+// export const checkout = () => {
+//   return {type: CHECKOUT}
+// }
 
 // thunks
 export const loadCartItems = () => {
@@ -42,8 +48,6 @@ export const loadCartItems = () => {
   }
 }
 
-
-
 export const addCartItem = function(memeId, userId) {
   return (dispatch, getState) => {
     return axios.post('/api/carts', {memeId, userId})
@@ -51,12 +55,7 @@ export const addCartItem = function(memeId, userId) {
       return res.data
     })
     .then((cart) => {
-      if (userId) {
-        dispatch(loadCartItems())
-      } else {
-        console.log('loading in addCartItem', cart)
-        dispatch(loadItems(cart))
-      }
+      dispatch(loadCartItems())
     })
     .catch((error) => console.error(error))
   }
@@ -69,15 +68,20 @@ export const removeCartItem = function(memeId) {
       return res.data
     })
     .then((item) => {
-      if (item.user_id) {
-        dispatch(loadCartItems())
-      } else {
-        dispatch(loadItems(cart))
-      }
+      dispatch(loadCartItems())
     })
     .catch((error) => console.error(error))
   }
 }
 
+export const checkout = (userId) => {
+  return (dispatch) => {
+    return axios.get('/api/carts/checkout')
+    .then(res => {
+      return dispatch(loadCartItems())
+    })
+    .catch((error) => console.error(error))
+  }
+}
 
 export default reducer

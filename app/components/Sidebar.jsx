@@ -5,8 +5,13 @@ import {connect} from 'react-redux'
 class Sidebar extends React.Component {
   render() {
     return (
-      <div className="sidebar col-md-2">
-        <div className="categories">
+      <div className="col-md-2">
+        <Link to="/">
+          <div className="store">
+            <span className="green">memes</span><span className="red">R</span><span className="blue">us</span>
+          </div>
+        </Link>
+        <div className="sidebar categories">
           <h4>Categories</h4>
           <ul>
             {this.props.tags.map(tag => {
