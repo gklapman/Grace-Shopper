@@ -11,6 +11,7 @@ class ProductManagement extends React.Component {
       price: '',
       product: '',
       stock: '',
+      photo: '',
       showForm: false,
 
     }
@@ -21,10 +22,10 @@ class ProductManagement extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    console.log('submit buttin hit')
   }
   handleChange(event) {
-    console.log('handle change hit')
+    this.setState( {[event.currentTarget.name]: event.currentTarget.value})
+
   }
   editRow(event) {
     event.preventDefault()
@@ -33,14 +34,14 @@ class ProductManagement extends React.Component {
     const value = this.props.memes.filter((el) => {
       return (el.id == id)
     })
-    const meme = value[0];
-    console.log(value)
+    const meme = value[0]
 
     this.setState({
       name: meme.name,
       price: meme.price,
       product: meme.product_info,
       stock: meme.stock,
+      photo: meme.photo
     })
 
   }
@@ -56,7 +57,6 @@ class ProductManagement extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('this is state', state)
   return {
     memes: state.meme.memes,
     currentUser: state.auth

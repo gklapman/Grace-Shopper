@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 
-
 export default props => {
-  console.log(props);
-
   return (
     <div>
-      <table style={{width:'1000px'}}>
+      <table style={{width: '1000px'}}>
         <tr>
           <th></th>
           <th>Id</th>
@@ -34,21 +31,20 @@ export default props => {
       </table>
       {props.showForm ?
        <div className="login form-inline col-md-7">
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.onSubmit}>
           <div className="form-group">
             <label>name</label>
             <input
               value = { props.formState.name}
-              onChange ={props.handleChange}
+              onChange ={props.onChange}
               name="name"
               className="form-control"
             />
             <br/>
            <label>price</label>
            <input
-              style={{display:'float-right'}}
               value = { props.formState.price}
-              onChange ={props.handleChange}
+              onChange ={props.onChange}
               name="price"
               className="form-control"
             />
@@ -56,16 +52,26 @@ export default props => {
             <label>Product Info</label>
            <textArea
               value = { props.formState.product}
-              onChange ={props.handleChange}
+              onChange ={props.onChange}
               name="product"
               className="form-control"
             />
             <br/>
+            <label>Quanity</label>
             <input
               value = { props.formState.stock}
-              onChange ={props.handleChange}
+              onChange ={props.onChange}
               name="stock"
               className="form-control"
+            />
+            <br/>
+             <label>photo url</label>
+               <input
+              value = { props.formState.photo}
+              onChange ={props.onChange}
+              name="stock"
+              className="form-control"
+              style={{width: '300px'}}
             />
           </div>
           <br/>

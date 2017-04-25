@@ -12,7 +12,7 @@ class AdminPanel extends React.Component {
     return (
       <div style={{backgroundColor: 'white'}}>
         <h1>Welcome, admin.  <img style={{height: "100px"}} src="https://www.mememaker.net/static/images/memes/3686571.jpg" alt=""/></h1>
-        <ul class="breadcrumb">
+        <ul>
           <li>
              <Link to={`/admin/productManagement`}>Product Management</Link>
           </li>
