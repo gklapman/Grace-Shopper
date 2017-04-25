@@ -49,7 +49,7 @@ class ProductManagement extends React.Component {
     const meme = value[0]
 
     this.setState({
-      id: meme.id
+      id: meme.id,
       name: meme.name,
       price: meme.price,
       product: meme.product_info,
