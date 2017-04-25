@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 import React from 'react'
+
 
 class AdminPanel extends React.Component {
   constructor(props) {
@@ -9,9 +10,23 @@ class AdminPanel extends React.Component {
   }
   render() {
     return (
-      <div>
-        <h1>Welcome, James.</h1>
-        {this.props.children}
+      <div style={{backgroundColor: 'white'}}>
+        <h1>Welcome, admin.  <img style={{height: "100px"}} src="https://www.mememaker.net/static/images/memes/3686571.jpg" alt=""/></h1>
+        <ul class="breadcrumb">
+          <li>
+             <Link to={`/admin/productManagement`}>Product Management</Link>
+          </li>
+          <li>
+             <Link to={`/admin/orderManagement`}>Order Management</Link>
+          </li>
+          <li>
+            <Link to={`/admin/userManagement`}>User Management</Link>
+          </li>
+        </ul>
+
+        <div style={{border: "solid black 2px", padding: '10px'}} className="">
+          {this.props.children}
+        </div>
       </div>
 
     )

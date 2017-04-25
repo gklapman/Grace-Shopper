@@ -107,9 +107,9 @@ render(
         <Route path='/cart' component={Cart} onEnter={loadCartItemsEnter}/>
         <Route path='/pastorders' component={PastOrders} onEnter={loadPastOrderEnter}/>
         <Route path='/admin' component={AdminPanel}>
-          <Route path='productManagement' component={ProductManagement}/>
+          <Route path='productManagement' component={ProductManagement} onEnter={onProductContainerEnter}/>
           <Route path='orderManagement' component={OrderManagement} />
-          <Route path='/userManagement' component={UserManagement}/>
+          <Route path='userManagement' component={UserManagement}/>
         </Route>
 
       </Route>
