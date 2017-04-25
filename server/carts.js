@@ -107,3 +107,68 @@ module.exports = require('express').Router()
 		res.json(req.session.cart)
 	}
 })
+
+.get('/checkout', (req, res, next) => {
+	let updateMatrix
+	if (req.user) {
+		Cart.update({status: 'purchased'}, {where: {user_id: req.user.id, status: 'not-purchased'}, returning: true})
+		.then(items => {
+			let bob = items
+			bob.shift()
+			updateMatrix = bob.map(item => {
+				return [item[0].quantity, item[0].meme_id]
+			})
+			return updateMatrix.map(item => {
+				return Meme.findById(item[1])
+			})
+		})
+		.then(promises => {
+			return Promise.all(promises)
+		})
+		.then(memes => {
+			updateMatrix = updateMatrix.map((item, index) => {
+				return [memes[index].stock - item[0], item[1]]
+			})
+			return updateMatrix.map(item => {
+				return Meme.update({stock: item[0]}, {where: {id: item[1]}})
+			})
+		})
+		.then(map => {
+			return Promise.all(map)
+		})
+		.then(resolution => {
+			res.send(resolution)
+		})
+		.catch(err => {
+			console.log('error!', err)
+		})
+	} else {
+		// code for unauths (guests)
+		console.log('sesh', req.session)
+		updateMatrix = req.session.cart.map(item => {
+			return [Number(item.quantity), Number(item.meme_id)]
+		})
+		let promises = updateMatrix.map(item => {
+				return Meme.findById(item[1])
+			})
+		Promise.all(promises)
+		.then(memes => {
+			updateMatrix = updateMatrix.map((item, index) => {
+				return [memes[index].stock - item[0], item[1]]
+			})
+			return updateMatrix.map(item => {
+				return Meme.update({stock: item[0]}, {where: {id: item[1]}})
+			})
+		})
+		.then(map => {
+			return Promise.all(map)
+		})
+		.then(resolution => {
+			req.session.cart = null
+			res.send(resolution)
+		})
+		.catch(err => {
+			console.log('error!', err)
+		})
+	}
+})

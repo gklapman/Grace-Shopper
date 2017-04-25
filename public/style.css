@@ -51,7 +51,8 @@ img {
 
 .sidebar {
   border: solid 1px blue;
-  background-color: lightblue
+  background-color: lightblue;
+  width: 100%
 }
 
 .adbar {
@@ -125,9 +126,9 @@ ul {
 
 .store {
   font-size: 36px;
-  position: absolute;
+  /*position: absolute;
   left: 50%;
-  top: 40px;
+  top: 40px;*/
   background-color: orange;
   border: solid 4px purple;
   border-radius: 20%
@@ -143,4 +144,26 @@ ul {
 
 .blue {
   color: blue
+}
+
+.btn-checkout {
+  position: relative;
+  bottom: -8px
+}
+
+/*.checkout {
+  float: right
+}*/
+
+.flow {
+  float: right
+}
+
+.lab {
+  position: relative;
+  top: 8px
+}
+
+.single-display {
+  padding: 0 5% 0 5%
 }

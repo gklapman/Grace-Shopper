@@ -16,6 +16,7 @@ import SingleProductContainer from './containers/SingleProductContainer.js'
 import Cart from './components/Cart'
 import Sidebar from './components/Sidebar'
 import Adbar from './components/Adbar'
+import Checkout from './components/Checkout'
 
 import PastOrders from './components/PastOrders'
 
@@ -35,20 +36,15 @@ const MemeApp = connect(
   ({ user, children }) =>
     <div>
       <nav className="navbar navbar-default container-fluid">
-        <div className="col-md-6">
+        <div className="col-md-7">
           <LoginLogoutContainer />
         </div>
-        <div className="col-md-4">
+        <div className="col-md-3">
           <SearchContainer />
         </div>
         <div className="col-md-2">
           <CartIcon />
         </div>
-        <Link to="/">
-          <div className="store">
-            <span className="green">memes</span><span className="red">R</span><span className="blue">us</span>
-          </div>
-        </Link>
       </nav>
       <div className="container-fluid">
         <Sidebar />
