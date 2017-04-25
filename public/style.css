@@ -141,6 +141,6 @@ ul {
   top: 8px
 }
 
-/*.single-display {
-  margin: 0 5% 0 5%
-}*/
+.single-display {
+  padding: 0 5% 0 5%
+}

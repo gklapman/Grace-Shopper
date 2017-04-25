@@ -15,11 +15,11 @@ const SingleProduct = (props) => {
 
   return (
     <div>
-        <h3>{meme.name} <span>$ {meme.price} {starify(meme.rating)}</span></h3>
+        <h3>{meme.name} ${meme.price}<br />{starify(meme.rating)}</h3>
         <img className="single-display" src={meme.photo}/>
         <p>{meme.product_info}</p>
         <p>User reviews gave {meme.name} an average of {meme.rating}/5.00</p>
-        <h4>We have this many in stock: {meme.stock}</h4>
+        <h4>There are {meme.stock} left in stock</h4>
         <hr/>
     </div>
   )
