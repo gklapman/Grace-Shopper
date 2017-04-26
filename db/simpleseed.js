@@ -70,7 +70,7 @@ const generateMemes = () => {
     name: 'charles',
     price: 10.99,
     photo: '/images/charles_on_subway.png',
-    product_info: 'Need to convey that perfect sense of despair at the futility of even existing?',
+    product_info: 'Need to convey that perfect sense of despair at the futility of even existing?  Try Charles on a Subway',
     stock: 3
   }))
 
@@ -78,8 +78,16 @@ const generateMemes = () => {
     name: 'arthur',
     price: 6.99,
     photo: '/images/arthur.jpg',
-    product_info: 'Who\'s a good boy?  Is it you?  Yes it is!  Yes you are a good boy.  Have some treats.  I need to test the space limit of descriptions so laaaaaaaaaaa',
+    product_info: 'Having fun isn\'t hard if you buy this classic Arthur meme!',
     stock: 8
+  }))
+
+  memesArray.push(Meme.build({
+    name: 'cody',
+    price: 4.49,
+    photo: '/images/cody-believes_1024.png',
+    product_info: 'Cody knows you can do it!  CLAP IF YOU BELIEVE!  CLAP YOUR HANDS FOR CODYBELL!',
+    stock: 17
   }))
 
   return memesArray;
@@ -92,15 +100,15 @@ const generateTags = () => {
   let tagsArray = []
 
   tagsArray.push(Tag.build({
-    tag: 'The Offcie'
+    tag: 'The Office'
   }))
 
   tagsArray.push(Tag.build({
-    tag: 'Michale Scott'
+    tag: 'Michael Scott'
   }))
 
   tagsArray.push(Tag.build({
-    tag: 'Comedy'
+    tag: 'Fullstack'
   }))
 
   return tagsArray
@@ -198,7 +206,7 @@ const createTags = (tags) => {
 
 // }
 
-let usersdata, memesdata, cartdata
+let usersdata, memesdata, cartdata, tagdata, fullstack, office, michael
 
 
 
@@ -221,9 +229,33 @@ db.didSync
       cartdata = data
       return createTags()
     })
-    .then(function(){
-      createReviews()
-      console.log('end of seed')
+    .then(function(data){
+      tagdata = data
+      return createReviews()
+    })
+    .then(() => {
+      fullstack = tagdata.filter(tag => {
+        return tag.tag === "Fullstack"
+      })
+      return memesdata[3].addTag(fullstack)
+    })
+    .then(() => {
+      office = tagdata.filter(tag => {
+        return tag.tag === "The Office"
+      })
+      return memesdata[0].addTag(office)
+    })
+    .then(() => {
+      return memesdata[1].addTag(office)
+    })
+    .then(() => {
+      return memesdata[2].addTag(office)
+    })
+    .then(() => {
+      michael = tagdata.filter(tag => {
+        return tag.tag === "Michael Scott"
+      })
+      return memesdata[0].addTag(michael)
     })
     .catch(error => {
       console.error('an error occurred', error)

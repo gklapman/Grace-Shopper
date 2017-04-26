@@ -66,7 +66,7 @@ class LoginContainer extends React.Component {
 	render(){
 		const { currentUser } = this.props
 		return (
-			<div className="login-container navbar">
+			<div className="login-container">
 			{ this.checkUser (currentUser)}
 			</div>
 		)

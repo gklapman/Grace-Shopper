@@ -21,7 +21,7 @@ const reviewCreator = (props) => {
             <option value ='4' >★★★★</option>
             <option value ='5' >★★★★★</option>
           </select>
-            <input type="submit" value="Submit"/>
+          <button className="btn btn-product" type="submit" value="Submit">Submit</button>
       </form>
     </div>
   )
