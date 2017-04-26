@@ -248,6 +248,9 @@ db.didSync
       return memesdata[3].addTag(fullstack)
     })
     .then(() => {
+      return memesdata[8].addTag(fullstack)
+    })
+    .then(() => {
       office = tagdata.filter(tag => {
         return tag.tag === "The Office"
       })
