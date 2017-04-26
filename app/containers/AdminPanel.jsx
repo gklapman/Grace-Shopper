@@ -10,7 +10,7 @@ class AdminPanel extends React.Component {
   }
   render() {
     return (
-      <div style={{backgroundColor: 'white'}}>
+      <div className="on-admin">
         <h1>Welcome, admin.  <img style={{height: "100px"}} src="https://www.mememaker.net/static/images/memes/3686571.jpg" alt=""/></h1>
         <ul>
           <li>

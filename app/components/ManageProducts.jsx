@@ -33,7 +33,7 @@ export default props => {
 
       </table>
       {props.showForm ?
-       <div className="login form-inline col-md-7">
+       <div className="login on-admin form-inline col-md-7">
         <form onSubmit={props.onSubmit}>
           <div className="form-group">
             <label>name</label>
@@ -85,7 +85,7 @@ export default props => {
       </div>
        : null }
        {props.formState.showOtherForm ?
-       <div className="login form-inline col-md-7">
+       <div className="login on-admin form-inline col-md-7">
         <form onSubmit={props.handleTagSub}>
           <label>Tag</label>
           <input value={props.formState.tag} onChange={props.handleTag} className="form-control"/>
