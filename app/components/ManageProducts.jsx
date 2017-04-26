@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 export default props => {
   return (
     <div>
+      <button onClick={props.addItem}>Add new Item</button>
       <table style={{width: '1000px'}}>
         <tr>
           <th></th>
@@ -70,13 +71,15 @@ export default props => {
                <input
               value = { props.formState.photo}
               onChange ={props.onChange}
-              name="stock"
+              name="photo"
               className="form-control"
               style={{width: '300px'}}
             />
           </div>
           <br/>
           <button type="submit" className="btn btn-primary">Update</button>
+          <button onClick ={props.createItem} type="submit" name='create' className="btn btn-primary">Create</button>
+
         </form>
       </div>
        : null }
