@@ -93,11 +93,16 @@ module.exports = require('express').Router()
       .catch(next)
   })
   .post('/:memeId/tags', isAdmin('only admins can add tags'), (req, res, next) => {
-    Tag.findOrCreate({tag: req.body.tag})
-      .then(tag => {
-        return Meme.findById(req.params.memeId)
+    let tag
+    let meme
+    return Tag.findOrCreate({where: {tag: req.body.tag}})
+      .then(tag1 => {
+        console.log(tag1)
+        tag = tag1[0]
+        return Meme.findById(Number(req.params.memeId))
       })
-      .then(meme => {
+      .then(meme1 => {
+        meme = meme1
         return meme.addTags(tag)
       })
       .then(() => {

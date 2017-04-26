@@ -23,6 +23,7 @@ const isAdmin = message => (req, res, next) => {
 	if (!req.user.admin){
 		res.send(message)	
 	}
+  next()
 }
 
 

@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router'
 import React from 'react'
 import ManageProducts from '../components/ManageProducts'
 import { editProduct } from '../reducers/meme'
+import axios from 'axios'
 
 class ProductManagement extends React.Component {
   constructor(props) {
@@ -15,11 +16,17 @@ class ProductManagement extends React.Component {
       stock: '',
       photo: '',
       showForm: false,
+      showOtherForm: false,
+      tag: '',
+      tagId: ''
 
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.editRow = this.editRow.bind(this)
+    this.addTag = this.addTag.bind(this)
+    this.handleTag = this.handleTag.bind(this)
+    this.handleTagSub = this.handleTagSub.bind(this)
   }
 
   handleSubmit(event) {
@@ -41,7 +48,7 @@ class ProductManagement extends React.Component {
   }
   editRow(event) {
     event.preventDefault()
-    this.setState({showForm: !this.state.showForm})
+    this.setState({showForm: !this.state.showForm, showOtherForm: false})
     const id = event.target.value
     const value = this.props.memes.filter((el) => {
       return (el.id == id)
@@ -57,12 +64,26 @@ class ProductManagement extends React.Component {
       photo: meme.photo
     })
   }
+  handleTag(e) {
+    this.setState({tag: e.currentTarget.value})
+  }
+  addTag(e) {
+    this.setState({showForm: false, showOtherForm: !this.state.showOtherForm, tagId: e.currentTarget.value})
+  }
+  handleTagSub(e) {
+    e.preventDefault()
+    axios.post(`/api/memes/${this.state.tagId}/tags`, {tag: this.state.tag})
+    .then(res => {
+      console.log('success')
+    })
+    this.setState({tag: '', showOtherForm: false})
+  }
 
   render() {
     return (
       <div>
         <h3>Product Management Panel</h3>
-        <ManageProducts formState = {this.state} showForm={this.state.showForm} editRow={this.editRow} props={this.props.memes} onChange={this.handleChange} onSubmit={this.handleSubmit}/>
+        <ManageProducts formState = {this.state} showForm={this.state.showForm} editRow={this.editRow} addTag={this.addTag} handleTag={this.handleTag} props={this.props.memes} handleTagSub={this.handleTagSub} onChange={this.handleChange} onSubmit={this.handleSubmit}/>
       </div>
     )
   }
