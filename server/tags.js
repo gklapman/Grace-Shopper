@@ -3,6 +3,7 @@
 const db = require('APP/db')
 const Tag = db.model('tags')
 const Meme = db.model('memes')
+const {isAdmin} = require('./auth.filters')
 
 module.exports = require('express').Router()
   .get('/', (req, res, next) => {
@@ -44,3 +45,20 @@ module.exports = require('express').Router()
     })
     .catch(next)
   })
+  // .post('/edit', (req, res, next) => {
+  //   let tag;
+  //   let meme;
+  //   return Tag.findOrCreate({tag: req.body.tag})
+  //   .then(tag1 => {
+  //     tag = tag1
+  //     return Meme.findById(req.body.tagId)
+  //   })
+  //   .then(meme1 => {
+  //     meme = meme1
+  //     return meme.addTag(tag)
+  //   })
+  //   .then(() => {
+  //     res.status(201).send(`${meme} tagged as ${tag}`)
+  //   })
+  //   .catch(next)
+  // })

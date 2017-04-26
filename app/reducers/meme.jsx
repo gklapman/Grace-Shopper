@@ -140,7 +140,7 @@ export const postReview = (data) => {
   return dispatch => {
     return axios.post('/api/reviews', data)
       .then(function(data) {
-        console.log( data)
+        console.log(data)
       })
   }
 }
@@ -148,7 +148,7 @@ export const postReview = (data) => {
 export const editProduct = (data) => {
   return dispatch => {
     return axios.put('/api/edit/memeid', data)
-      .then(function(data){
+      .then(function(data) {
         console.log(data)
       })
   }
