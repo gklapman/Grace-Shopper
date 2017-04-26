@@ -2,8 +2,14 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import React from 'react'
 import ManageProducts from '../components/ManageProducts'
+<<<<<<< HEAD
 import { editProduct } from '../reducers/meme'
 import axios from 'axios'
+=======
+import { editProduct, getMemes } from '../reducers/meme'
+import axios from 'axios'
+
+>>>>>>> 661a48e7411399e4b1a3e1ee7113fd7d30876d9a
 
 class ProductManagement extends React.Component {
   constructor(props) {
@@ -24,22 +30,37 @@ class ProductManagement extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.editRow = this.editRow.bind(this)
+<<<<<<< HEAD
     this.addTag = this.addTag.bind(this)
     this.handleTag = this.handleTag.bind(this)
     this.handleTagSub = this.handleTagSub.bind(this)
+=======
+    this.addItem = this.addItem.bind(this)
+    this.createItem = this.createItem.bind(this)
+>>>>>>> 661a48e7411399e4b1a3e1ee7113fd7d30876d9a
   }
 
   handleSubmit(event) {
     event.preventDefault()
+    console.log(event)
+
     let putObject = {
       id: this.state.id,
       name: this.state.name,
       price: this.state.price,
       photo: this.state.photo,
       product_info: this.state.product,
-      stock: this.state.stock
+      stock: this.state.stock,
     }
-    editProduct(putObject)
+    //console.log(editProduct)
+
+    axios.put(`/api/memes/edit/${this.state.id}`, putObject)
+    .then(data => {
+        console.log('response for edit mem put', data)
+    })
+
+
+    //editProduct(putObject)
     //.then and reset the local state and/or display a sucess message?
   }
   handleChange(event) {
@@ -47,6 +68,7 @@ class ProductManagement extends React.Component {
 
   }
   editRow(event) {
+
     event.preventDefault()
     this.setState({showForm: !this.state.showForm, showOtherForm: false})
     const id = event.target.value
@@ -79,6 +101,40 @@ class ProductManagement extends React.Component {
     this.setState({tag: '', showOtherForm: false})
   }
 
+
+  addItem(event) {
+    event.preventDefault()
+    this.setState({showForm: !this.state.showForm})
+    console.log('hit button')
+  }
+
+  createItem(event) {
+      let putObject = {
+        id: this.state.id,
+        name: this.state.name,
+        price: this.state.price,
+        photo: this.state.photo,
+        product_info: this.state.product,
+        stock: this.state.stock,
+      }
+    return axios.post('/api/memes/add', putObject)
+      .then(data => {
+        this.setState({
+          id: '',
+          name: '',
+          price: '',
+          product: '',
+          stock: '',
+          photo: '',
+          showForm: false
+        })
+      })
+      // .then(function() {
+      //   console.log('')
+      //   this.props.getMemes()
+      // })
+  }
+
   render() {
     return (
       <div>
@@ -95,7 +151,9 @@ const mapStateToProps = (state) => {
     currentUser: state.auth
   }
 }
-const mapDispatchToProps = null
+const mapDispatchToProps = {
+  getMemes
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductManagement)
 

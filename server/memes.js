@@ -113,6 +113,7 @@ module.exports = require('express').Router()
 
   .put('/edit/:memeId', isAdmin('only admins can edit products'), (req, res, next) => {
     //need to send the product info correctly based on the table name
+    console.log("BOOOOO YEAHHHH")
     return Meme.findById(req.params.memeId)
     .then(meme => {
       return meme.update(req.body)
@@ -127,9 +128,9 @@ module.exports = require('express').Router()
     console.log(req.body)
     // let {name, photo, product_info, stock} = req.body
     return Meme.create({
-      name: req.body.name, 
-      price: req.body.price, 
-      photo: req.body.photo, 
+      name: req.body.name,
+      price: req.body.price,
+      photo: req.body.photo,
       product_info: req.body.product_info,
       stock: req.body.stock
     })

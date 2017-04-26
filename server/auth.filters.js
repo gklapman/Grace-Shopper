@@ -20,9 +20,9 @@ const isAdmin = message => (req, res, next) => {
 	if (!req.user){
 		res.send('please log in as an admin for this capability')
 	}
-	if (!req.user.admin){
-		res.send(message)	
-	}
+	if (!req.user.admin) {
+		res.send(message)
+  }
   next()
 }
 
