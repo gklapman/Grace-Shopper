@@ -46,7 +46,7 @@ class SearchContainer extends React.Component {
   render() {
     const { memes } = this.props
     return (
-      <div className="search-container container-fluid">
+      <div className="search-container item2">
         <Search handleChange={this.handleChange} handleSubmit={this.handleSubmit} search={this.state.search}/>
       </div>
     )

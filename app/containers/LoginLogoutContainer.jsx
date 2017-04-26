@@ -40,7 +40,7 @@ class LoginContainer extends React.Component {
 			return (<WhoAmI />)
 		}
 		else {
-			return ( <div className="container-fluid">
+			return ( <div className="item1">
 
 	{/*render(){
 		const { currentUser } = this.props
@@ -50,11 +50,11 @@ class LoginContainer extends React.Component {
 				<div className="container-fluid">*/}
 
 					<Login handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-					<div className="col-md-4">
-						<div className="row">
+					<div className="container-fluid">
+						<div className="col-md-8 marg">
 							<Oauth />
 						</div>
-						<div className="row">
+						<div className="col-md-4 marg">
 							<SignUpContainer />
 						</div>
 					</div>

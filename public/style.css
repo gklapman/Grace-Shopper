@@ -126,7 +126,8 @@
 }
 
 .flex {
-  display: flex
+  display: flex;
+  justify-content: space-between
 }
 
 .bob {
@@ -135,7 +136,7 @@
 
 .nav-lab {
   color: white;
-  text-shadow: 1px 1px black
+  text-shadow: 1px 1px black;
 }
 
 .navbar {
@@ -176,3 +177,28 @@
 .btn-product:hover {
   background-color: #009973
 }
+
+.item1 {
+  order: 1
+}
+
+.item2 {
+  order: 2
+}
+
+.item3 {
+  order: 3
+}
+
+.item1 div {
+  display: inline-block
+}
+
+.item2 div {
+  display: inline-block
+}
+
+/*.marg {
+  margin-left: -15px;
+  margin-right: -15px
+}*/

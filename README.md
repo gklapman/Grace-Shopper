@@ -102,3 +102,7 @@ have a linter someday soon.
 Afterwards,
   - *To deploy:* `npm run deploy-heroku`
   - *To re-seed:* `heroku run npm run seed`
+
+
+***LIVE SITE***
+https://memesrus.herokuapp.com

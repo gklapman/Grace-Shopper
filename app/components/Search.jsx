@@ -9,10 +9,10 @@ const Search = ({handleChange, handleSubmit, search}) => {
 return (
   <div className="search">
     <form onSubmit={handleSubmit}>
-      <div className="col-md-2">
+      <div className="">
         <label className="centered-text nav-lab">Search</label>
       </div>
-      <div className="col-md-8">
+      <div className="">
         <input
           className="form-control"
           type="text"
@@ -20,7 +20,7 @@ return (
           onChange={handleChange}
         />
       </div>
-      <div className="col-md-2">
+      <div className="">
         <button className="btn btn-primary">Go!</button>
       </div>
     </form>

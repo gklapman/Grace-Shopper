@@ -9,20 +9,20 @@ import Adbar from '../components/Adbar'
 const MemeApp = ({user, children}) => {
   return (
     <div>
-      <nav className="navbar navbar-default container-fluid">
-        <div className="col-md-7">
+      <nav className="navbar navbar-default flex">
+        <div className="">
           <LoginLogoutContainer />
         </div>
-        <div className="col-md-3">
+        <div className="">
           <SearchContainer />
         </div>
-        <div className="col-md-2">
+        <div className="">
           <CartIcon />
         </div>
       </nav>
-      <div className="container-fluid">
+      <div className="">
         <Sidebar />
-        <div  id="content" className="col-md-8">
+        <div  id="content" className="">
           {children}
         </div>
         <Adbar />
