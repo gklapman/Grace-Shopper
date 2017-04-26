@@ -29,6 +29,7 @@ class PastOrders extends React.Component {
               <h4 className='meme-name'>Meme Item: {item.meme.name}</h4>
               <img className='image' src={item.meme.photo}/>
               <span className='quantity'> Quantity: {item.quantity}</span>
+              <span className='date'> Date Purchased: {new Date (item.date).toDateString()}</span> 
             
               
             </div>

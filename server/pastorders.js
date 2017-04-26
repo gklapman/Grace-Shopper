@@ -45,7 +45,7 @@ module.exports = require('express').Router()
 })
 
 
-.get('/order/:cartId', (req, res, next) => {
+.get('/order/:cartId', isAdmin('only admins can view this order'), (req, res, next) => {
 	console.log('inside of this route')
 	return Cart.findOne({
 		where: {

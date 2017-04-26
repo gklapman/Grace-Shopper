@@ -109,9 +109,10 @@ module.exports = require('express').Router()
 })
 
 .get('/checkout', (req, res, next) => {
-	let updateMatrix
+	let updateMatrix;
+	let date = Date()
 	if (req.user) {
-		Cart.update({status: 'purchased'}, {where: {user_id: req.user.id, status: 'not-purchased'}, returning: true})
+		Cart.update({status: 'purchased', date: date}, {where: {user_id: req.user.id, status: 'not-purchased'}, returning: true})
 		.then(items => {
 			let bob = items
 			bob.shift()
