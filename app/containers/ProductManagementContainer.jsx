@@ -3,6 +3,8 @@ import { browserHistory } from 'react-router'
 import React from 'react'
 import ManageProducts from '../components/ManageProducts'
 import { editProduct } from '../reducers/meme'
+import axios from 'axios'
+
 
 class ProductManagement extends React.Component {
   constructor(props) {
@@ -30,9 +32,18 @@ class ProductManagement extends React.Component {
       price: this.state.price,
       photo: this.state.photo,
       product_info: this.state.product,
-      stock: this.state.stock
+      stock: this.state.stock,
+      tags: 'stinky'
     }
-    editProduct(putObject)
+    //console.log(editProduct)
+
+    axios.put(`/api/memes/edit/${this.state.id}`, putObject)
+    .then(data => {
+        console.log('response for edit mem put', data)
+    })
+
+
+    //editProduct(putObject)
     //.then and reset the local state and/or display a sucess message?
   }
   handleChange(event) {
@@ -40,6 +51,7 @@ class ProductManagement extends React.Component {
 
   }
   editRow(event) {
+
     event.preventDefault()
     this.setState({showForm: !this.state.showForm})
     const id = event.target.value
