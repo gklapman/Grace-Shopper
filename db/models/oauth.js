@@ -66,29 +66,31 @@ module.exports = db => {
     .catch(done)
 
   // setupStrategy is a wrapper around passport.use, and is called in authentication routes in server/auth.js
-  OAuth.setupStrategy =
-  ({
-    provider,
-    strategy,
-    config,
-    oauth=OAuth.V2,
-    passport
-  }) => {
-    const undefinedKeys = Object.keys(config)
-          .map(k => config[k])
-          .filter(value => typeof value === 'undefined')
-    if (undefinedKeys.length) {
-      for (const key in config) {
-        if (!config[key]) debug('provider:%s: needs environment var %s', provider, key)
-      }
-      debug('provider:%s will not initialize', provider)
-      return
-    }
 
-    debug('initializing provider:%s', provider)
+  // GET OUT FOUL DEMONS
+//   OAuth.setupStrategy =
+//   ({
+//     provider,
+//     strategy,
+//     config,
+//     oauth=OAuth.V2,
+//     passport
+//   }) => {
+//     const undefinedKeys = Object.keys(config)
+//           .map(k => config[k])
+//           .filter(value => typeof value === 'undefined')
+//     if (undefinedKeys.length) {
+//       for (const key in config) {
+//         if (!config[key]) debug('provider:%s: needs environment var %s', provider, key)
+//       }
+//       debug('provider:%s will not initialize', provider)
+//       return
+//     }
 
-    passport.use(new strategy(config, oauth))
-  }
+//     debug('initializing provider:%s', provider)
+
+//     passport.use(new strategy(config, oauth))
+//   }
 
   return OAuth
 }

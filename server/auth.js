@@ -36,42 +36,44 @@ const auth = require('express').Router()
  
 // Facebook needs the FACEBOOK_CLIENT_ID and FACEBOOK_CLIENT_SECRET
 // environment variables.
- OAuth.setupStrategy({
-  provider: 'facebook',
-  strategy: require('passport-facebook').Strategy,
-  config: {
-    clientID: secretsFile.FACEBOOK_CLIENT_ID,
-    clientSecret: secretsFile.FACEBOOK_CLIENT_SECRET,
-    callbackURL: `https://localhost:1337/api/auth/login/facebook`,
-  },
-  passport
-})
+
+// uck foauth
+//  OAuth.setupStrategy({
+//   provider: 'facebook',
+//   strategy: require('passport-facebook').Strategy,
+//   config: {
+//     clientID: secretsFile.FACEBOOK_CLIENT_ID,
+//     clientSecret: secretsFile.FACEBOOK_CLIENT_SECRET,
+//     callbackURL: `https://localhost:1337/api/auth/login/facebook`,
+//   },
+//   passport
+// })
 
 
 
-OAuth.setupStrategy({
-  provider: 'google',
-  strategy: require('passport-google-oauth').OAuth2Strategy,
-  config: {
-    clientID: secretsFile.GOOGLE_CLIENT_ID,
-    clientSecret: secretsFile.GOOGLE_CLIENT_SECRET,
-    callbackURL: `http://localhost:1337/api/auth/login/google`,
-  },
-  passport
-})
+// OAuth.setupStrategy({
+//   provider: 'google',
+//   strategy: require('passport-google-oauth').OAuth2Strategy,
+//   config: {
+//     clientID: secretsFile.GOOGLE_CLIENT_ID,
+//     clientSecret: secretsFile.GOOGLE_CLIENT_SECRET,
+//     callbackURL: `http://localhost:1337/api/auth/login/google`,
+//   },
+//   passport
+// })
 
-// Github needs the GITHUB_CLIENT_ID AND GITHUB_CLIENT_SECRET
-// environment variables.
-OAuth.setupStrategy({
-  provider: 'github',
-  strategy: require('passport-github2').Strategy,
-  config: {
-    clientID: secretsFile.GITHUB_CLIENT_ID,
-    clientSecret: secretsFile.GITHUB_CLIENT_SECRET,
-    callbackURL: `${app.baseUrl}/api/auth/login/github`,
-  },
-  passport
-})
+// // Github needs the GITHUB_CLIENT_ID AND GITHUB_CLIENT_SECRET
+// // environment variables.
+// OAuth.setupStrategy({
+//   provider: 'github',
+//   strategy: require('passport-github2').Strategy,
+//   config: {
+//     clientID: secretsFile.GITHUB_CLIENT_ID,
+//     clientSecret: secretsFile.GITHUB_CLIENT_SECRET,
+//     callbackURL: `${app.baseUrl}/api/auth/login/github`,
+//   },
+//   passport
+// })
 
 // Other passport configuration:
 // Passport review in the Week 6 Concept Review:
