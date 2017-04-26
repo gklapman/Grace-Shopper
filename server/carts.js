@@ -144,7 +144,6 @@ module.exports = require('express').Router()
 		})
 	} else {
 		// code for unauths (guests)
-		console.log('sesh', req.session)
 		updateMatrix = req.session.cart.map(item => {
 			return [Number(item.quantity), Number(item.meme_id)]
 		})

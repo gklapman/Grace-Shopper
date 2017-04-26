@@ -51,7 +51,6 @@ class ReviewsContainer extends Component {
   render(state) {
     let userSet = false;
 
-    console.log('currnet user', this.props.currentUser)
     if (this.props.currentUser !== '') {
       userSet = true
     }

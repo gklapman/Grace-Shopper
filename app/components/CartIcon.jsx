@@ -14,10 +14,10 @@ const CartIcon = ({cartItems, currentUser}) => {
 return (
   <div className="cart-items">
    <Link to="/cart">
-     <span>My Cart </span>
+     <button className="btn btn-nav">My Cart </button>
     </Link>
     <Link to={`/pastorders`}>
-    <span>My Past Orders</span>
+      <button className="btn btn-nav">My Past Orders</button>
     </Link>
   </div> 
   

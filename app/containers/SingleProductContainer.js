@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import SingleProduct from '../components/SingleProduct'
 import ReviewsContainer from './ReviewsContainer'
+import {addCartItem} from '../reducers/cart.jsx'
 
 
 class SingleProductContainer extends React.Component {
@@ -16,7 +17,7 @@ class SingleProductContainer extends React.Component {
   }
 }
 
-const mapDispatchToProps = null;
+const mapDispatchToProps = {addCartItem};
 
 const mapStateToProps = function(state) {
   return {

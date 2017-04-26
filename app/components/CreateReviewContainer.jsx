@@ -29,7 +29,6 @@ class CreateReview extends Component {
     })
   }
   handleChange(event) {
-    console.log(event.currentTarget.value)
     event.preventDefault()
     this.setState({[event.currentTarget.name]: event.currentTarget.value})
   }

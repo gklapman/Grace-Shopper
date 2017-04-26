@@ -4,11 +4,11 @@ import {connect} from 'react-redux'
 import {checkout} from '../reducers/cart'
 
 class Checkout extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      address: '',
-      email: '',
+      address: props.currentUser.address || '',
+      email: props.currentUser.email || '',
       hidden: true
     }
 
@@ -19,7 +19,6 @@ class Checkout extends React.Component {
 
   handleChange = (val, key) => {
     this.setState({[key]: val})
-    console.log('state', this.state)
   }
 
   toggleHidden = () => {
@@ -33,7 +32,6 @@ class Checkout extends React.Component {
     this.props.checkout()
     window.alert('Your order has been received')
     browserHistory.push('/')
-
   }
 
   render() {
@@ -62,7 +60,7 @@ class Checkout extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {return {}}
+const mapStateToProps = (state) => {return {currentUser: state.auth}}
 const mapPropsToDispatch = (dispatch) => {return {checkout: () => dispatch(checkout())}}
 
 export default connect(mapStateToProps, mapPropsToDispatch)(Checkout)

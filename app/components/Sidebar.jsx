@@ -7,21 +7,19 @@ class Sidebar extends React.Component {
     return (
       <div className="col-md-2">
         <Link to="/">
-          <div className="store">
+          <div className="store center">
             <span className="green">memes</span><span className="red">R</span><span className="blue">us</span>
           </div>
         </Link>
-        <div className="sidebar categories">
-          <h4>Categories</h4>
-          <ul>
+        <div className="sidebar center">
+          <h3>Categories</h3>
             {this.props.tags.map(tag => {
               return (
-                <li key={tag.id}>
+                <div key={tag.id}>
                   <Link to={`/products/categories/${tag.id}`}>{tag.tag}</Link>
-                </li>
+                </div>
               )
             })}
-          </ul>
         </div>
       </div>
     )
