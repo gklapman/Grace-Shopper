@@ -5,10 +5,7 @@ import Login from '../components/Login.jsx'
 import WhoAmI from '../components/WhoAmI.jsx'
 import Oauth from '../components/Oauth.jsx'
 import SignUpContainer from './SignUpContainer.jsx'
-
 import {login} from 'APP/app/reducers/auth'
-
-
 
 class LoginContainer extends React.Component {
     constructor(props) {
@@ -18,6 +15,7 @@ class LoginContainer extends React.Component {
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.checkUser = this.checkUser.bind(this);
 	}
 
 
@@ -37,13 +35,20 @@ class LoginContainer extends React.Component {
 		this.props.login(email, password)
 	}
 
+	checkUser(currentUser){
+		if (currentUser) {
+			return (<WhoAmI />)
+		}
+		else {
+			return ( <div className="container-fluid">
 
-	render(){
+	{/*render(){
 		const { currentUser } = this.props
 		return (
 			<div className="login-container">
 			{currentUser ? <WhoAmI /> :
-				<div className="container-fluid">
+				<div className="container-fluid">*/}
+
 					<Login handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
 					<div className="col-md-4">
 						<div className="row">
@@ -53,29 +58,33 @@ class LoginContainer extends React.Component {
 							<SignUpContainer />
 						</div>
 					</div>
-				</div> }
+				</div> )
+			}
 
+	}
 
+	render(){
+		const { currentUser } = this.props
+		return (
+			<div className="login-container navbar">
+			{ this.checkUser (currentUser)}
 			</div>
 		)
 	}
 }
 
 const mapStateToProps = (state, ownProps) => {
-	return {
-		currentUser: state.auth
-	}
-
+  return {
+    currentUser: state.auth
+  }
 }
 
 const MapDispatchToProps = (dispatch) => {
-	return {
-		login(email, password){
-			return dispatch(login(email, password))
-		}
-	}
+  return {
+    login(email, password) {
+      return dispatch(login(email, password))
+    }
+  }
 }
 
-
-export default connect(mapStateToProps, MapDispatchToProps)(LoginContainer);
-
+export default connect(mapStateToProps, MapDispatchToProps)(LoginContainer)

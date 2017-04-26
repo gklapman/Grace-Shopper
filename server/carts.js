@@ -7,7 +7,7 @@ const Meme = db.model('memes')
 const {selfOnly} = require('./auth.filters')
 
 module.exports = require('express').Router()
-// Gonna need to implement some forbidden stuff here
+
 
 .get('/', (req, res, next) => {
 	if (!req.user) {
