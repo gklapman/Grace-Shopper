@@ -12,7 +12,7 @@ class SignUpContainer extends React.Component {
 			password: '',
 			address: '',
 			name: '',
-			showSignUp: false,
+			showSignUp: false
 			
 		}
 		this.handleChange = this.handleChange.bind(this)
@@ -43,8 +43,9 @@ class SignUpContainer extends React.Component {
 	}
 
 	switchSignUp(){
+		let bool = this.state.showSignUp
 		this.setState({
-			showSignUp: true,
+			showSignUp: !bool
 		});
 	}
 
@@ -52,8 +53,8 @@ class SignUpContainer extends React.Component {
 	
 		return (
 			<div className="create-account-container"> 
-			<button className="btn btn-default" onClick={this.switchSignUp}>SignUp</button>
-			{this.state.showSignUp ? <SignUp handleChange={this.handleChange} handleSubmit={this.handleSubmit}/> : null}
+			<button className="btn btn-nav" onClick={this.switchSignUp}>SignUp</button>
+			{this.state.showSignUp ? <SignUp expand={this.state.expand} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/> : null}
 			
 			
 			</div>

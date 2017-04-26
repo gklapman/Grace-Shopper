@@ -37,32 +37,10 @@ import UserManagement from './containers/userManagementContainer'
 import AdminPanel from './containers/adminPanel'
 
 
-const MemeApp = connect(
-  ({ auth }) => ({ user: auth }))
+import MemeApp from './containers/MemeApp'
 
-(
-  ({ user, children }) =>
-    <div>
-      <nav className="navbar navbar-default container-fluid">
-        <div className="col-md-7">
-          <LoginLogoutContainer />
-        </div>
-        <div className="col-md-3">
-          <SearchContainer />
-        </div>
-        <div className="col-md-2">
-          <CartIcon />
-        </div>
-      </nav>
-      <div className="container-fluid">
-        <Sidebar />
-        <div className="col-md-8">
-          {children}
-        </div>
-        <Adbar />
-      </div>
-    </div>
-)
+
+// on enter hooks
 
 const onEnterLoadInfo = () => {
   store.dispatch(getCats())
