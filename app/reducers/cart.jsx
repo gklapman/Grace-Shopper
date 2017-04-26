@@ -12,9 +12,6 @@ const reducer = (prevState = initialState, action) => {
     case LOAD_ITEMS:
       newState.cart = action.items
       return newState
-    // case CHECKOUT:
-    //   newState.cart = []
-    //   return newState
     default:
       return newState
   }
@@ -25,11 +22,6 @@ const LOAD_ITEMS = 'LOAD_ITEMS'
 export const loadItems = (items) => {
   return {type: LOAD_ITEMS, items}
 }
-
-// const CHECKOUT = 'CHECKOUT'
-// export const checkout = () => {
-//   return {type: CHECKOUT}
-// }
 
 // thunks
 export const loadCartItems = () => {

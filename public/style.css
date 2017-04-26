@@ -1,72 +1,38 @@
-/*ul {
-  list-style-type: none
-}
-
-li {
-  border: solid 2px black;
-}*/
-/*.produce {
-  list-style-type: none;
-}
-.produce li {
-  border: solid 2px black;
-  margin: 0 0 1em 0
-}
-
-img {
-  border: solid 1px red
-}
-
-.in-block {
-  display: inline-block;
-  border: solid 1px green;
-  position: absolute;
-}
-
-.in-block div {
-  margin: 5px 10px 5px 10px;
-  border: solid 1px black;
-}
-
-.name {
-  font-size: 48px
-}
-
-.price {
-  font-size: 24px
-}
-
-.rating {
-  font-size: 24px
-}
-
-.info {
-  font-size: 16px
-}*/
-
 .on-display {
   border: solid 1px black;
-  background-color: gainsboro
+  background-color: #ff99ff;
+  padding: 2% 2% 2% 2%;
 }
 
 .sidebar {
-  border: solid 1px blue;
-  background-color: lightblue;
-  width: 100%
+  background-color: #00cc99;
+  border: solid 2px #669999;
+  border-radius: 3px;
+  width: 100%;
+  margin-top: 1em;
+  padding-bottom: 1em;
+}
+
+.sidebar a {
+  color: blue;
+  font-size: 18px
+  /*text-shadow: 1px 1px black;*/
 }
 
 .adbar {
   border: solid 1px red;
-  background-color: lightcoral;
-  padding: 50% 0 0 0
+  background: linear-gradient(red, black);
+  color: white;
+  width: 100%;
+  margin-bottom: 5%
 }
 
-ul {
-  list-style-type: none
+.adbar a {
+  color: white;
 }
 
-.categories {
-  float: left
+.adbar img {
+  width: 100%
 }
 
 .centered-text {
@@ -115,20 +81,8 @@ ul {
   font-size: 25px;
 }
 
-
-
-/*.whoami-user-name {
-}*/
-
-/*.row {
-  clear: both
-}*/
-
 .store {
   font-size: 36px;
-  /*position: absolute;
-  left: 50%;
-  top: 40px;*/
   background-color: orange;
   border: solid 4px purple;
   border-radius: 20%
@@ -151,10 +105,6 @@ ul {
   bottom: -8px
 }
 
-/*.checkout {
-  float: right
-}*/
-
 .flow {
   float: right
 }
@@ -165,5 +115,58 @@ ul {
 }
 
 .single-display {
-  padding: 0 5% 0 5%
+  padding: 0 5% 0 5%;
+  margin-bottom: 1em
+}
+
+.flex {
+  display: flex
+}
+
+.bob {
+  background: linear-gradient(red,orange,yellow,green,blue,indigo,violet)
+}
+
+.nav-lab {
+  color: white;
+  text-shadow: 1px 1px black
+}
+
+.navbar {
+  /*background: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);*/
+  background-color: #00cc99;
+  border: solid 0 black;
+  border-bottom: solid 2px #669999;
+  border-radius: 0;
+  padding: 1em 0 1em 0
+}
+
+.btn-nav {
+  background-color: #ff66ff;
+  color: black;
+  border: solid 1px #660066
+}
+
+.btn-nav:hover {
+  background-color: #ff00ff
+}
+
+#content {
+  margin-bottom: 2em
+}
+
+.on-display a {
+  color: black;
+  font-size: 14px
+}
+
+.btn-product {
+  background-color: #00cc99;
+  color: black;
+  /*text-shadow: 1px 1px black;*/
+  border: solid 1px black;
+}
+
+.btn-product:hover {
+  background-color: #009973
 }

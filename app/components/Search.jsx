@@ -10,7 +10,7 @@ return (
   <div className="search">
     <form onSubmit={handleSubmit}>
       <div className="col-md-2">
-        <label className="centered-text">Search</label>
+        <label className="centered-text nav-lab">Search</label>
       </div>
       <div className="col-md-8">
         <input
@@ -21,7 +21,7 @@ return (
         />
       </div>
       <div className="col-md-2">
-        <button className="btn btn-default">Go!</button>
+        <button className="btn btn-primary">Go!</button>
       </div>
     </form>
   </div>
