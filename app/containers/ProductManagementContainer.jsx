@@ -2,14 +2,8 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import React from 'react'
 import ManageProducts from '../components/ManageProducts'
-<<<<<<< HEAD
-import { editProduct } from '../reducers/meme'
-import axios from 'axios'
-=======
 import { editProduct, getMemes } from '../reducers/meme'
 import axios from 'axios'
-
->>>>>>> 661a48e7411399e4b1a3e1ee7113fd7d30876d9a
 
 class ProductManagement extends React.Component {
   constructor(props) {
@@ -30,14 +24,11 @@ class ProductManagement extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.editRow = this.editRow.bind(this)
-<<<<<<< HEAD
     this.addTag = this.addTag.bind(this)
     this.handleTag = this.handleTag.bind(this)
     this.handleTagSub = this.handleTagSub.bind(this)
-=======
     this.addItem = this.addItem.bind(this)
     this.createItem = this.createItem.bind(this)
->>>>>>> 661a48e7411399e4b1a3e1ee7113fd7d30876d9a
   }
 
   handleSubmit(event) {
