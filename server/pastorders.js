@@ -24,7 +24,7 @@ module.exports = require('express').Router()
 	return Cart.findAll({
 		where: {
 			status: 'purchased'
-		}, include: [Meme]
+		}, include: [Meme, User]
 	})
 	.then(cartitems => {
 		res.json(cartitems)
@@ -37,9 +37,23 @@ module.exports = require('express').Router()
 		where: {
 			user_id: req.params.userId,
 			status: 'purchased'
-		}, include: [Meme]
+		}, include: [User]
 	})
 	.then(cartitems => {
 		res.json(cartitems)
+	})
+})
+
+
+.get('/order/:cartId', (req, res, next) => {
+	console.log('inside of this route')
+	return Cart.findOne({
+		where: {
+			id: req.params.cartId
+		}, include: [User, Meme]
+	})
+	.then(itemInfo => {
+		console.log('im sending back this ', itemInfo)
+		res.json(itemInfo)
 	})
 })

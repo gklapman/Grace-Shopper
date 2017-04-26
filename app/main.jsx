@@ -3,6 +3,7 @@ import React from 'react'
 import {Link, Router, Route, IndexRedirect, browserHistory} from 'react-router'
 import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
+import axios from 'axios'
 
 import store from './store'
 import Jokes from './components/Jokes'
@@ -17,6 +18,7 @@ import Cart from './components/Cart'
 import Sidebar from './components/Sidebar'
 import Adbar from './components/Adbar'
 import Checkout from './components/Checkout'
+import SingleOrderItem from './components/SingleOrderItem'
 
 import PastOrders from './components/PastOrders'
 
@@ -27,7 +29,7 @@ import { getCats } from './reducers/bars'
 
 import {loadCartItems} from './reducers/cart.jsx'
 
-import {loadPastItems} from './reducers/pastorders.jsx'
+import {loadPastItems, loadAllItems, loadSingleItem} from './reducers/pastorders.jsx'
 
 import ProductManagement from './containers/productManagementContainer'
 import OrderManagement from './containers/orderManagementContainer'
@@ -90,6 +92,14 @@ const loadCartItemsEnter = () => {
   store.dispatch(loadCartItems())
 }
 
+const loadOrdersEnter = () => {
+  store.dispatch(loadAllItems())
+}
+
+const loadSingleOrderEnter = (nextRouterState) => {
+  console.log('inside of load single with this nextRouterState', nextRouterState.params.itemId)
+  store.dispatch(loadSingleItem(nextRouterState.params.itemId))
+}
 
 
 render(
@@ -104,7 +114,8 @@ render(
         <Route path='/pastorders' component={PastOrders} onEnter={loadPastOrderEnter}/>
         <Route path='/admin' component={AdminPanel}>
           <Route path='productManagement' component={ProductManagement} onEnter={onProductContainerEnter}/>
-          <Route path='orderManagement' component={OrderManagement} />
+          <Route path='orderManagement' component={OrderManagement} onEnter={loadOrdersEnter}/>
+          <Route path='orderManagement/:itemId' component={SingleOrderItem} onEnter={loadSingleOrderEnter} />
           <Route path='userManagement' component={UserManagement}/>
         </Route>
 
