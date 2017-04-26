@@ -35,18 +35,18 @@ if (!reasonableName.test(pkg.name)) {
 const env = Object.assign({}, process.env)
     /*, secretsFile = resolve(process.env.HOME, `.${pkg.name}.env.json`)*/
 
-console.log('secret file*************', secretsFile)
+// console.log('secret file*************', secretsFile)
 
 
-try {
-  const additionalEnv = require(secretsFile)
-  Object.assign(env, additionalEnv)
-  process.env = env
-  debug('%s: %j', secretsFile, additionalEnv)
-} catch (error) {
-  debug('%s: %s', secretsFile, error.message)
-  debug('%s: env file not found or invalid, moving on', secretsFile)
-}
+// try {
+//   const additionalEnv = require(secretsFile)
+//   Object.assign(env, additionalEnv)
+//   process.env = env
+//   debug('%s: %j', secretsFile, additionalEnv)
+// } catch (error) {
+//   debug('%s: %s', secretsFile, error.message)
+//   debug('%s: env file not found or invalid, moving on', secretsFile)
+// }
 
 module.exports = {
   get name() { return pkg.name },
@@ -68,5 +68,5 @@ module.exports = {
   },
   package: pkg,
   env,
-  secretsFile: require(secretsFile),
+  // secretsFile: require(secretsFile),
 }
