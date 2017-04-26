@@ -90,6 +90,14 @@ const generateMemes = () => {
     stock: 17
   }))
 
+  memesArray.push(Meme.build({
+    name: 'nish',
+    price: 99.99,
+    photo: '/images/nish.jpg',
+    product_info: '#winning',
+    stock: 1
+  }))
+
   return memesArray;
 }
 
