@@ -113,7 +113,7 @@ const generateCarts = () => {
   cartArray.push(Cart.build({
     status: 'not-purchased',
     date: new Date(2017,5,18),
-    quantity: 0,
+    quantity: 2,
     meme_id: 2,
     user_id: 1
   }))

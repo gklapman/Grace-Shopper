@@ -130,7 +130,6 @@ auth.get('/whoami', (req, res) => res.send(req.user))
 
 // POST requests for local login:
 auth.post('/login/local', function(req, res, next){
-  console.log('this is inside of the post route ', req.body)
   console.log(req.session.cart)
   return passport.authenticate('local', function(err, user){
     if (err) {

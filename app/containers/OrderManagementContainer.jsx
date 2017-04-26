@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import React from 'react'
 import ManageOrders from '../components/ManageOrders'
+import OrderItem from '../components/OrderItem'
 
 
 class OrderManagement extends React.Component {
@@ -10,15 +11,21 @@ class OrderManagement extends React.Component {
     this.state = {}
   }
   render() {
+    const allOrders = this.props.allOrders
     return (
       <div>
         <h1>Order Management Panel</h1>
+        {allOrders && allOrders.map(order => {
+          return (<OrderItem item={order}/>)
+        })}
       </div>
     )
   }
 }
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    allOrders: state.pastorders.allitems
+  }
 }
 const mapDispatchToProps = null
 
