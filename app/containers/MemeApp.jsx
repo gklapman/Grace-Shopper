@@ -20,9 +20,9 @@ const MemeApp = ({user, children}) => {
           <CartIcon />
         </div>
       </nav>
-      <div className="">
+      <div className="container-fluid">
         <Sidebar />
-        <div  id="content" className="">
+        <div  id="content" className="col-md-8">
           {children}
         </div>
         <Adbar />
